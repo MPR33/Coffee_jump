@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://mg0atayuqian"]
+
+[ext_resource type="Texture2D" uid="uid://bfbd1l6hajuga" path="res://assets/actors/sugar_cube_idle.png" id="1_x03tn"]
+[ext_resource type="Texture2D" uid="uid://cau5uckhd0e0q" path="res://assets/actors/sugar_cube_jump.png" id="2_ehf5v"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n032i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_x03tn")
+}],
+"loop": true,
+"name": &"defaultidle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ehf5v")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x03tn"]
+size = Vector2(14, 21.5)
+
+[node name="player" type="CharacterBody2D" groups=["player"]]
+collision_mask = 6
+
+[node name="anim" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -12)
+sprite_frames = SubResource("SpriteFrames_n032i")
+animation = &"defaultidle"
+
+[node name="collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -10.75)
+shape = SubResource("RectangleShape2D_x03tn")
