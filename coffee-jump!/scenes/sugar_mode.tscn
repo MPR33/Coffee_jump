@@ -11,7 +11,15 @@ size = Vector2(1190, 4)
 
 [node name="sugar_mode" type="Node2D"]
 script = ExtResource("1_namnb")
+platform_scene = null
+num_initial_platforms = null
+vertical_gap = null
+horizontal_range = null
 player_node_path = NodePath("sugar")
+coffee_speed = null
+coffee_min_distance = null
+coffee_color_node = null
+coffee_area_node = null
 
 [node name="sugar" parent="." instance=ExtResource("1_68idp")]
 position = Vector2(70, -67)
@@ -50,3 +58,9 @@ color = Color(0.3239916, 0.16470474, 0.052271716, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CoffeeLine/CoffeeKillZone"]
 position = Vector2(1, 125)
 shape = SubResource("RectangleShape2D_namnb")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0

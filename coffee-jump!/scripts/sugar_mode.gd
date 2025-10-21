@@ -78,6 +78,10 @@ func _physics_process(_delta):
 	# Mise à jour positions globales
 	coffee_line.global_position.y = new_y
 	coffee_area.global_position.y = new_y
+	if position.y < max_height:
+		max_height = position.y
+		score = int(-max_height)
+		score_label.text = str(score)
 
 	# --- Suppression des plateformes submergées (pile à la surface) ---
 	var surface_y: float = coffee_line.global_position.y
