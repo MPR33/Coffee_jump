@@ -25,7 +25,7 @@ func level_generator(amount):
 		platform_initial_position_y -= randf_range(36,54)
 		var new_platform 
 		
-		if new_type==0:
+		if new_type==0 :
 			new_platform= platform_scene[0].instantiate() as StaticBody2D
 		elif new_type==1:
 			new_platform= platform_scene[1].instantiate() as StaticBody2D
