@@ -17,5 +17,5 @@ scale = Vector2(0.3, 0.3)
 visibility_layer = 8
 layout_mode = 2
 size_flags_vertical = 0
-value = 19.0
+value = 76.0
 texture_progress = ExtResource("1_cj132")

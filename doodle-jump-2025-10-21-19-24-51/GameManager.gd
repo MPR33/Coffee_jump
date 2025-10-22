@@ -13,7 +13,7 @@ var mode: Mode = Mode.DOODLE
 
 # --- Caféine & paramètres (tous éditables si tu veux @export) ---
 var caffeine := 0.0                         # normalisée entre 0 et 1
-@export var doodle_rate := 0.0             # /s, la vitesse à laquelle ça monte en Doodle
+@export var doodle_rate := 0.1             # /s, la vitesse à laquelle ça monte en Doodle
 @export var coffee_rate := -0.10            # /s, la vitesse à laquelle ça descend en Coffee
 @export var doodle_switch_threshold := 0.60  # au-dessus => on PEUT passer en Coffee
 @export var coffee_min_threshold := 0.25     # en-dessous => on NE PEUT PAS quitter Coffee (et si trop bas => mort)
