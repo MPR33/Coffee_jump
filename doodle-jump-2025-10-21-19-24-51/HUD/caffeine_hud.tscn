@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnqbheiixm4sv"]
+
+[ext_resource type="Texture2D" uid="uid://bithlm7ae2jx0" path="res://assets/extras/coffee_gauge_full.png" id="1_cj132"]
+[ext_resource type="Script" uid="uid://mlpeg08nuspu" path="res://scripts/caffeine_hud.gd" id="1_f1d73"]
+
+[node name="CaffeineHUD" type="CanvasLayer"]
+script = ExtResource("1_f1d73")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_left = 31.0
+offset_top = 8.0
+offset_right = 431.0
+offset_bottom = 88.0
+scale = Vector2(0.3, 0.3)
+
+[node name="CaffeineBar" type="TextureProgressBar" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+value = 19.0
+texture_progress = ExtResource("1_cj132")

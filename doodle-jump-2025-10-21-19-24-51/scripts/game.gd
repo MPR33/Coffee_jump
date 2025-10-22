@@ -46,6 +46,7 @@ func level_generator(amount):
 func _ready() -> void:
 	randomize()
 	level_generator(20)
+	GameManager.died.connect(_on_died)
 	
 func _physics_process(delta : float) -> void:
 	if player.position.y < camera.position.y:
@@ -70,3 +71,8 @@ func _on_platform_cleaner_body_entered(body: Node2D) -> void:
 func score_update():
 	score=camera_start_position-camera.position.y
 	score_label.text = str(int(score))
+	
+func _on_died(reason: String) -> void:
+	# Stoppe le jeu, affiche un panneau, enregistre highscore, etc.
+	# Ou:
+	get_tree().change_scene_to_file("res://scenes/titl_screen.tscn")

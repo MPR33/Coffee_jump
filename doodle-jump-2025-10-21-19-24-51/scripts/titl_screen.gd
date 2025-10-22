@@ -10,9 +10,10 @@ func _process(delta: float) -> void:
 	pass
 
 
-func _on_startbtn_pressed() -> void:
-	if get_tree().change_scene_to_file("res://scenes/doodle_jump.tscn")!=OK:
-		print("je sais pas quoi mettre")
 
 func _on_quitbtn_pressed() -> void:
 	get_tree().quit()
+	
+func _on_startbtn_pressed():
+	GameManager.reset_game_state()
+	get_tree().change_scene_to_file("res://scenes/doodle_jump.tscn")
