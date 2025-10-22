@@ -23,13 +23,13 @@ size = Vector2(180, 312)
 shader = ExtResource("10_1avu4")
 shader_parameter/tint = Color(1, 1, 1, 1)
 shader_parameter/gloss_color = Vector3(1, 1, 1)
-shader_parameter/gloss_strength = 0.110000005225
+shader_parameter/gloss_strength = 0.0
 shader_parameter/spec_power = 1.0
 shader_parameter/use_sweep = true
 shader_parameter/sweep_angle_deg = 90.0
-shader_parameter/sweep_width = 0.29300001252047
-shader_parameter/sweep_speed = 0.7330001773174999
-shader_parameter/sweep_strength = 0.094000004465
+shader_parameter/sweep_width = 0.60000002384186
+shader_parameter/sweep_speed = -0.4389998783525
+shader_parameter/sweep_strength = 0.162000007695
 shader_parameter/light_pos = Vector2(0.2, 0.8)
 
 [node name="doodle_jump" type="Node2D"]
@@ -57,7 +57,7 @@ limit_bottom = 320
 position_smoothing_enabled = true
 
 [node name="platform_cleaner" type="Area2D" parent="platform_container/camera"]
-position = Vector2(-1, 17)
+position = Vector2(-1, 32)
 collision_layer = 0
 collision_mask = 7
 script = ExtResource("7_gkglp")
@@ -104,6 +104,7 @@ position = Vector2(123, 65)
 layer = -1
 
 [node name="bg_texture" type="TextureRect" parent="BG"]
+texture_filter = 1
 material = SubResource("ShaderMaterial_g5eel")
 offset_right = 180.0
 offset_bottom = 319.0

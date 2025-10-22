@@ -38,8 +38,10 @@ void fragment() {
     // --- Bande “sweep” animée ---
     float ang = radians(sweep_angle_deg);
     vec2  q   = rotate(UV - 0.5, ang);
-    float line = q.x - fract(TIME * sweep_speed);
-    float sweep = 1.0 - smoothstep(0.0, sweep_width, abs(line));
+	float scroll = mod(TIME * sweep_speed, 2.0) - 1.0;  // boucle propre -1 → +1
+	float line = q.x - scroll;
+    // bande plus douce, falloff progressif
+	float sweep = exp(-pow(line / sweep_width, 2.0)); // gaussian falloff
 
     float highlight = spec * gloss_strength + (use_sweep ? sweep * sweep_strength : 0.0);
 
