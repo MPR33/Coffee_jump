@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dbrfr0h6vqo0g"]
+[gd_scene load_steps=15 format=3 uid="uid://dbrfr0h6vqo0g"]
 
 [ext_resource type="Script" uid="uid://ceptogppcdn68" path="res://scripts/game.gd" id="1_4fsdi"]
 [ext_resource type="PackedScene" uid="uid://mg0atayuqian" path="res://actors/player_blue.tscn" id="1_eowx7"]
@@ -9,12 +9,34 @@
 [ext_resource type="Script" uid="uid://bqfd6ncomoyrw" path="res://scripts/platform_cleaner.gd" id="7_gkglp"]
 [ext_resource type="Texture2D" uid="uid://b4ph5c5kwudpl" path="res://assets/extras/coffee_rectangle.png" id="8_j6j3j"]
 [ext_resource type="PackedScene" uid="uid://bnqbheiixm4sv" path="res://HUD/caffeine_hud.tscn" id="8_rea41"]
+[ext_resource type="Shader" uid="uid://c5qwfshq05v0i" path="res://scenes/glow.gdshader" id="10_1avu4"]
+[ext_resource type="Texture2D" uid="uid://d34tpf8k8ouj1" path="res://assets/extras/ChatGPT Image 22 oct. 2025, 12_50_11.png" id="10_rea41"]
+
+[sub_resource type="Environment" id="Environment_1avu4"]
+glow_enabled = true
+glow_bloom = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4fsdi"]
 size = Vector2(180, 312)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g5eel"]
+shader = ExtResource("10_1avu4")
+shader_parameter/tint = Color(1, 1, 1, 1)
+shader_parameter/gloss_color = Vector3(1, 1, 1)
+shader_parameter/gloss_strength = 0.110000005225
+shader_parameter/spec_power = 1.0
+shader_parameter/use_sweep = true
+shader_parameter/sweep_angle_deg = 90.0
+shader_parameter/sweep_width = 0.29300001252047
+shader_parameter/sweep_speed = 0.7330001773174999
+shader_parameter/sweep_strength = 0.094000004465
+shader_parameter/light_pos = Vector2(0.2, 0.8)
+
 [node name="doodle_jump" type="Node2D"]
 script = ExtResource("1_4fsdi")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1avu4")
 
 [node name="platform_container" type="Node2D" parent="."]
 
@@ -48,16 +70,20 @@ shape = SubResource("RectangleShape2D_4fsdi")
 position = Vector2(1, 283)
 texture = ExtResource("8_j6j3j")
 
-[node name="score" type="Label" parent="platform_container/camera"]
+[node name="CaffeineHUD" parent="platform_container/camera" instance=ExtResource("8_rea41")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="platform_container/camera"]
+
+[node name="score" type="Label" parent="platform_container/camera/CanvasLayer"]
 texture_filter = 1
 anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -4.0
-offset_top = -145.0
+offset_top = 15.0
 offset_right = 8.0
-offset_bottom = -121.0
+offset_bottom = 39.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -71,9 +97,17 @@ text = "0"
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="CaffeineHUD" parent="platform_container/camera" instance=ExtResource("8_rea41")]
-
 [node name="enemy" parent="platform_container" instance=ExtResource("6_cym8e")]
 position = Vector2(123, 65)
+
+[node name="BG" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="bg_texture" type="TextureRect" parent="BG"]
+material = SubResource("ShaderMaterial_g5eel")
+offset_right = 180.0
+offset_bottom = 319.0
+texture = ExtResource("10_rea41")
+expand_mode = 1
 
 [connection signal="body_entered" from="platform_container/camera/platform_cleaner" to="." method="_on_platform_cleaner_body_entered"]

@@ -5,7 +5,7 @@ extends Node2D
 @onready var platform_initial_position_y: float = (platform as Node2D).position.y
 @onready var player := $platform_container/player as CharacterBody2D
 var last_platform_is_cloud:= false
-@onready var score_label :=$platform_container/camera/score as Label
+@onready var score_label :=$platform_container/camera/CanvasLayer/score as Label
 @onready var camera_start_position =$platform_container/camera.position.y
 @onready var camera :=$platform_container/camera as Camera2D
 @onready var cafe :=$platform_container/camera/platform_cleaner as Area2D
