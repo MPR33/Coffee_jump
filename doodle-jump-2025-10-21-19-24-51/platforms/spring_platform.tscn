@@ -2,17 +2,17 @@
 
 [ext_resource type="Script" uid="uid://dqc2yr2nb7tq6" path="res://scripts/spring_platform.gd" id="1_37ag1"]
 [ext_resource type="Texture2D" uid="uid://dy4t1rs31reo2" path="res://assets/tiles/coffee_platform_center.png" id="2_41l8x"]
-[ext_resource type="Texture2D" uid="uid://c0xtkssrnf54m" path="res://assets/actors/spoon_pressed.png" id="3_37ag1"]
-[ext_resource type="Texture2D" uid="uid://b6h0jdjd5r3dw" path="res://assets/actors/spoon_normal.png" id="4_e12v4"]
+[ext_resource type="Texture2D" uid="uid://cm5kxtc0hjv3k" path="res://assets/actors/spoon_pressed.png" id="3_37ag1"]
+[ext_resource type="Texture2D" uid="uid://1f22icelmfua" path="res://assets/actors/spoon_normal.png" id="4_e12v4"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_e12v4"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_37ag1")
+"texture": ExtResource("4_e12v4")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_e12v4")
+"texture": ExtResource("3_37ag1")
 }],
 "loop": true,
 "name": &"default",
@@ -36,9 +36,9 @@ texture = ExtResource("2_41l8x")
 
 [node name="spring" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(-2, -8)
+position = Vector2(0, -6)
 sprite_frames = SubResource("SpriteFrames_e12v4")
-frame_progress = 0.5171221
+frame_progress = 0.05995824
 
 [node name="collision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)

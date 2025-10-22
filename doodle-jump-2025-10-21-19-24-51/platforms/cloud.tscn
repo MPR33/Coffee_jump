@@ -1,5 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://clro8eyl5wdpb"]
+[gd_scene load_steps=5 format=3 uid="uid://clro8eyl5wdpb"]
 
+[ext_resource type="Texture2D" uid="uid://cma58lupogjai" path="res://assets/actors/speculoos_left.png" id="2_ikktd"]
+[ext_resource type="Texture2D" uid="uid://cipodyuepiuja" path="res://assets/actors/speculoos_right.png" id="3_6oesa"]
 [ext_resource type="Script" uid="uid://dyvm8v4ilbqcl" path="res://scripts/cloud.gd" id="3_ikktd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fcyt7"]
@@ -14,10 +16,12 @@ jumpforce = 0.75
 [node name="left_cloud" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(-9, 3)
+texture = ExtResource("2_ikktd")
 
 [node name="right_cloud" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(9, 3)
+texture = ExtResource("3_6oesa")
 
 [node name="cloud" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 1)
