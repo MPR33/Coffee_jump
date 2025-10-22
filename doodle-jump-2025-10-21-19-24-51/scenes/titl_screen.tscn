@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3 uid="uid://htsrwtgttig2"]
+
+[ext_resource type="Script" uid="uid://dh2baj0n1x0ix" path="res://scripts/titl_screen.gd" id="1_suhcb"]
+[ext_resource type="Texture2D" uid="uid://dxvlmip8fic70" path="res://assets/extras/ChatGPT Image 22 oct. 2025, 09_14_22.png" id="2_wocmi"]
+[ext_resource type="Texture2D" uid="uid://umagvni7ka08" path="res://assets/extras/btn_play-normal.png" id="3_67ovs"]
+[ext_resource type="Texture2D" uid="uid://dl3ncmk85bpqm" path="res://assets/extras/btn_play-pressed.png" id="4_wqkbx"]
+[ext_resource type="Texture2D" uid="uid://8da1rasa1r6b" path="res://assets/extras/btn_quit-normal.png" id="5_cq3nm"]
+[ext_resource type="Texture2D" uid="uid://b7584nopw8jbu" path="res://assets/extras/btn_quit-pressed.png" id="6_viwmn"]
+[ext_resource type="FontFile" uid="uid://c4587vxue4ri3" path="res://fonts/Kenney Pixel Square.ttf" id="7_ydcui"]
+
+[sub_resource type="FontVariation" id="FontVariation_iffxh"]
+base_font = ExtResource("7_ydcui")
+
+[node name="titl-screen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_suhcb")
+
+[node name="main" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="game-title" type="TextureRect" parent="main"]
+custom_minimum_size = Vector2(180, 120)
+layout_mode = 2
+texture = ExtResource("2_wocmi")
+expand_mode = 1
+
+[node name="buttons" type="HBoxContainer" parent="main"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="start-btn" type="TouchScreenButton" parent="main/buttons"]
+position = Vector2(44, 9)
+texture_normal = ExtResource("3_67ovs")
+texture_pressed = ExtResource("4_wqkbx")
+
+[node name="quit-btn" type="TouchScreenButton" parent="main/buttons"]
+position = Vector2(95, 9)
+texture_normal = ExtResource("5_cq3nm")
+texture_pressed = ExtResource("6_viwmn")
+
+[node name="highscore" type="Label" parent="main"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_iffxh")
+text = "Highscore:"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="main/buttons/start-btn" to="." method="_on_startbtn_pressed"]
+[connection signal="pressed" from="main/buttons/quit-btn" to="." method="_on_quitbtn_pressed"]

@@ -33,26 +33,6 @@ limit_right = 180
 limit_bottom = 320
 position_smoothing_enabled = true
 
-[node name="score" type="Label" parent="platform_container/camera"]
-texture_filter = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -1.0
-offset_top = -160.0
-offset_right = 11.0
-offset_bottom = -136.0
-grow_horizontal = 2
-size_flags_vertical = 0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 3
-theme_override_constants/shadow_outline_size = 1
-theme_override_fonts/font = ExtResource("5_eygnr")
-theme_override_font_sizes/font_size = 32
-text = "0"
-horizontal_alignment = 1
-metadata/_edit_use_anchors_ = true
-
 [node name="platform_cleaner" type="Area2D" parent="platform_container/camera"]
 position = Vector2(-1, 17)
 collision_layer = 0
@@ -66,6 +46,28 @@ shape = SubResource("RectangleShape2D_4fsdi")
 [node name="Sprite2D" type="Sprite2D" parent="platform_container/camera/platform_cleaner"]
 position = Vector2(1, 283)
 texture = ExtResource("8_j6j3j")
+
+[node name="score" type="Label" parent="platform_container/camera"]
+texture_filter = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_top = -137.0
+offset_right = 12.0
+offset_bottom = -113.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_constants/shadow_outline_size = 1
+theme_override_fonts/font = ExtResource("5_eygnr")
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="enemy" parent="platform_container" instance=ExtResource("6_cym8e")]
 position = Vector2(123, 65)

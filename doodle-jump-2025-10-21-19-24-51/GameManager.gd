@@ -2,7 +2,7 @@ extends Node
 
 const DOODLE_SCENE := "res://scenes/doodle_jump.tscn"
 const COFFEE_SCENE := "res://scenes/coffee_mode.tscn"
-
+var highscore:=0
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"): # Espace mappé sur ui_accept
 		toggle_mode()

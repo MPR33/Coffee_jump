@@ -9,7 +9,7 @@ var last_platform_is_cloud:= false
 @onready var camera_start_position =$platform_container/camera.position.y
 @onready var camera :=$platform_container/camera as Camera2D
 @onready var cafe :=$platform_container/camera/platform_cleaner as Area2D
-var score=0
+var score:=0
 @export var platform_scene: Array[PackedScene] = [
 	preload("res://platforms/platform.tscn"),
 	preload("res://platforms/spring_platform.tscn"),
@@ -54,7 +54,11 @@ func _physics_process(delta : float) -> void:
 
 func delete_object(obstacle):
 	if obstacle.is_in_group("player"):
-		get_tree().reload_current_scene()
+		#get_tree().reload_current_scene()
+		if score> GameManager.highscore:
+			GameManager.highscore=score
+		if get_tree().change_scene_to_file("res://scenes/titl_screen.tscn")!=OK:
+			print("je sais pas quoi mettre")
 	elif obstacle.is_in_group("platform") or obstacle.is_in_group("enemies"):
 		obstacle.queue_free()
 		level_generator(1)
