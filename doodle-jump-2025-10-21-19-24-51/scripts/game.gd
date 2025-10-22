@@ -1,5 +1,8 @@
 extends Node2D
 
+
+
+
 @onready var platform_container := $platform_container
 @onready var platform := $platform_container/platform
 @onready var platform_initial_position_y: float = (platform as Node2D).position.y
@@ -16,6 +19,8 @@ var score:=0
 	preload("res://platforms/cloud.tscn"),
 	preload("res://actors/enemy.tscn")
 ]
+
+
 
 
 func level_generator(amount):
@@ -43,10 +48,7 @@ func level_generator(amount):
 			platform_container.call_deferred('add_child', new_platform)
 		
 
-func _ready() -> void:
-	randomize()
-	level_generator(20)
-	GameManager.died.connect(_on_died)
+
 	
 func _physics_process(delta : float) -> void:
 	if player.position.y < camera.position.y:
@@ -76,3 +78,10 @@ func _on_died(reason: String) -> void:
 	# Stoppe le jeu, affiche un panneau, enregistre highscore, etc.
 	# Ou:
 	get_tree().change_scene_to_file("res://scenes/titl_screen.tscn")
+	
+
+
+func _ready() -> void:
+	randomize()
+	level_generator(20)
+	GameManager.died.connect(_on_died)
