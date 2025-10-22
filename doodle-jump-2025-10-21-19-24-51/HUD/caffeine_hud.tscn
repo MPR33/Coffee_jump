@@ -14,6 +14,7 @@ offset_bottom = 88.0
 scale = Vector2(0.3, 0.3)
 
 [node name="CaffeineBar" type="TextureProgressBar" parent="MarginContainer"]
+visibility_layer = 8
 layout_mode = 2
 size_flags_vertical = 0
 value = 19.0
