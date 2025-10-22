@@ -1,3 +1,69 @@
-[gd_scene format=3 uid="uid://2oneleomh7xu"]
+[gd_scene load_steps=7 format=3 uid="uid://2oneleomh7xu"]
+
+[ext_resource type="Script" uid="uid://cvjxma2ocxxbs" path="res://scripts/coffee_mode.gd" id="1_3isco"]
+[ext_resource type="PackedScene" uid="uid://d1qpm3ys6gfcx" path="res://actors/coffee_bean.tscn" id="1_b8dvw"]
+[ext_resource type="Script" uid="uid://vnpf86sgij0r" path="res://scripts/coffee_bean.gd" id="2_j8578"]
+[ext_resource type="PackedScene" uid="uid://b6ib0vyldviqq" path="res://platforms/platform_coffee.tscn" id="3_j8578"]
+[ext_resource type="PackedScene" uid="uid://bnqbheiixm4sv" path="res://HUD/caffeine_hud.tscn" id="5_mc3dk"]
+[ext_resource type="FontFile" uid="uid://dvq2o6ni8eccq" path="res://fonts/Kenney Pixel.ttf" id="6_8pu30"]
 
 [node name="coffee_mode" type="Node2D"]
+script = ExtResource("1_3isco")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+[node name="platform_container" type="Node2D" parent="."]
+
+[node name="coffee_bean" parent="platform_container" instance=ExtResource("1_b8dvw")]
+position = Vector2(91.00001, 48.00003)
+scale = Vector2(0.03, 0.03)
+collision_mask = 6
+script = ExtResource("2_j8578")
+
+[node name="platform_coffee" parent="platform_container" instance=ExtResource("3_j8578")]
+position = Vector2(2.0000076, -237.99997)
+scale = Vector2(0.99999994, 0.99999994)
+collision_mask = 6
+
+[node name="camera" type="Camera2D" parent="platform_container"]
+position = Vector2(90, 160)
+scale = Vector2(0.03, 0.03)
+limit_left = 0
+limit_top = 0
+limit_right = 180
+position_smoothing_enabled = true
+
+[node name="platform_cleaner" type="Area2D" parent="platform_container/camera"]
+collision_layer = 0
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="platform_container/camera/platform_cleaner"]
+
+[node name="Sprite2D" type="Sprite2D" parent="platform_container/camera/platform_cleaner"]
+
+[node name="CaffeineHUD" parent="platform_container/camera" instance=ExtResource("5_mc3dk")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="platform_container/camera"]
+
+[node name="score" type="Label" parent="platform_container/camera/CanvasLayer"]
+texture_filter = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = 15.0
+offset_right = 8.0
+offset_bottom = 39.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_constants/shadow_outline_size = 1
+theme_override_fonts/font = ExtResource("6_8pu30")
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true

@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://bqfd6ncomoyrw" path="res://scripts/platform_cleaner.gd" id="7_gkglp"]
 [ext_resource type="Texture2D" uid="uid://b4ph5c5kwudpl" path="res://assets/extras/coffee_rectangle.png" id="8_j6j3j"]
 [ext_resource type="PackedScene" uid="uid://bnqbheiixm4sv" path="res://HUD/caffeine_hud.tscn" id="8_rea41"]
-[ext_resource type="Shader" uid="uid://c5qwfshq05v0i" path="res://scenes/glow.gdshader" id="10_1avu4"]
+[ext_resource type="Shader" path="res://scenes/glow.gdshader" id="10_1avu4"]
 [ext_resource type="Texture2D" uid="uid://d34tpf8k8ouj1" path="res://assets/extras/ChatGPT Image 22 oct. 2025, 12_50_11.png" id="10_rea41"]
 
 [sub_resource type="Environment" id="Environment_1avu4"]

@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://xbny88htp7mc"]
+
+[ext_resource type="Texture2D" uid="uid://dxvlmip8fic70" path="res://assets/extras/ChatGPT Image 22 oct. 2025, 09_14_22.png" id="1_8bfp7"]
+[ext_resource type="Texture2D" uid="uid://umagvni7ka08" path="res://assets/extras/btn_play-normal.png" id="2_ruuxv"]
+[ext_resource type="Texture2D" uid="uid://dl3ncmk85bpqm" path="res://assets/extras/btn_play-pressed.png" id="3_iffxh"]
+[ext_resource type="Texture2D" uid="uid://8da1rasa1r6b" path="res://assets/extras/btn_quit-normal.png" id="4_c7yvd"]
+[ext_resource type="Texture2D" uid="uid://b7584nopw8jbu" path="res://assets/extras/btn_quit-pressed.png" id="5_he1e8"]
+
+[node name="titl-screen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="main" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="game-title" type="TextureRect" parent="main"]
+custom_minimum_size = Vector2(180, 120)
+layout_mode = 2
+texture = ExtResource("1_8bfp7")
+expand_mode = 1
+
+[node name="buttons" type="HBoxContainer" parent="main"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="start-btn" type="TouchScreenButton" parent="main/buttons"]
+position = Vector2(44, 9)
+texture_normal = ExtResource("2_ruuxv")
+texture_pressed = ExtResource("3_iffxh")
+
+[node name="quit-btn" type="TouchScreenButton" parent="main/buttons"]
+position = Vector2(95, 9)
+texture_normal = ExtResource("4_c7yvd")
+texture_pressed = ExtResource("5_he1e8")
+
+[node name="highscore" type="Label" parent="main"]
+layout_mode = 2

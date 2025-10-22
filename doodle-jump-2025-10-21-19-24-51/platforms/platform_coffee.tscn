@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://b6ib0vyldviqq"]
+
+[ext_resource type="Texture2D" uid="uid://bmxj16463oiug" path="res://assets/tiles/Plateforme grille.png" id="1_ayk8a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4w1b1"]
+size = Vector2(38, 15)
+
+[node name="platform_coffee" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="platform_grille" type="Sprite2D" parent="."]
+position = Vector2(90, 300)
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("1_ayk8a")
+
+[node name="collision_platform" type="CollisionShape2D" parent="."]
+position = Vector2(88, 300.5)
+shape = SubResource("RectangleShape2D_4w1b1")
