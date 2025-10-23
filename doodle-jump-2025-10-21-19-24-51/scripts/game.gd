@@ -8,6 +8,7 @@ extends Node2D
 @onready var platform_initial_position_y: float = (platform as Node2D).position.y
 @onready var player := $platform_container/player as CharacterBody2D
 var last_platform_is_cloud:= false
+var last_platform_is_enemy:=false
 @onready var score_label :=$platform_container/camera/CanvasLayer/score as Label
 @onready var camera_start_position =$platform_container/camera.position.y
 @onready var camera :=$platform_container/camera as Camera2D
@@ -35,15 +36,25 @@ func level_generator(amount):
 		elif new_type==1:
 			new_platform= platform_scene[1].instantiate() as StaticBody2D
 		elif new_type>=2 :
-			if last_platform_is_cloud == false and score>1000:
+			if last_platform_is_cloud == false and last_platform_is_enemy==false:
 				new_platform= platform_scene[new_type].instantiate() as StaticBody2D
 				new_platform.connect("delete_object", self.delete_object)
-				last_platform_is_cloud=true
+				if new_type==2:
+					last_platform_is_cloud=true
+				else:
+					last_platform_is_enemy=true
 			else :
 				new_platform= platform_scene[0].instantiate() as StaticBody2D
 				last_platform_is_cloud=false
+				last_platform_is_enemy=false
 
-		if new_type != null:
+		if new_type != null and new_type!=3:
+			new_platform.position = Vector2(randf_range(20,160), platform_initial_position_y)
+			platform_container.call_deferred('add_child', new_platform)
+		elif new_type !=null and new_type==3 and (last_platform_is_cloud == false and last_platform_is_enemy==false):
+			new_platform.position = Vector2(randf_range(20,160), platform_initial_position_y)
+			platform_container.call_deferred('add_child', new_platform)
+		else:
 			new_platform.position = Vector2(randf_range(20,160), platform_initial_position_y)
 			platform_container.call_deferred('add_child', new_platform)
 		
@@ -83,5 +94,5 @@ func _on_died(reason: String) -> void:
 
 func _ready() -> void:
 	randomize()
-	level_generator(20)
+	level_generator(200)
 	GameManager.died.connect(_on_died)

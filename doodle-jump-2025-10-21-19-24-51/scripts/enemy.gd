@@ -1,21 +1,25 @@
 extends "res://scripts/platform.gd"
 
 var direction:= Vector2.RIGHT
+var gravity := 20
 var velocity := Vector2.ZERO
 @export var SPEED := 100
 @onready var screen_size:= get_viewport_rect().size
 @onready var anim:= $anim as AnimatedSprite2D
-
+func _ready():
+	anim.play("moving")
 func movement(delta):
-	anim.flip_h=!anim.flip_h
-	velocity=direction *SPEED
-	position+=velocity*delta	
-	if position.x>=screen_size.x:
-		direction*=-1
-		anim.flip_h=!anim.flip_h
-	elif position.x<=0:
-		direction*=-1
-		anim.flip_h=!anim.flip_h
+	#anim.flip_h=!anim.flip_h
+	#velocity=direction *SPEED
+	#position+=velocity*delta	
+	#if position.x>=screen_size.x:
+		#direction*=-1
+		#anim.flip_h=!anim.flip_h
+	#elif position.x<=0:
+		#direction*=-1
+		#anim.flip_h=!anim.flip_h
+	velocity.y += gravity * delta   # accélère verticalement
+	position += velocity * delta    # applique le mouvement
 		
 func _physics_process(delta: float) -> void:
 	movement(delta)

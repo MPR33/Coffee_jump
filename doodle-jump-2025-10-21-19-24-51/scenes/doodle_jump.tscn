@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dbrfr0h6vqo0g"]
+[gd_scene load_steps=15 format=3 uid="uid://dbrfr0h6vqo0g"]
 
 [ext_resource type="Script" uid="uid://ceptogppcdn68" path="res://scripts/game.gd" id="1_4fsdi"]
 [ext_resource type="PackedScene" uid="uid://mg0atayuqian" path="res://actors/player_blue.tscn" id="1_eowx7"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bnqbheiixm4sv" path="res://HUD/caffeine_hud.tscn" id="8_rea41"]
 [ext_resource type="Shader" uid="uid://c5qwfshq05v0i" path="res://scenes/glow.gdshader" id="10_1avu4"]
 [ext_resource type="Texture2D" uid="uid://d34tpf8k8ouj1" path="res://assets/extras/ChatGPT Image 22 oct. 2025, 12_50_11.png" id="10_rea41"]
+[ext_resource type="PackedScene" uid="uid://rml7e8sjjxs4" path="res://actors/enemy.tscn" id="11_1avu4"]
 
 [sub_resource type="Environment" id="Environment_1avu4"]
 glow_enabled = true
@@ -107,5 +108,8 @@ offset_right = 180.0
 offset_bottom = 319.0
 texture = ExtResource("10_rea41")
 expand_mode = 1
+
+[node name="enemy" parent="." instance=ExtResource("11_1avu4")]
+position = Vector2(375, 39)
 
 [connection signal="body_entered" from="platform_container/camera/platform_cleaner" to="." method="_on_platform_cleaner_body_entered"]
