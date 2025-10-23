@@ -10,10 +10,9 @@ collision_layer = 2
 collision_mask = 0
 
 [node name="platform_grille" type="Sprite2D" parent="."]
-position = Vector2(90, 300)
 scale = Vector2(0.03, 0.03)
 texture = ExtResource("1_ayk8a")
 
 [node name="collision_platform" type="CollisionShape2D" parent="."]
-position = Vector2(88, 300.5)
+position = Vector2(-2, 0.5)
 shape = SubResource("RectangleShape2D_4w1b1")

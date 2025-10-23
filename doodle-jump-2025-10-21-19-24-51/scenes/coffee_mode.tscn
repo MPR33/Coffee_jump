@@ -1,11 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://2oneleomh7xu"]
+[gd_scene load_steps=10 format=3 uid="uid://2oneleomh7xu"]
 
 [ext_resource type="Script" uid="uid://cvjxma2ocxxbs" path="res://scripts/coffee_mode.gd" id="1_3isco"]
 [ext_resource type="PackedScene" uid="uid://d1qpm3ys6gfcx" path="res://actors/coffee_bean.tscn" id="1_b8dvw"]
 [ext_resource type="Script" uid="uid://vnpf86sgij0r" path="res://scripts/coffee_bean.gd" id="2_j8578"]
 [ext_resource type="PackedScene" uid="uid://b6ib0vyldviqq" path="res://platforms/platform_coffee.tscn" id="3_j8578"]
+[ext_resource type="Script" uid="uid://cqwv6lk6iyjw1" path="res://scripts/platform_cleaner_coffee_bean.gd" id="5_cq4jp"]
 [ext_resource type="PackedScene" uid="uid://bnqbheiixm4sv" path="res://HUD/caffeine_hud.tscn" id="5_mc3dk"]
 [ext_resource type="FontFile" uid="uid://dvq2o6ni8eccq" path="res://fonts/Kenney Pixel.ttf" id="6_8pu30"]
+[ext_resource type="Texture2D" uid="uid://i8ex4ti8oip" path="res://assets/extras/Engrenages.png" id="6_o50h2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cq4jp"]
+size = Vector2(5978.3345, 2344.9995)
 
 [node name="coffee_mode" type="Node2D"]
 script = ExtResource("1_3isco")
@@ -21,7 +26,7 @@ collision_mask = 6
 script = ExtResource("2_j8578")
 
 [node name="platform_coffee" parent="platform_container" instance=ExtResource("3_j8578")]
-position = Vector2(2.0000076, -237.99997)
+position = Vector2(90, 57)
 scale = Vector2(0.99999994, 0.99999994)
 collision_mask = 6
 
@@ -36,10 +41,17 @@ position_smoothing_enabled = true
 [node name="platform_cleaner" type="Area2D" parent="platform_container/camera"]
 collision_layer = 0
 collision_mask = 7
+script = ExtResource("5_cq4jp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="platform_container/camera/platform_cleaner"]
+position = Vector2(-22.5, -6294.166)
+scale = Vector2(0.9999998, 0.9999998)
+shape = SubResource("RectangleShape2D_cq4jp")
 
 [node name="Sprite2D" type="Sprite2D" parent="platform_container/camera/platform_cleaner"]
+position = Vector2(366.667, -5766.66)
+scale = Vector2(5, 5)
+texture = ExtResource("6_o50h2")
 
 [node name="CaffeineHUD" parent="platform_container/camera" instance=ExtResource("5_mc3dk")]
 
