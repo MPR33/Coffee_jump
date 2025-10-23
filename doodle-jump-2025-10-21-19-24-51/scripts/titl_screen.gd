@@ -16,6 +16,6 @@ func _on_quitbtn_pressed() -> void:
 	
 func _on_startbtn_pressed():
 	GameManager.reset_game_state()
-	get_tree().change_scene_to_file("res://scenes/doodle_jump.tscn")
+	get_tree().change_scene_to_file("res://main.tscn")
 	GameManager.score_sugar=0
 	GameManager.score_coffee = 0

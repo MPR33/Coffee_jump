@@ -23,39 +23,53 @@ var last_platform_is_enemy:=false
 
 
 
-func level_generator(amount):
-	for items in amount :
-		var new_type = randi()%4
-		#0 1 2
-		platform_initial_position_y -= randf_range(36,54)
-		var new_platform 
-		
-		if new_type==0 :
-			new_platform= platform_scene[0].instantiate() as StaticBody2D
-		elif new_type==1:
-			new_platform= platform_scene[1].instantiate() as StaticBody2D
-		elif new_type>=2 :
-			if last_platform_is_cloud == false and last_platform_is_enemy==false:
-				new_platform= platform_scene[new_type].instantiate() as StaticBody2D
-				new_platform.connect("delete_object", self.delete_object)
-				if new_type==2:
-					last_platform_is_cloud=true
-				else:
-					last_platform_is_enemy=true
-			else :
-				new_platform= platform_scene[0].instantiate() as StaticBody2D
-				last_platform_is_cloud=false
-				last_platform_is_enemy=false
+func level_generator(amount: int) -> void:
+	for i in range(amount):
+		var new_type := randi() % platform_scene.size()  # 0..3
+		platform_initial_position_y -= randf_range(36.0, 54.0)
 
-		if new_type != null and new_type!=3:
-			new_platform.position = Vector2(randf_range(20,160), platform_initial_position_y)
-			platform_container.call_deferred('add_child', new_platform)
-		elif new_type !=null and new_type==3 and (last_platform_is_cloud == false and last_platform_is_enemy==false):
-			new_platform.position = Vector2(randf_range(20,160), platform_initial_position_y)
-			platform_container.call_deferred('add_child', new_platform)
+		var new_platform: Node2D = null
+
+		if new_type == 0:
+			# plate-forme normale
+			new_platform = platform_scene[0].instantiate() as Node2D
+			last_platform_is_cloud = false
+			last_platform_is_enemy = false
+
+		elif new_type == 1:
+			# spring
+			new_platform = platform_scene[1].instantiate() as Node2D
+			last_platform_is_cloud = false
+			last_platform_is_enemy = false
+
 		else:
-			new_platform.position = Vector2(randf_range(20,160), platform_initial_position_y)
-			platform_container.call_deferred('add_child', new_platform)
+			# 2 = cloud, 3 = enemy (par ex.)
+			# Empêcher deux spéciaux d’affilée
+			if not last_platform_is_cloud and not last_platform_is_enemy:
+				new_platform = platform_scene[new_type].instantiate() as Node2D
+				if new_type == 2:
+					last_platform_is_cloud = true
+					last_platform_is_enemy = false
+				else:
+					last_platform_is_enemy = true
+					last_platform_is_cloud = false
+				# Connecter un signal seulement s'il existe
+				if new_platform.has_signal("delete_object"):
+					new_platform.connect("delete_object", self.delete_object)
+			else:
+				# fallback vers une plateforme simple
+				new_platform = platform_scene[0].instantiate() as Node2D
+				last_platform_is_cloud = false
+				last_platform_is_enemy = false
+
+		# Sécurité : si jamais null, on saute
+		if new_platform == null:
+			push_error("level_generator: new_platform est null (type=%d)" % new_type)
+			continue
+
+		new_platform.position = Vector2(randf_range(20.0, 160.0), platform_initial_position_y)
+		platform_container.call_deferred("add_child", new_platform)
+
 		
 
 

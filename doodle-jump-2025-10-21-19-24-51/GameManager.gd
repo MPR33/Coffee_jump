@@ -53,15 +53,8 @@ func _on_space_pressed() -> void:
 
 func _toggle_mode() -> void:
 	mode = Mode.COFFEE if mode == Mode.DOODLE else Mode.DOODLE
-
 	emit_signal("mode_changed", mode)
 	emit_signal("can_switch_changed", _compute_can_switch())
-
-	var scene_path = DOODLE_SCENE if mode == Mode.DOODLE else COFFEE_SCENE
-
-	var ok := get_tree().change_scene_to_file(scene_path)
-	if ok != OK:
-		push_warning("Impossible de changer de scène vers: %s" % scene_path)
 
 func _compute_can_switch() -> bool:
 	return true # for now

@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://b00utfiu2ahxc"]
+
+[ext_resource type="PackedScene" uid="uid://2oneleomh7xu" path="res://scenes/coffee_mode.tscn" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://chuo8wxeijogw" path="res://main.gd" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://dbrfr0h6vqo0g" path="res://scenes/doodle_jump.tscn" id="2_h2yge"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_ig7tw")
+doodle_packed = ExtResource("2_h2yge")
+coffee_packed = ExtResource("1_0xm2m")
