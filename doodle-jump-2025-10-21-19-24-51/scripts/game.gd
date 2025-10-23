@@ -68,8 +68,8 @@ func _physics_process(delta : float) -> void:
 func delete_object(obstacle):
 	if obstacle.is_in_group("player"):
 		#get_tree().reload_current_scene()
-		if GameManager.score> GameManager.highscore:
-			GameManager.highscore=GameManager.score
+		if GameManager.score_coffee-GameManager.score_sugar> GameManager.highscore:
+			GameManager.highscore=GameManager.score_coffee-GameManager.score_sugar
 		if get_tree().change_scene_to_file("res://scenes/titl_screen.tscn")!=OK:
 			print("je sais pas quoi mettre")
 	elif obstacle.is_in_group("platform") or obstacle.is_in_group("enemies"):
@@ -81,17 +81,18 @@ func _on_platform_cleaner_body_entered(body: Node2D) -> void:
 	delete_object(body)
 
 func score_update():
-	GameManager.score+=camera_start_position-player.position.y
-	score_label.text = str(int(GameManager.score))
+	GameManager.score_sugar = min(GameManager.score_sugar, player.position.y)
+	score_label.text = str(int(-GameManager.score_sugar+GameManager.score_coffee))
 	
 func _on_died(reason: String) -> void:
 	# Stoppe le jeu, affiche un panneau, enregistre highscore, etc.
 	# Ou:
 	get_tree().change_scene_to_file("res://scenes/titl_screen.tscn")
-	
+
 
 
 func _ready() -> void:
 	randomize()
 	level_generator(200)
 	GameManager.died.connect(_on_died)
+	score_update()

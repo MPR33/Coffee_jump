@@ -36,6 +36,7 @@ func _ready() -> void:
 	randomize()
 	level_generator(100)
 	GameManager.died.connect(_on_died)
+	score_update()
 	
 func _physics_process(delta : float) -> void:
 	if player.position.y > camera.position.y:
@@ -59,8 +60,8 @@ func _on_platform_cleaner_coffee_body_entered(body: Node2D) -> void:
 	body.queue_free()
 
 func score_update():
-	GameManager.score+=player.position.y
-	score_label.text = str(int(GameManager.score))
+	GameManager.score_coffee=max(player.position.y,GameManager.score_coffee)
+	score_label.text = str(int(GameManager.score_coffee-GameManager.score_sugar))
 	
 func _on_died(reason: String) -> void:
 	# Stoppe le jeu, affiche un panneau, enregistre highscore, etc.
