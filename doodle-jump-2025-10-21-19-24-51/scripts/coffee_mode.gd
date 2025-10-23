@@ -20,21 +20,23 @@ func level_generator(amount):
 	for items in amount :
 		var new_type = randi()%2
 		#0 1
-		platform_initial_position_y += randf_range(36,54)
 		var new_platform 
 		
 		if new_type==0:
+			platform_initial_position_y += randf_range(36,54)
 			new_platform= platform_scene[0].instantiate() as StaticBody2D
-		elif new_type==1:
+			new_platform.position = Vector2(randf_range(15,170), platform_initial_position_y)
+			platform_container.call_deferred('add_child', new_platform)
+		if new_type==1:
+			platform_initial_position_y += randf_range(36,54)
 			new_platform= platform_scene[1].instantiate() as StaticBody2D
-		if new_type != null:
-			new_platform.position = Vector2(randf_range(20,160), platform_initial_position_y)
+			new_platform.position = Vector2(randf_range(20,165), platform_initial_position_y)
 			platform_container.call_deferred('add_child', new_platform)
 		
 
 func _ready() -> void:
 	randomize()
-	level_generator(20)
+	level_generator(100)
 	GameManager.died.connect(_on_died)
 	
 func _physics_process(delta : float) -> void:
@@ -58,7 +60,7 @@ func _on_platform_cleaner_body_entered(body: Node2D) -> void:
 	delete_object(body)
 
 func score_update():
-	score=camera_start_position-camera.position.y
+	score=camera_start_position+camera.position.y
 	score_label.text = str(int(score))
 	
 func _on_died(reason: String) -> void:
