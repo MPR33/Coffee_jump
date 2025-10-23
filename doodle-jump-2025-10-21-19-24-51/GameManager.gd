@@ -13,12 +13,14 @@ var mode: Mode = Mode.DOODLE
 
 # --- Caféine & paramètres (tous éditables si tu veux @export) ---
 var caffeine := 0.8                         # normalisée entre 0 et 1
-@export var doodle_rate := -0.03             # /s, la vitesse à laquelle ça monte en Doodle
-@export var coffee_rate := 0.05            # /s, la vitesse à laquelle ça descend en Coffee
-@export var allow_coffee_to_doodle_anytime := false  # si true, on peut sortir du Coffee quand on veut
+@export var doodle_rate := +0.0             # /s, la vitesse à laquelle ça monte en Doodle
+@export var coffee_rate := -0.0            # /s, la vitesse à laquelle ça descend en Coffee
+@export var allow_coffee_to_doodle_anytime := false
+@onready var score_label1 :=$platform_container_coffee/camera/CanvasLayer/score as Label
+@onready var score_label2 :=$platform_container/camera/CanvasLayer/score as Label
 
 var highscore := 0
-
+var score:=0
 func _ready() -> void:
 	set_process(true)
 	emit_signal("mode_changed", mode)
@@ -49,7 +51,8 @@ func _on_space_pressed() -> void:
 	# Règle : on ne peut changer que si la jauge est du bon côté du seuil, sinon mort.
 	if _compute_can_switch():
 		_toggle_mode()
-
+		score_label1.text=str(int(score))
+		score_label2.text=str(int(score))
 func _toggle_mode() -> void:
 	mode = Mode.COFFEE if mode == Mode.DOODLE else Mode.DOODLE
 

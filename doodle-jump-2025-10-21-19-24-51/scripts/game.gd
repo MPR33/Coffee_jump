@@ -13,7 +13,6 @@ var last_platform_is_enemy:=false
 @onready var camera_start_position =$platform_container/camera.position.y
 @onready var camera :=$platform_container/camera as Camera2D
 @onready var cafe :=$platform_container/camera/platform_cleaner as Area2D
-var score:=0
 @export var platform_scene: Array[PackedScene] = [
 	preload("res://platforms/platform.tscn"),
 	preload("res://platforms/spring_platform.tscn"),
@@ -69,8 +68,8 @@ func _physics_process(delta : float) -> void:
 func delete_object(obstacle):
 	if obstacle.is_in_group("player"):
 		#get_tree().reload_current_scene()
-		if score> GameManager.highscore:
-			GameManager.highscore=score
+		if GameManager.score> GameManager.highscore:
+			GameManager.highscore=GameManager.score
 		if get_tree().change_scene_to_file("res://scenes/titl_screen.tscn")!=OK:
 			print("je sais pas quoi mettre")
 	elif obstacle.is_in_group("platform") or obstacle.is_in_group("enemies"):
@@ -82,8 +81,8 @@ func _on_platform_cleaner_body_entered(body: Node2D) -> void:
 	delete_object(body)
 
 func score_update():
-	score=camera_start_position-camera.position.y
-	score_label.text = str(int(score))
+	GameManager.score+=camera_start_position-player.position.y
+	score_label.text = str(int(GameManager.score))
 	
 func _on_died(reason: String) -> void:
 	# Stoppe le jeu, affiche un panneau, enregistre highscore, etc.

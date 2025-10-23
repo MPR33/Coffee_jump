@@ -1,20 +1,18 @@
 extends Node2D
 
-@onready var platform_container := $platform_container
-@onready var platform := $platform_container/platform_coffee
+@onready var platform_container := $platform_container_coffee
+@onready var platform := $platform_container_coffee/platform_coffee
 @onready var platform_initial_position_y: float = (platform as Node2D).position.y
-@onready var player := $platform_container/coffee_bean as CharacterBody2D
+@onready var player := $platform_container_coffee/coffee_bean as CharacterBody2D
 var last_platform_is_cloud:= false
-@onready var score_label :=$platform_container/camera/CanvasLayer/score as Label
-@onready var camera_start_position =$platform_container/camera.position.y
-@onready var camera :=$platform_container/camera as Camera2D
-@onready var cafe :=$platform_container/camera/platform_cleaner as Area2D
-var score:=0
+@onready var score_label :=$platform_container_coffee/camera/CanvasLayer/score as Label
+@onready var camera_start_position =$platform_container_coffee/camera.position.y
+@onready var camera :=$platform_container_coffee/camera as Camera2D
+@onready var cafe :=$platform_container_coffee/camera/platform_cleaner as Area2D
 @export var platform_scene: Array[PackedScene] = [
 	preload("res://platforms/platform.tscn"),
 	preload("res://platforms/platform_coffee.tscn")
 ]
-
 
 func level_generator(amount):
 	for items in amount :
@@ -47,21 +45,22 @@ func _physics_process(delta : float) -> void:
 func delete_object(obstacle):
 	if obstacle.is_in_group("player"):
 		#get_tree().reload_current_scene()
-		if score> GameManager.highscore:
-			GameManager.highscore=score
+		if GameManager.score> GameManager.highscore:
+			GameManager.highscore=GameManager.score
 		if get_tree().change_scene_to_file("res://scenes/titl_screen.tscn")!=OK:
 			print("je sais pas quoi mettre")
 	elif obstacle.is_in_group("platform") or obstacle.is_in_group("enemies"):
 		obstacle.queue_free()
-		level_generator(1)
+		level_generator(30)
 	
 	
-func _on_platform_cleaner_body_entered(body: Node2D) -> void:
+func _on_platform_cleaner_coffee_body_entered(body: Node2D) -> void:
 	delete_object(body)
+	body.queue_free()
 
 func score_update():
-	score=camera_start_position+camera.position.y
-	score_label.text = str(int(score))
+	GameManager.score+=player.position.y
+	score_label.text = str(int(GameManager.score))
 	
 func _on_died(reason: String) -> void:
 	# Stoppe le jeu, affiche un panneau, enregistre highscore, etc.

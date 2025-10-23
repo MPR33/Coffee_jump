@@ -71,7 +71,7 @@ position = Vector2(1, 283)
 texture = ExtResource("8_j6j3j")
 
 [node name="CaffeineHUD" parent="platform_container/camera" instance=ExtResource("8_rea41")]
-layer = 5
+layer = 0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="platform_container/camera"]
 
