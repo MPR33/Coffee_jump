@@ -15,7 +15,8 @@ var last_coffee_pos: Vector2 = Vector2.ZERO
 var is_transitioning := false
 
 func _ready() -> void:
-	#GameManager.register_main_signals(self)
+	doodle_node = doodle_packed.instantiate()
+	add_child(doodle_node)
 	# Écoute les changements de mode déclenchés par GameManager
 	GameManager.mode_changed.connect(_on_mode_changed)
 	# Charge le mode initial (converti en string)

@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwnukrq54gdg8"]
+
+[ext_resource type="Texture2D" uid="uid://vlsnrio3bjxj" path="res://assets/actors/ChatGPT Image 22 oct. 2025, 14_35_35.png" id="2_pyf7a"]
+
+[sub_resource type="GDScript" id="GDScript_kf5vp"]
+script/source = "extends Area2D
+
+@export var speed: float = 600.0
+@export var kill_group: StringName = &\"player\"
+@export var lifetime: float = 8.0
+
+var _life: float = 0.0
+
+func _ready() -> void:
+	monitoring = true
+	connect(\"body_entered\", _on_body_entered)
+	set_physics_process(true)
+
+func _physics_process(delta: float) -> void:
+	position.y += speed * delta
+	_life += delta
+	if _life > lifetime:
+		queue_free()
+
+func _on_body_entered(body: Node2D) -> void:
+	if body.is_in_group(kill_group) and body.has_method(\"die\"):
+		body.die()
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e2rpy"]
+
+[node name="Coffee drop" type="Area2D"]
+script = SubResource("GDScript_kf5vp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_e2rpy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("2_pyf7a")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1pl0m3srbkfd"]
+
+[ext_resource type="PackedScene" uid="uid://d1qpm3ys6gfcx" path="res://actors/coffee_bean.tscn" id="1_m4d1r"]
+[ext_resource type="PackedScene" uid="uid://dhegmosl7bs7t" path="res://platforms/ice.tscn" id="2_0kuaf"]
+[ext_resource type="Script" path="res://platforms/amacec.gd" id="2_0onqu"]
+
+[node name="coffee_bean" instance=ExtResource("1_m4d1r")]
+script = ExtResource("2_0onqu")
+
+[node name="collision_coffee" parent="." index="0"]
+position = Vector2(-37.499817, 182.50037)
+scale = Vector2(0.9999989, 0.9999989)
+
+[node name="anim_coffee" parent="." index="1"]
+position = Vector2(-29.999878, 130.00037)
+scale = Vector2(0.26562518, 0.27539074)
+
+[node name="ice" parent="." index="2" instance=ExtResource("2_0kuaf")]
+position = Vector2(-19.999817, 620.0001)
