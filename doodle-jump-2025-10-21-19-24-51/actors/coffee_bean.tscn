@@ -1,10 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://d1qpm3ys6gfcx"]
+[gd_scene load_steps=6 format=3 uid="uid://d1qpm3ys6gfcx"]
 
+[ext_resource type="Script" uid="uid://vnpf86sgij0r" path="res://scripts/coffee_bean.gd" id="1_fsxpr"]
 [ext_resource type="Texture2D" uid="uid://dqa0y7sajb7ti" path="res://assets/actors/Coffee fall.png" id="1_nl11q"]
 [ext_resource type="Texture2D" uid="uid://swmdc3h3wv0v" path="res://assets/actors/Coffee posee.png" id="2_fsxpr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nl11q"]
-size = Vector2(490.00012, 140.00003)
+size = Vector2(592.5001, 860.0005)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yhk0c"]
 animations = [{
@@ -28,10 +29,11 @@ animations = [{
 [node name="coffee_bean" type="CharacterBody2D"]
 position = Vector2(90.999985, 164.99998)
 scale = Vector2(0.1, 0.1)
+script = ExtResource("1_fsxpr")
 
 [node name="collision_coffee" type="CollisionShape2D" parent="."]
-position = Vector2(-5.0000205, -59.99998)
-scale = Vector2(0.99999964, 0.99999964)
+position = Vector2(20.000183, -419.99963)
+scale = Vector2(0.99999934, 0.99999934)
 shape = SubResource("RectangleShape2D_nl11q")
 
 [node name="anim_coffee" type="AnimatedSprite2D" parent="."]

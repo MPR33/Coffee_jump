@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://dhegmosl7bs7t"]
+
+[ext_resource type="Texture2D" uid="uid://cl16wpcsqab4s" path="res://assets/actors/ice_platform_left.png" id="1_2x1vx"]
+[ext_resource type="Script" uid="uid://dvfu17fowdpmp" path="res://scripts/ice.gd" id="1_sqd0u"]
+[ext_resource type="Texture2D" uid="uid://bf3ultf3gytve" path="res://assets/actors/ice_platform_right.png" id="2_sqd0u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2x1vx"]
+size = Vector2(31, 12.5)
+
+[node name="ice" type="StaticBody2D" groups=["platform"]]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_sqd0u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 7.25)
+shape = SubResource("RectangleShape2D_2x1vx")
+one_way_collision = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_2x1vx")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_sqd0u")

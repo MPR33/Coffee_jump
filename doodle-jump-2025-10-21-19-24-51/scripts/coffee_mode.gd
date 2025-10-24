@@ -8,10 +8,11 @@ var last_platform_is_cloud:= false
 @onready var score_label :=$platform_container_coffee/camera/CanvasLayer/score as Label
 @onready var camera_start_position =$platform_container_coffee/camera.position.y
 @onready var camera :=$platform_container_coffee/camera as Camera2D
-@onready var cafe :=$platform_container_coffee/camera/platform_cleaner as Area2D
+@onready var cafe :=$platform_cleaner_coffee as Area2D
+@onready var cafe2 :=$platform_cleaner_coffee2 as Area2D
 @export var platform_scene: Array[PackedScene] = [
-	preload("res://platforms/platform.tscn"),
-	preload("res://platforms/platform_coffee.tscn")
+	preload("res://platforms/platform_coffee.tscn"),
+	preload("res://platforms/ice.tscn")
 ]
 
 func level_generator(amount):
@@ -40,24 +41,35 @@ func _ready() -> void:
 	
 func _physics_process(delta : float) -> void:
 	if player.position.y > camera.position.y:
-		camera.position.y = player.position.y 
+		camera.position.y = player.position.y
 		score_update()
+	if player.position.y < camera.position.y - 130:
+		camera.position.y = player.position.y
+	
+	for child in platform_container.get_children():
+		if child.is_in_group("platform") or child.is_in_group("enemies"):
+			if child.global_position.y < cafe.global_position.y - 200 :
+				child.queue_free()
+				level_generator(1)
 
 func delete_object(obstacle):
 	if obstacle.is_in_group("player"):
 		#get_tree().reload_current_scene()
-		if GameManager.score> GameManager.highscore:
-			GameManager.highscore=GameManager.score
-		if get_tree().change_scene_to_file("res://scenes/titl_screen.tscn")!=OK:
-			print("je sais pas quoi mettre")
+		_on_died("")
+		if GameManager.score_coffee-GameManager.score_sugar> GameManager.highscore:
+			GameManager.highscore=GameManager.score_coffee-GameManager.score_sugar
 	elif obstacle.is_in_group("platform") or obstacle.is_in_group("enemies"):
 		obstacle.queue_free()
-		level_generator(30)
+		level_generator(1)
 	
 	
 func _on_platform_cleaner_coffee_body_entered(body: Node2D) -> void:
-	delete_object(body)
-	body.queue_free()
+	if body.is_in_group("player"):
+		delete_object(body)
+
+func _on_platform_cleaner_coffee_2_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		delete_object(body)
 
 func score_update():
 	GameManager.score_coffee=max(player.position.y,GameManager.score_coffee)

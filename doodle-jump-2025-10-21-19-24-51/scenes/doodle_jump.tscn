@@ -16,9 +16,6 @@
 glow_enabled = true
 glow_bloom = 1.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4fsdi"]
-size = Vector2(180, 312)
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g5eel"]
 shader = ExtResource("10_1avu4")
 shader_parameter/tint = Color(1, 1, 1, 1)
@@ -31,6 +28,9 @@ shader_parameter/sweep_width = 0.60000002384186
 shader_parameter/sweep_speed = -0.4389998783525
 shader_parameter/sweep_strength = 0.162000007695
 shader_parameter/light_pos = Vector2(0.2, 0.8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4fsdi"]
+size = Vector2(180, 312)
 
 [node name="doodle_jump" type="Node2D"]
 script = ExtResource("1_4fsdi")
@@ -55,20 +55,7 @@ limit_left = 0
 limit_right = 180
 limit_bottom = 320
 position_smoothing_enabled = true
-
-[node name="platform_cleaner" type="Area2D" parent="platform_container/camera"]
-position = Vector2(-1, 32)
-collision_layer = 0
-collision_mask = 7
-script = ExtResource("7_gkglp")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="platform_container/camera/platform_cleaner"]
-position = Vector2(1, 288)
-shape = SubResource("RectangleShape2D_4fsdi")
-
-[node name="Sprite2D" type="Sprite2D" parent="platform_container/camera/platform_cleaner"]
-position = Vector2(1, 283)
-texture = ExtResource("8_j6j3j")
+position_smoothing_speed = 20.0
 
 [node name="CaffeineHUD" parent="platform_container/camera" instance=ExtResource("8_rea41")]
 layer = 0
@@ -112,4 +99,18 @@ expand_mode = 1
 [node name="enemy" parent="." instance=ExtResource("11_1avu4")]
 position = Vector2(375, 39)
 
-[connection signal="body_entered" from="platform_container/camera/platform_cleaner" to="." method="_on_platform_cleaner_body_entered"]
+[node name="platform_cleaner" type="Area2D" parent="."]
+position = Vector2(89, 192)
+collision_layer = 0
+collision_mask = 7
+script = ExtResource("7_gkglp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="platform_cleaner"]
+position = Vector2(1, 288)
+shape = SubResource("RectangleShape2D_4fsdi")
+
+[node name="Sprite2D" type="Sprite2D" parent="platform_cleaner"]
+position = Vector2(1, 283)
+texture = ExtResource("8_j6j3j")
+
+[connection signal="body_entered" from="platform_cleaner" to="." method="_on_platform_cleaner_body_entered"]
