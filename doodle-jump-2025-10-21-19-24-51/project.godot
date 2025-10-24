@@ -1,0 +1,45 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Doodle Jump"
+run/main_scene="uid://htsrwtgttig2"
+config/features=PackedStringArray("4.5", "Forward Plus")
+config/icon="res://icon.svg"
+
+[autoload]
+
+GameManager="*res://GameManager.gd"
+ModeCache="*res://scripts/ModeCache.gd"
+
+[display]
+
+window/size/viewport_width=180
+window/size/viewport_height=320
+window/size/window_width_override=180
+window/size/window_height_override=320
+window/stretch/mode="viewport"
+
+[global_group]
+
+platform=""
+player=""
+enemies=""
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
+[layer_names]
+
+2d_physics/layer_1="player"
+2d_physics/layer_2="obstacles"
+2d_physics/layer_3="enemies"

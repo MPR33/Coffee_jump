@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://crd11i6mcyalc"]
+
+[ext_resource type="PackedScene" uid="uid://bgmatys3es86x" path="res://scenes/engrenage.tscn" id="1_nsvf4"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Engrenage" parent="." instance=ExtResource("1_nsvf4")]
+position = Vector2(22, 32)
+
+[node name="Engrenage2" parent="." instance=ExtResource("1_nsvf4")]
+position = Vector2(69, 32)
+rotation = 1.1780972
+direction = -1
+
+[node name="Engrenage3" parent="." instance=ExtResource("1_nsvf4")]
+position = Vector2(116, 32)
+
+[node name="Engrenage4" parent="." instance=ExtResource("1_nsvf4")]
+position = Vector2(160.99998, 29.999996)
+rotation = 1.1780972
+direction = -1
