@@ -17,7 +17,6 @@ config/features=PackedStringArray("4.5", "Forward Plus")
 [autoload]
 
 GameManager="*res://GameManager.gd"
-ModeCache="*res://scripts/ModeCache.gd"
 
 [display]
 
