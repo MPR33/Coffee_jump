@@ -95,7 +95,7 @@ position = Vector2(-2766.666, -6766.668)
 scale = Vector2(30, 30)
 
 [node name="platform_cleaner_coffee2" type="Area2D" parent="."]
-position = Vector2(88, 485)
+position = Vector2(89, 509.00006)
 scale = Vector2(0.03, 0.03)
 collision_layer = 0
 collision_mask = 7

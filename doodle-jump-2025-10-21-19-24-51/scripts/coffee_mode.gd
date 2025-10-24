@@ -9,6 +9,7 @@ var last_platform_is_cloud:= false
 @onready var camera_start_position =$platform_container_coffee/camera.position.y
 @onready var camera :=$platform_container_coffee/camera as Camera2D
 @onready var cafe :=$platform_cleaner_coffee as Area2D
+@onready var cafe2 :=$platform_cleaner_coffee2 as Area2D
 @export var platform_scene: Array[PackedScene] = [
 	preload("res://platforms/platform.tscn"),
 	preload("res://platforms/platform_coffee.tscn")
@@ -41,7 +42,6 @@ func _ready() -> void:
 func _physics_process(delta : float) -> void:
 	if player.position.y > camera.position.y:
 		camera.position.y = player.position.y
-		cafe.position.y = max(cafe.position.y, player.position.y - 80)
 		score_update()
 	if player.position.y < camera.position.y - 130:
 		camera.position.y = player.position.y
@@ -65,6 +65,10 @@ func delete_object(obstacle):
 	
 	
 func _on_platform_cleaner_coffee_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		delete_object(body)
+
+func _on_platform_cleaner_coffee_2_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		delete_object(body)
 
