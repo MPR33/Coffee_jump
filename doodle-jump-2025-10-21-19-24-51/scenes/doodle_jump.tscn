@@ -55,6 +55,7 @@ limit_left = 0
 limit_right = 180
 limit_bottom = 320
 position_smoothing_enabled = true
+position_smoothing_speed = 20.0
 
 [node name="CaffeineHUD" parent="platform_container/camera" instance=ExtResource("8_rea41")]
 layer = 0

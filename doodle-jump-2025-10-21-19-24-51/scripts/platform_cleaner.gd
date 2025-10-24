@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var rise_speed := 10.0   # pixels/sec vers le haut
+@export var rise_speed := 75.0   # pixels/sec vers le haut
 
 func _physics_process(delta):
 	position.y -= rise_speed * delta

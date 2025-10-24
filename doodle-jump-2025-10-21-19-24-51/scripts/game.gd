@@ -1,8 +1,6 @@
 extends Node2D
 
 
-
-
 @onready var platform_container := $platform_container
 @onready var platform := $platform_container/platform
 @onready var platform_initial_position_y: float = (platform as Node2D).position.y
@@ -19,9 +17,6 @@ var last_platform_is_enemy:=false
 	preload("res://platforms/cloud.tscn"),
 	preload("res://actors/enemy.tscn")
 ]
-
-
-
 
 func level_generator(amount: int) -> void:
 	for i in range(amount):
@@ -70,13 +65,12 @@ func level_generator(amount: int) -> void:
 		new_platform.position = Vector2(randf_range(20.0, 160.0), platform_initial_position_y)
 		platform_container.call_deferred("add_child", new_platform)
 
-	
 func _physics_process(delta : float) -> void:
 	if player.position.y < camera.position.y:
 		camera.position.y = player.position.y
-		cafe.position.y = min(cafe.position.y, player.position.y + 150)
+		cafe.position.y = min(cafe.position.y, player.position.y + 80)
 		score_update()
-	if player.position.y > camera.position.y + 80:
+	if player.position.y > camera.position.y + 130:
 		camera.position.y = player.position.y
 	
 	for child in platform_container.get_children():
