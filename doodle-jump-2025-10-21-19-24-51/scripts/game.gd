@@ -31,7 +31,9 @@ func level_generator(amount: int) -> void:
 		# Avant ENEMY_MIN_SCORE : pas d'ennemi. Après : proba d'ennemi croissante.
 		var enemy_weight := 0.0
 		if score >= ENEMY_MIN_SCORE:
-			var t : float = clamp((float(score) - float(ENEMY_MIN_SCORE)) / 200.0, 0.0, 1.0)
+			var raw : float = clamp((float(score) - float(ENEMY_MIN_SCORE)) / 200.0, 0.0, 1.0)
+			var t: float = raw * raw * raw   # progression très douce au début
+
 			enemy_weight = 0.10 + 0.30 * t  # de 10% à 40% d'ennemis
 
 		var cloud_weight := 0.15          # nuages (2)
@@ -86,7 +88,7 @@ func level_generator(amount: int) -> void:
 					last_platform_is_cloud = false
 
 					# Positionner l'ennemi en haut de l'écran (x random), légèrement hors-écran pour "entrer"
-					var top_y := player.position.y-200
+					var top_y := player.position.y-300
 					new_platform.position = Vector2(randf_range(20.0, 160.0), top_y)
 
 					# Générer une plateforme 0 au niveau courant (même "batch")
@@ -117,21 +119,13 @@ func level_generator(amount: int) -> void:
 
 		platform_container.call_deferred("add_child", new_platform)
 
-<<<<<<< Updated upstream
-=======
 
-	
->>>>>>> Stashed changes
 func _physics_process(delta : float) -> void:
 	if player.position.y < camera.position.y:
 		camera.position.y = player.position.y
 		cafe.position.y = min(cafe.position.y, player.position.y + 80)
 		score_update()
-<<<<<<< Updated upstream
-	if player.position.y > camera.position.y + 130:
-=======
 	if player.position.y > camera.position.y + 150:
->>>>>>> Stashed changes
 		camera.position.y = player.position.y
 	
 	for child in platform_container.get_children():
