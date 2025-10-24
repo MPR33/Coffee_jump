@@ -79,7 +79,7 @@ texture = ExtResource("10_scrcr")
 stretch_mode = 1
 
 [node name="platform_cleaner_coffee" type="Area2D" parent="."]
-position = Vector2(90, 160)
+position = Vector2(90.00001, 142)
 scale = Vector2(0.03, 0.03)
 collision_layer = 0
 collision_mask = 7
