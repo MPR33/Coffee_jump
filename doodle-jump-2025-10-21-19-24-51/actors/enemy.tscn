@@ -1,12 +1,12 @@
 [gd_scene load_steps=8 format=3 uid="uid://rml7e8sjjxs4"]
 
 [ext_resource type="Script" uid="uid://by0vaaqrm2ssa" path="res://scripts/enemy.gd" id="1_34jws"]
-[ext_resource type="Texture2D" uid="uid://be8uqcnnmk5nc" path="res://assets/actors/coffee_enemy_1.png" id="2_34jws"]
-[ext_resource type="Texture2D" uid="uid://detcaefcse81e" path="res://assets/actors/coffee_enemy_2.png" id="3_u1dkd"]
-[ext_resource type="Texture2D" uid="uid://dph2o2wlbs0pm" path="res://assets/actors/coffee_enemy_3.png" id="4_dpeei"]
+[ext_resource type="Texture2D" uid="uid://vlsnrio3bjxj" path="res://assets/actors/ChatGPT Image 22 oct. 2025, 14_35_35.png" id="2_34jws"]
+[ext_resource type="Texture2D" uid="uid://f28oy70ifi68" path="res://assets/actors/ChatGPT Image 24 oct. 2025, 11_34_16 (1).png" id="3_u1dkd"]
+[ext_resource type="Texture2D" uid="uid://byq0yobvqkaeb" path="res://assets/actors/ChatGPT Image 24 oct. 2025, 12_00_17.png" id="4_dpeei"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dpeei"]
-size = Vector2(29, 13)
+size = Vector2(7, 10)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6tp0m"]
 animations = [{
@@ -26,7 +26,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kho5t"]
-size = Vector2(31, 17)
+size = Vector2(7, 10.375)
 
 [node name="enemy" type="StaticBody2D" groups=["enemies"]]
 collision_layer = 4
@@ -34,16 +34,17 @@ collision_mask = 0
 script = ExtResource("1_34jws")
 
 [node name="collision" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 0.5)
+position = Vector2(1.5, 2)
 shape = SubResource("RectangleShape2D_dpeei")
 one_way_collision = true
 
 [node name="anim" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
+position = Vector2(1.5000005, 2.7499995)
+scale = Vector2(0.014648438, 0.016113281)
 sprite_frames = SubResource("SpriteFrames_6tp0m")
 animation = &"moving"
-frame = 1
-frame_progress = 0.95559615
+frame_progress = 0.84084094
 
 [node name="hitbox" type="Area2D" parent="."]
 collision_layer = 4
@@ -51,7 +52,7 @@ collision_mask = 7
 
 [node name="collision" type="CollisionShape2D" parent="hitbox"]
 modulate = Color(1, 0.09803922, 0.078431375, 1)
-position = Vector2(0.5, 3.5)
+position = Vector2(1.5, 2.8125)
 shape = SubResource("RectangleShape2D_kho5t")
 
 [connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
