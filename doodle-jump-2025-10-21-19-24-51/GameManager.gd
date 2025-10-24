@@ -55,7 +55,7 @@ func _process(delta: float) -> void:
 	emit_signal("can_switch_changed", _compute_can_switch())
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_accept"):
+	if event.is_action_pressed("ui_accept") and game_started:
 		_on_space_pressed()
 
 func _on_space_pressed() -> void:

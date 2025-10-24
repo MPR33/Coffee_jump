@@ -9,7 +9,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-
+func _input(event: InputEvent) -> void: # permet de lancer le jeu avec espace
+	if event.is_action_pressed("start_game") and not GameManager.game_started:
+		_on_startbtn_pressed()
 
 func _on_quitbtn_pressed() -> void:
 	get_tree().quit()
