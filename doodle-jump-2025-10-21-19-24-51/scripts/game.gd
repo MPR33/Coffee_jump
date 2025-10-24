@@ -12,7 +12,7 @@ var last_platform_is_enemy:=false
 @onready var score_label :=$platform_container/camera/CanvasLayer/score as Label
 @onready var camera_start_position =$platform_container/camera.position.y
 @onready var camera :=$platform_container/camera as Camera2D
-@onready var cafe :=$platform_container/camera/platform_cleaner as Area2D
+@onready var cafe :=$platform_cleaner as Area2D
 @export var platform_scene: Array[PackedScene] = [
 	preload("res://platforms/platform.tscn"),
 	preload("res://platforms/spring_platform.tscn"),
@@ -70,14 +70,20 @@ func level_generator(amount: int) -> void:
 		new_platform.position = Vector2(randf_range(20.0, 160.0), platform_initial_position_y)
 		platform_container.call_deferred("add_child", new_platform)
 
-		
-
-
 	
 func _physics_process(delta : float) -> void:
 	if player.position.y < camera.position.y:
-		camera.position.y = player.position.y 
+		camera.position.y = player.position.y
+		cafe.position.y = min(cafe.position.y, player.position.y + 150)
 		score_update()
+	if player.position.y > camera.position.y + 80:
+		camera.position.y = player.position.y
+	
+	for child in platform_container.get_children():
+		if child.is_in_group("platform") or child.is_in_group("enemies"):
+			if child.global_position.y > cafe.global_position.y + 130 :
+				child.queue_free()
+				level_generator(1)
 
 func delete_object(obstacle):
 	if obstacle.is_in_group("player"):
@@ -92,7 +98,8 @@ func delete_object(obstacle):
 	
 	
 func _on_platform_cleaner_body_entered(body: Node2D) -> void:
-	delete_object(body)
+	if body.is_in_group("player"):
+		delete_object(body)
 
 func score_update():
 	GameManager.score_sugar = min(GameManager.score_sugar, player.position.y)
@@ -107,6 +114,6 @@ func _on_died(reason: String) -> void:
 
 func _ready() -> void:
 	randomize()
-	level_generator(200)
+	level_generator(100)
 	GameManager.died.connect(_on_died)
 	score_update()
