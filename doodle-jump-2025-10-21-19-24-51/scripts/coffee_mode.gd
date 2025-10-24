@@ -79,4 +79,3 @@ func score_update():
 func _on_died(reason: String) -> void:
 	# Stoppe le jeu, affiche un panneau, enregistre highscore, etc.
 	GameManager.game_started = false
-	get_tree().change_scene_to_file("res://scenes/titl_screen.tscn")

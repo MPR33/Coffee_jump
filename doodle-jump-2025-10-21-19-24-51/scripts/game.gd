@@ -123,7 +123,7 @@ func level_generator(amount: int) -> void:
 func _physics_process(delta : float) -> void:
 	if player.position.y < camera.position.y:
 		camera.position.y = player.position.y
-		cafe.position.y = min(cafe.position.y, player.position.y + 80)
+		cafe.position.y = min(cafe.position.y, player.position.y + 120)
 		score_update()
 	if player.position.y > camera.position.y + 150:
 		camera.position.y = player.position.y
