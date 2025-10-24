@@ -11,8 +11,8 @@ var last_platform_is_cloud:= false
 @onready var cafe :=$platform_cleaner_coffee as Area2D
 @onready var cafe2 :=$platform_cleaner_coffee2 as Area2D
 @export var platform_scene: Array[PackedScene] = [
-	preload("res://platforms/platform.tscn"),
-	preload("res://platforms/platform_coffee.tscn")
+	preload("res://platforms/platform_coffee.tscn"),
+	preload("res://platforms/ice.tscn")
 ]
 
 func level_generator(amount):
@@ -55,10 +55,9 @@ func _physics_process(delta : float) -> void:
 func delete_object(obstacle):
 	if obstacle.is_in_group("player"):
 		#get_tree().reload_current_scene()
+		_on_died("")
 		if GameManager.score_coffee-GameManager.score_sugar> GameManager.highscore:
 			GameManager.highscore=GameManager.score_coffee-GameManager.score_sugar
-		if get_tree().change_scene_to_file("res://scenes/titl_screen.tscn")!=OK:
-			print("je sais pas quoi mettre")
 	elif obstacle.is_in_group("platform") or obstacle.is_in_group("enemies"):
 		obstacle.queue_free()
 		level_generator(1)

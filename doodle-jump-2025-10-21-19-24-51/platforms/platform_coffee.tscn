@@ -16,3 +16,4 @@ texture = ExtResource("1_ayk8a")
 [node name="collision_platform" type="CollisionShape2D" parent="."]
 position = Vector2(-2, 0.5)
 shape = SubResource("RectangleShape2D_4w1b1")
+one_way_collision = true
