@@ -123,7 +123,7 @@ func level_generator(amount: int) -> void:
 func _physics_process(delta : float) -> void:
 	if player.position.y < camera.position.y:
 		camera.position.y = player.position.y
-		cafe.position.y = min(cafe.position.y, player.position.y + 80)
+		cafe.position.y = min(cafe.position.y, player.position.y + 120)
 		score_update()
 	if player.position.y > camera.position.y + 150:
 		camera.position.y = player.position.y
@@ -139,8 +139,7 @@ func delete_object(obstacle):
 		#get_tree().reload_current_scene()
 		if GameManager.score_coffee-GameManager.score_sugar> GameManager.highscore:
 			GameManager.highscore=GameManager.score_coffee-GameManager.score_sugar
-		if get_tree().change_scene_to_file("res://scenes/titl_screen.tscn")!=OK:
-			print("je sais pas quoi mettre")
+		_on_died("")
 	elif obstacle.is_in_group("platform") or obstacle.is_in_group("enemies"):
 		obstacle.queue_free()
 		level_generator(1)
@@ -157,6 +156,7 @@ func score_update():
 func _on_died(reason: String) -> void:
 	# Stoppe le jeu, affiche un panneau, enregistre highscore, etc.
 	# Ou:
+	GameManager.game_started = false
 	get_tree().change_scene_to_file("res://scenes/titl_screen.tscn")
 
 
