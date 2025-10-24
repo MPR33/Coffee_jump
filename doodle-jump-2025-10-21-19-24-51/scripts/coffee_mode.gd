@@ -8,7 +8,7 @@ var last_platform_is_cloud:= false
 @onready var score_label :=$platform_container_coffee/camera/CanvasLayer/score as Label
 @onready var camera_start_position =$platform_container_coffee/camera.position.y
 @onready var camera :=$platform_container_coffee/camera as Camera2D
-@onready var cafe :=$platform_container_coffee/camera/platform_cleaner as Area2D
+@onready var cafe :=$platform_cleaner_coffee as Area2D
 @export var platform_scene: Array[PackedScene] = [
 	preload("res://platforms/platform.tscn"),
 	preload("res://platforms/platform_coffee.tscn")
@@ -40,8 +40,17 @@ func _ready() -> void:
 	
 func _physics_process(delta : float) -> void:
 	if player.position.y > camera.position.y:
-		camera.position.y = player.position.y 
+		camera.position.y = player.position.y
+		cafe.position.y = max(cafe.position.y, player.position.y - 80)
 		score_update()
+	if player.position.y < camera.position.y - 130:
+		camera.position.y = player.position.y
+	
+	for child in platform_container.get_children():
+		if child.is_in_group("platform") or child.is_in_group("enemies"):
+			if child.global_position.y < cafe.global_position.y - 200 :
+				child.queue_free()
+				level_generator(1)
 
 func delete_object(obstacle):
 	if obstacle.is_in_group("player"):
@@ -52,12 +61,12 @@ func delete_object(obstacle):
 			print("je sais pas quoi mettre")
 	elif obstacle.is_in_group("platform") or obstacle.is_in_group("enemies"):
 		obstacle.queue_free()
-		level_generator(30)
+		level_generator(1)
 	
 	
 func _on_platform_cleaner_coffee_body_entered(body: Node2D) -> void:
-	delete_object(body)
-	body.queue_free()
+	if body.is_in_group("player"):
+		delete_object(body)
 
 func score_update():
 	GameManager.score_coffee=max(player.position.y,GameManager.score_coffee)

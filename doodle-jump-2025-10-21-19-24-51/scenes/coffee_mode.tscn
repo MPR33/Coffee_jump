@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://b8cpl8qctl00a" path="res://scripts/platform_coffee.gd" id="5_lqfok"]
 [ext_resource type="PackedScene" uid="uid://bnqbheiixm4sv" path="res://HUD/caffeine_hud.tscn" id="5_mc3dk"]
 [ext_resource type="FontFile" uid="uid://dvq2o6ni8eccq" path="res://fonts/Kenney Pixel.ttf" id="6_8pu30"]
-[ext_resource type="PackedScene" uid="uid://crd11i6mcyalc" path="res://scenes/rangée engrenages.tscn" id="7_scrcr"]
+[ext_resource type="PackedScene" path="res://scenes/rangée engrenages.tscn" id="7_scrcr"]
 [ext_resource type="Texture2D" uid="uid://mxyiybnmwgco" path="res://assets/extras/Background coffee machine 6.png" id="10_scrcr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cq4jp"]
@@ -38,20 +38,6 @@ limit_left = 0
 limit_top = 0
 limit_right = 180
 position_smoothing_enabled = true
-
-[node name="platform_cleaner_coffee" type="Area2D" parent="platform_container_coffee/camera"]
-collision_layer = 0
-collision_mask = 7
-script = ExtResource("5_cq4jp")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="platform_container_coffee/camera/platform_cleaner_coffee"]
-position = Vector2(-22.500488, -5394.166)
-scale = Vector2(0.99999976, 0.99999976)
-shape = SubResource("RectangleShape2D_cq4jp")
-
-[node name="Node2D" parent="platform_container_coffee/camera/platform_cleaner_coffee" instance=ExtResource("7_scrcr")]
-position = Vector2(-2766.666, -6766.668)
-scale = Vector2(30, 30)
 
 [node name="CaffeineHUD" parent="platform_container_coffee/camera" instance=ExtResource("5_mc3dk")]
 
@@ -92,5 +78,21 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("10_scrcr")
 stretch_mode = 1
 
+[node name="platform_cleaner_coffee" type="Area2D" parent="."]
+position = Vector2(90, 160)
+scale = Vector2(0.03, 0.03)
+collision_layer = 0
+collision_mask = 7
+script = ExtResource("5_cq4jp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="platform_cleaner_coffee"]
+position = Vector2(-22.500488, -5394.166)
+scale = Vector2(0.99999976, 0.99999976)
+shape = SubResource("RectangleShape2D_cq4jp")
+
+[node name="Node2D" parent="platform_cleaner_coffee" instance=ExtResource("7_scrcr")]
+position = Vector2(-2766.666, -6766.668)
+scale = Vector2(30, 30)
+
 [connection signal="delete_object" from="platform_container_coffee/platform_coffee" to="." method="_on_platform_coffee_delete_object"]
-[connection signal="body_entered" from="platform_container_coffee/camera/platform_cleaner_coffee" to="." method="_on_platform_cleaner_coffee_body_entered"]
+[connection signal="body_entered" from="platform_cleaner_coffee" to="." method="_on_platform_cleaner_coffee_body_entered"]
