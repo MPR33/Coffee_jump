@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://vnpf86sgij0r" path="res://scripts/coffee_bean.gd" id="2_j8578"]
 [ext_resource type="PackedScene" uid="uid://b6ib0vyldviqq" path="res://platforms/platform_coffee.tscn" id="3_j8578"]
 [ext_resource type="Script" uid="uid://cqwv6lk6iyjw1" path="res://scripts/platform_cleaner_coffee_bean.gd" id="5_cq4jp"]
-[ext_resource type="Script" path="res://scripts/platform_coffee.gd" id="5_lqfok"]
+[ext_resource type="Script" uid="uid://b8cpl8qctl00a" path="res://scripts/platform_coffee.gd" id="5_lqfok"]
 [ext_resource type="PackedScene" uid="uid://bnqbheiixm4sv" path="res://HUD/caffeine_hud.tscn" id="5_mc3dk"]
 [ext_resource type="FontFile" uid="uid://dvq2o6ni8eccq" path="res://fonts/Kenney Pixel.ttf" id="6_8pu30"]
 [ext_resource type="PackedScene" uid="uid://crd11i6mcyalc" path="res://scenes/rangée engrenages.tscn" id="7_scrcr"]
@@ -25,7 +25,7 @@ scale = Vector2(0.03, 0.03)
 collision_mask = 6
 script = ExtResource("2_j8578")
 
-[node name="platform_coffee" parent="platform_container_coffee" groups=["platform"] instance=ExtResource("3_j8578")]
+[node name="platform_coffee" parent="platform_container_coffee" instance=ExtResource("3_j8578")]
 position = Vector2(90, 57)
 scale = Vector2(0.99999994, 0.99999994)
 collision_mask = 6
