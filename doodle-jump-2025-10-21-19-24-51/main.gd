@@ -3,6 +3,8 @@ extends Node
 @export var doodle_packed: PackedScene
 @export var coffee_packed: PackedScene
 
+signal transition_state_changed(is_transitioning: bool)
+
 var doodle_node: Node = null
 var coffee_node: Node = null
 
@@ -13,6 +15,7 @@ var last_coffee_pos: Vector2 = Vector2.ZERO
 var is_transitioning := false
 
 func _ready() -> void:
+	GameManager.register_main_signals(self)
 	# Écoute les changements de mode déclenchés par GameManager
 	GameManager.mode_changed.connect(_on_mode_changed)
 	# Charge le mode initial (converti en string)
@@ -44,6 +47,7 @@ func load_mode(mode_str: String) -> void:
 
 func transition_to(next_mode: String) -> void:
 	is_transitioning = true
+	emit_signal("transition_state_changed", true)
 	var current_node := doodle_node if current_mode == GameManager.Mode.DOODLE else coffee_node
 
 	# 1) Geler + mémoriser la position du joueur
@@ -95,6 +99,7 @@ func transition_to(next_mode: String) -> void:
 		current_mode = GameManager.Mode.COFFEE
 
 	is_transitioning = false
+	emit_signal("transition_state_changed", false)
 
 func _set_active(node: Node, on: bool, frozen: bool=false) -> void:
 	if node == null: 

@@ -55,6 +55,7 @@ func _physics_process(delta : float) -> void:
 func delete_object(obstacle):
 	if obstacle.is_in_group("player"):
 		#get_tree().reload_current_scene()
+		GameManager.game_started = false
 		_on_died("")
 		if GameManager.score_coffee-GameManager.score_sugar> GameManager.highscore:
 			GameManager.highscore=GameManager.score_coffee-GameManager.score_sugar
@@ -77,5 +78,5 @@ func score_update():
 	
 func _on_died(reason: String) -> void:
 	# Stoppe le jeu, affiche un panneau, enregistre highscore, etc.
-	# Ou:
+	GameManager.game_started = false
 	get_tree().change_scene_to_file("res://scenes/titl_screen.tscn")
