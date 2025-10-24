@@ -66,7 +66,7 @@ func _add_caffeine(amount: float) -> void:
 		emit_signal("caffeine_changed", caffeine)
 
 func _die(reason: String) -> void:
-	emit_signal("died", reason)
+	#emit_signal("died", reason)
 	# À toi de décider ce qui se passe : retourner à l’écran titre, recharger la scène, etc.
 	# Exemple :
 	get_tree().change_scene_to_file("res://scenes/titl_screen.tscn")

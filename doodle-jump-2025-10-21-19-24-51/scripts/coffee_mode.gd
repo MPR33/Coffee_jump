@@ -5,6 +5,9 @@ extends Node2D
 @onready var platform_initial_position_y: float = (platform as Node2D).position.y
 @onready var player := $platform_container_coffee/coffee_bean as CharacterBody2D
 var last_platform_is_cloud:= false
+var Warning := preload("res://ui/warning_sign_ui.tscn")
+@onready var ui:=$UI
+
 @onready var score_label :=$platform_container_coffee/camera/CanvasLayer/score as Label
 @onready var camera_start_position =$platform_container_coffee/camera.position.y
 @onready var camera :=$platform_container_coffee/camera as Camera2D
@@ -12,12 +15,15 @@ var last_platform_is_cloud:= false
 @onready var cafe2 :=$platform_cleaner_coffee2 as Area2D
 @export var platform_scene: Array[PackedScene] = [
 	preload("res://platforms/platform_coffee.tscn"),
-	preload("res://platforms/ice.tscn")
+	preload("res://platforms/ice.tscn"),
+	preload("res://actors/vapeur.tscn")
 ]
+
+@onready var viewport_size := get_viewport().get_visible_rect().size
 
 func level_generator(amount):
 	for items in amount :
-		var new_type = randi()%2
+		var new_type = randi()%3
 		#0 1
 		var new_platform 
 		
@@ -26,13 +32,22 @@ func level_generator(amount):
 			new_platform= platform_scene[0].instantiate() as StaticBody2D
 			new_platform.position = Vector2(randf_range(15,170), platform_initial_position_y)
 			platform_container.call_deferred('add_child', new_platform)
-		if new_type==1:
+		elif new_type==1:
 			platform_initial_position_y += randf_range(36,54)
 			new_platform= platform_scene[1].instantiate() as StaticBody2D
 			new_platform.position = Vector2(randf_range(20,165), platform_initial_position_y)
 			platform_container.call_deferred('add_child', new_platform)
-		
-
+		elif new_type==2 and GameManager.score_coffee>0:
+			platform_initial_position_y += randf_range(36,54)
+			var x:=randf_range(20,165)
+			new_platform= platform_scene[2].instantiate() as StaticBody2D
+			var w:=Warning.instantiate()
+			w.anchors_preset = Control.PRESET_BOTTOM_WIDE  # ancré en bas, étiré horizontalement
+			w.global_position.x = x           # screen_x = transform cam du monde
+			w.global_position.y = get_viewport_rect().size.y - 3000  # 40 px au-dessus du bas
+			ui.add_child(w)
+			new_platform.position = Vector2(x, platform_initial_position_y)
+			platform_container.call_deferred('add_child', new_platform)
 func _ready() -> void:
 	randomize()
 	level_generator(100)
@@ -68,7 +83,7 @@ func _on_platform_cleaner_coffee_body_entered(body: Node2D) -> void:
 		delete_object(body)
 
 func _on_platform_cleaner_coffee_2_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player"):
+	if body.is_in_group("player") and not body.is_in_group("vapeur"):
 		delete_object(body)
 
 func score_update():
@@ -78,4 +93,4 @@ func score_update():
 func _on_died(reason: String) -> void:
 	# Stoppe le jeu, affiche un panneau, enregistre highscore, etc.
 	# Ou:
-	get_tree().change_scene_to_file("res://scenes/titl_screen.tscn")
+	GameManager._die("")

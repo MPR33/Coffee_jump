@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://2oneleomh7xu"]
+[gd_scene load_steps=13 format=3 uid="uid://2oneleomh7xu"]
 
 [ext_resource type="Script" uid="uid://cvjxma2ocxxbs" path="res://scripts/coffee_mode.gd" id="1_3isco"]
 [ext_resource type="PackedScene" uid="uid://d1qpm3ys6gfcx" path="res://actors/coffee_bean.tscn" id="1_b8dvw"]
@@ -9,6 +9,7 @@
 [ext_resource type="FontFile" uid="uid://dvq2o6ni8eccq" path="res://fonts/Kenney Pixel.ttf" id="6_8pu30"]
 [ext_resource type="PackedScene" uid="uid://crd11i6mcyalc" path="res://scenes/rangée engrenages.tscn" id="7_scrcr"]
 [ext_resource type="PackedScene" uid="uid://dhegmosl7bs7t" path="res://platforms/ice.tscn" id="9_dbi4s"]
+[ext_resource type="PackedScene" uid="uid://bewkgwjc47cu" path="res://actors/vapeur.tscn" id="9_pnj8p"]
 [ext_resource type="Texture2D" uid="uid://mxyiybnmwgco" path="res://assets/extras/Background coffee machine 6.png" id="10_scrcr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cq4jp"]
@@ -19,9 +20,9 @@ script = ExtResource("1_3isco")
 
 [node name="platform_container_coffee" type="Node2D" parent="."]
 
-[node name="coffee_bean" parent="platform_container_coffee" groups=["player"] instance=ExtResource("1_b8dvw")]
-position = Vector2(91, 60)
-scale = Vector2(0.03, 0.03)
+[node name="coffee_bean" parent="platform_container_coffee" instance=ExtResource("1_b8dvw")]
+position = Vector2(86, 61)
+scale = Vector2(0.4, 0.4)
 collision_mask = 6
 
 [node name="platform_coffee" parent="platform_container_coffee" instance=ExtResource("3_j8578")]
@@ -80,6 +81,9 @@ stretch_mode = 1
 [node name="ice" parent="platform_container_coffee" instance=ExtResource("9_dbi4s")]
 position = Vector2(-97, -16)
 
+[node name="vapeur" parent="platform_container_coffee" instance=ExtResource("9_pnj8p")]
+position = Vector2(-212, 250)
+
 [node name="platform_cleaner_coffee" type="Area2D" parent="."]
 position = Vector2(90.00001, 119)
 scale = Vector2(0.03, 0.03)
@@ -111,6 +115,9 @@ shape = SubResource("RectangleShape2D_cq4jp")
 [node name="Node2D" parent="platform_cleaner_coffee2" instance=ExtResource("7_scrcr")]
 position = Vector2(-2766.666, -6766.668)
 scale = Vector2(30, 30)
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 0
 
 [connection signal="delete_object" from="platform_container_coffee/platform_coffee" to="." method="_on_platform_coffee_delete_object"]
 [connection signal="delete_object" from="platform_container_coffee/ice" to="." method="_on_ice_delete_object"]

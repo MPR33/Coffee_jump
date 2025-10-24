@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cek8v4nmc8pv8"]
+
+[ext_resource type="Script" uid="uid://dd7a70boief0h" path="res://scripts/warning_sign_ui.gd" id="1_glckv"]
+[ext_resource type="Texture2D" uid="uid://boff0482ets1e" path="res://pixellab-Make-slight-modifications-to-m-1761310901832.png" id="2_d8n0i"]
+
+[node name="WarningSignUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_glckv")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("2_d8n0i")

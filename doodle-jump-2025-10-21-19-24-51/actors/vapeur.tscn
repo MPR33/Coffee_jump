@@ -1,0 +1,64 @@
+[gd_scene load_steps=11 format=3 uid="uid://bewkgwjc47cu"]
+
+[ext_resource type="Script" uid="uid://2ryv3scedfog" path="res://scripts/vapeur.gd" id="1_a68pw"]
+[ext_resource type="Texture2D" uid="uid://fqx2c5be32lt" path="res://assets/actors/vapor_frame_1.png" id="2_wu7ib"]
+[ext_resource type="Texture2D" uid="uid://c0wkgrlpvvhon" path="res://assets/actors/vapor_frame_2.png" id="3_n7bjs"]
+[ext_resource type="Texture2D" uid="uid://8mnwqfexlwr5" path="res://assets/actors/vapor_frame_3.png" id="4_5qevr"]
+[ext_resource type="Texture2D" uid="uid://cqsqm2nfk1u5e" path="res://assets/actors/vapor_frame_4.png" id="5_bqn6w"]
+[ext_resource type="Texture2D" uid="uid://k66phevf85ed" path="res://assets/actors/vapor_frame_5.png" id="6_43v0w"]
+[ext_resource type="Texture2D" uid="uid://dh4erbyjhvcoy" path="res://assets/actors/vapor_frame_6.png" id="7_tf17o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rsydx"]
+size = Vector2(25, 554)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ue6nj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_wu7ib")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_n7bjs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_5qevr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_bqn6w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_43v0w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_tf17o")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b64wy"]
+size = Vector2(21, 537)
+
+[node name="vapeur" type="StaticBody2D" groups=["enemies", "vapeur"]]
+script = ExtResource("1_a68pw")
+
+[node name="collision" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 319)
+shape = SubResource("RectangleShape2D_rsydx")
+
+[node name="anim" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 318.5)
+scale = Vector2(1, 4.5750003)
+sprite_frames = SubResource("SpriteFrames_ue6nj")
+animation = &"moving"
+frame_progress = 0.79749227
+
+[node name="hitbox" type="Area2D" parent="."]
+
+[node name="collision" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(3.5, 327.5)
+shape = SubResource("RectangleShape2D_b64wy")
+debug_color = Color(0.8905542, 0.2697089, 0.47382057, 0.41960785)
+
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
