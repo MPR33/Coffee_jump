@@ -16,12 +16,9 @@ func _ready():
 	anim.play("moving")
 	add_to_group("enemies")    # <-- pour que platform_cleaner la nettoie comme les autres
 
-func set_difficulty_factor(k: float) -> void:
-	# k >= 1.0 → plus dur => plus de "poussée" vers le haut
-	difficulty_factor = max(1.0, k)
-	gravity = base_gravity * difficulty_factor
-	# petit boost de départ quand c'est plus dur
-	velocity.y += -40.0 * (difficulty_factor - 1.0)
+
+func apply_difficulty(d: float) -> void:
+	difficulty_factor=d
 
 func movement(delta):
 	velocity.y += gravity * delta     # accélère verticalement (monte)

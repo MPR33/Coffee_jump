@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://b0318vsw406h7"]
+
+[ext_resource type="Script" uid="uid://cx3i4s4qryfjd" path="res://scripts/picots.gd" id="1_cq0rx"]
+[ext_resource type="Texture2D" uid="uid://d1l2pqfun6ulc" path="res://assets/tiles/spike_platform_frame3.png" id="1_eam3r"]
+[ext_resource type="Texture2D" uid="uid://dwswd5yskrx2o" path="res://assets/tiles/spike_platform_frame2.png" id="2_cq0rx"]
+[ext_resource type="Texture2D" uid="uid://bk5x23sthsnvi" path="res://assets/tiles/spike_platform_frame1.png" id="3_1gyt1"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cg2bu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_eam3r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_cq0rx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_1gyt1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kvopl"]
+size = Vector2(59, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cq0rx"]
+size = Vector2(59, 20)
+
+[node name="picots" type="StaticBody2D" groups=["platform"]]
+script = ExtResource("1_cq0rx")
+
+[node name="anim" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_cg2bu")
+frame_progress = 0.58260435
+
+[node name="hitbox" type="Area2D" parent="."]
+
+[node name="collision" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_kvopl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_cq0rx")
+
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
