@@ -34,11 +34,13 @@ func _physics_process(delta: float) -> void:
 	if collision:
 		velocity.y = +JUMP_VELOCITY*collision.get_collider().jumpforce
 		if collision.get_collider().has_method("response"):
+			print(velocity.y)
 			collision.get_collider().response()
 
 	position.x=wrapf(position.x,0, screen_size.x)
 	
 	
 func die():
-	velocity=Vector2.ZERO
-	GameManager._die("")
+	if velocity.y>-510:
+		velocity=Vector2.ZERO
+		GameManager._die("")

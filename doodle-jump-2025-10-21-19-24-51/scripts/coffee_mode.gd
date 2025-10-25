@@ -118,7 +118,7 @@ func level_generator(amount: int) -> void:
 		match new_type:
 			0:
 				platform_initial_position_y += randf_range(36, 54)
-				new_platform = platform_scene[2].instantiate()
+				new_platform = platform_scene[0].instantiate()
 				new_platform.position = Vector2(randf_range(15, 170), platform_initial_position_y)
 				platform_container.call_deferred("add_child", new_platform)
 

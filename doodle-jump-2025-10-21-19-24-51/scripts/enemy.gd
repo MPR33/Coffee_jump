@@ -15,8 +15,8 @@ func movement(delta):
 func _physics_process(delta: float) -> void:
 	movement(delta)
 
-func response():
-	emit_signal("delete_object",self)
+#func response():
+	#emit_signal("delete_object",self)
 
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
