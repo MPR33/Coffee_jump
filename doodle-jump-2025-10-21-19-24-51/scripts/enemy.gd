@@ -9,10 +9,11 @@ var velocity := Vector2.ZERO
 func _ready():
 	anim.play("moving")
 func movement(delta):
-	pass
+	velocity.y += gravity * delta   # accélère verticalement
+	position += velocity * delta    # applique le mouvement
 		
 func _physics_process(delta: float) -> void:
-	pass
+	movement(delta)
 
 func response():
 	emit_signal("delete_object",self)
