@@ -41,5 +41,4 @@ func _physics_process(delta: float) -> void:
 	
 func die():
 	velocity=Vector2.ZERO
-	set_collision_mask_value(2,false)
-	#GameManager.game_started = false
+	GameManager._die("")
