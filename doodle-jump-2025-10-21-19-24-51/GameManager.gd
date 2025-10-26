@@ -98,6 +98,7 @@ func _die(reason: String) -> void:
 
 	# Transition vers l’écran titre
 	get_tree().call_deferred("change_scene_to_file", TITLE_SCENE)
+	
 
 func reset_game_state() -> void:
 	game_started = false

@@ -1,10 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://xbny88htp7mc"]
+[gd_scene load_steps=10 format=3 uid="uid://xbny88htp7mc"]
 
 [ext_resource type="Texture2D" uid="uid://dxvlmip8fic70" path="res://assets/extras/ChatGPT Image 22 oct. 2025, 09_14_22.png" id="1_8bfp7"]
+[ext_resource type="Script" uid="uid://dh2baj0n1x0ix" path="res://scripts/titl_screen.gd" id="1_iffxh"]
+[ext_resource type="Shader" uid="uid://bwv0og558x2ue" path="res://titl_screen.gdshader" id="2_he1e8"]
 [ext_resource type="Texture2D" uid="uid://umagvni7ka08" path="res://assets/extras/btn_play-normal.png" id="2_ruuxv"]
 [ext_resource type="Texture2D" uid="uid://dl3ncmk85bpqm" path="res://assets/extras/btn_play-pressed.png" id="3_iffxh"]
 [ext_resource type="Texture2D" uid="uid://8da1rasa1r6b" path="res://assets/extras/btn_quit-normal.png" id="4_c7yvd"]
 [ext_resource type="Texture2D" uid="uid://b7584nopw8jbu" path="res://assets/extras/btn_quit-pressed.png" id="5_he1e8"]
+[ext_resource type="AudioStream" uid="uid://4ygvvmwrckmk" path="res://assets/sounds/Hikari E [8 bit cover] - One Piece OP 3.wav" id="6_ruuxv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_shyvv"]
+shader = ExtResource("2_he1e8")
 
 [node name="titl-screen" type="Control"]
 layout_mode = 3
@@ -13,6 +19,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_iffxh")
 
 [node name="main" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -23,6 +30,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="game-title" type="TextureRect" parent="main"]
+material = SubResource("ShaderMaterial_shyvv")
 custom_minimum_size = Vector2(180, 120)
 layout_mode = 2
 texture = ExtResource("1_8bfp7")
@@ -44,3 +52,6 @@ texture_pressed = ExtResource("5_he1e8")
 
 [node name="highscore" type="Label" parent="main"]
 layout_mode = 2
+
+[node name="musique" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_ruuxv")
