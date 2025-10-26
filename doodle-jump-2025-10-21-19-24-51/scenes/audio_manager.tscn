@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://mnnxkx8337ld"]
+
+[ext_resource type="AudioStream" uid="uid://dayv48rhnhjl" path="res://assets/sounds/SPY x FAMILY OP - Mixed nuts (8-Bit remix).wav" id="1_8qd8g"]
+[ext_resource type="AudioStream" uid="uid://b48pm7h7yjdcf" path="res://assets/sounds/Steins;Gate Op - Hacking to The Gate (8-Bit).wav" id="3_3asnw"]
+
+[node name="AudioManager" type="Node2D"]
+
+[node name="DoodleMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_8qd8g")
+
+[node name="CoffeeMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_3asnw")
+volume_db = -6.842

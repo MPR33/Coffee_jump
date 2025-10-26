@@ -1,8 +1,9 @@
 extends Control
 
-@onready var highscore: Label = $main/highscore
+@onready var highscore: Label = $highscore
 @onready var title: TextureRect =$"main/game-title"
 @onready var music: AudioStreamPlayer = AudioStreamPlayer.new()
+@onready var anim:= $anim as AnimatedSprite2D
 
 const TITLE_MUSIC: AudioStream = preload("res://assets/sounds/Hikari E [8 bit cover] - One Piece OP 3.wav")
 
@@ -39,13 +40,13 @@ var brightness_env := 0.1  # moyenne glissante de la "brillance" (proportion d'a
 
 func _ready() -> void:
 	# ---- tes fonctionnalités existantes ----
-	highscore.text = "Highscore\n" + str(GameManager.highscore)
+
+	highscore.text = "Highscore : " + str(GameManager.highscore)
 	add_child(music)
 	music.bus = "Master"
 	music.stream = TITLE_MUSIC
 	music.volume_db = 0.0
 	music.play()
-
 	# ---- initialisation visuelle & audio ----
 	set_process(true)
 	#pause_mode = Node.PAUSE_MODE_PROCESS
@@ -144,6 +145,9 @@ func _on_quitbtn_pressed() -> void:
 	get_tree().quit()
 
 func _on_startbtn_pressed():
+	anim.play("default")
+	var timer := get_tree().create_timer(4.0)
+	await timer.timeout
 	GameManager.reset_game_state()
 	get_tree().change_scene_to_file("res://main.tscn")
 	GameManager.score_sugar = 0

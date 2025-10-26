@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dayv48rhnhjl"
+path="res://.godot/imported/SPY x FAMILY OP - Mixed nuts (8-Bit remix).wav-ac2117ee0f7215714d0c956d6ef77492.sample"
+
+[deps]
+
+source_file="res://assets/sounds/SPY x FAMILY OP - Mixed nuts (8-Bit remix).wav"
+dest_files=["res://.godot/imported/SPY x FAMILY OP - Mixed nuts (8-Bit remix).wav-ac2117ee0f7215714d0c956d6ef77492.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

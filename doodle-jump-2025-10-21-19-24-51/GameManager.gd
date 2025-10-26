@@ -7,7 +7,7 @@ signal died(reason: String)
 
 const DOODLE_SCENE := "res://scenes/doodle_jump.tscn"
 const COFFEE_SCENE := "res://scenes/coffee_mode.tscn"
-const TITLE_SCENE := "res://scenes/titl_screen.tscn"
+const TITLE_SCENE :="res://scenes/titl_screen.tscn"
 
 enum Mode { DOODLE, COFFEE }
 var mode: Mode = Mode.DOODLE
