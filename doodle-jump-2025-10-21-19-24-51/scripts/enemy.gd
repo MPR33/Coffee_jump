@@ -9,8 +9,8 @@ var velocity := Vector2.ZERO
 func _ready():
 	anim.play("moving")
 func movement(delta):
-	velocity.y += gravity * delta   # accélère verticalement
-	position += velocity * delta    # applique le mouvement
+	# velocity.y += gravity * delta   # accélère verticalement
+	position.y += SPEED * delta    # applique le mouvement
 		
 func _physics_process(delta: float) -> void:
 	movement(delta)
@@ -21,4 +21,4 @@ func _physics_process(delta: float) -> void:
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player") and body.has_method("die"):
-		body.die()
+		body.die("goutte de café")

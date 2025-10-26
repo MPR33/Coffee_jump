@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://byq0yobvqkaeb" path="res://assets/actors/ChatGPT Image 24 oct. 2025, 12_00_17.png" id="4_dpeei"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dpeei"]
-size = Vector2(7, 10)
+size = Vector2(5, 7)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6tp0m"]
 animations = [{
@@ -26,7 +26,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kho5t"]
-size = Vector2(7, 10.375)
+size = Vector2(5, 7)
 
 [node name="enemy" type="StaticBody2D" groups=["enemies"]]
 collision_layer = 4
@@ -34,7 +34,7 @@ collision_mask = 0
 script = ExtResource("1_34jws")
 
 [node name="collision" type="CollisionShape2D" parent="."]
-position = Vector2(1.5, 2)
+position = Vector2(1.5, 2.5)
 shape = SubResource("RectangleShape2D_dpeei")
 one_way_collision = true
 
@@ -52,7 +52,7 @@ collision_mask = 7
 
 [node name="collision" type="CollisionShape2D" parent="hitbox"]
 modulate = Color(1, 0.09803922, 0.078431375, 1)
-position = Vector2(1.5, 2.8125)
+position = Vector2(1.5, 2.5)
 shape = SubResource("RectangleShape2D_kho5t")
 
 [connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]

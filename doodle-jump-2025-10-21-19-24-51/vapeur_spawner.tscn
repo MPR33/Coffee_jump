@@ -1,9 +1,17 @@
 [gd_scene load_steps=2 format=3 uid="uid://cf35pv6nxdfgi"]
 
-[ext_resource type="Script" path="res://scripts/vapeur_spawner.gd" id="1_bx3bm"]
+[sub_resource type="GDScript" id="GDScript_rr04y"]
+script/source = "extends Node2D
+@export var vapeur=preload(\"res://actors/vapeur.tscn\")
+
+func _on_timer_timeout() -> void:
+	var enemy=vapeur.instantiate()
+	add_child(enemy)
+	enemy.position.y=50
+"
 
 [node name="VapeurSpawner" type="Node2D"]
-script = ExtResource("1_bx3bm")
+script = SubResource("GDScript_rr04y")
 
 [node name="Timer" type="Timer" parent="."]
 

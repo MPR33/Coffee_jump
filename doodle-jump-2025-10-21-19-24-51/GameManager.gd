@@ -13,7 +13,7 @@ enum Mode { DOODLE, COFFEE }
 var mode: Mode = Mode.DOODLE
 
 # --- Caféine et paramètres généraux ---
-var caffeine: float = 0.1
+var caffeine: float = 0.6
 @export var doodle_rate: float = -0.03        # vitesse de montée en Doodle
 @export var coffee_rate: float = +0.06       # vitesse de descente en Coffee
 @export var allow_coffee_to_doodle_anytime: bool = false
@@ -102,7 +102,7 @@ func _die(reason: String) -> void:
 
 func reset_game_state() -> void:
 	game_started = false
-	caffeine = 0.8
+	caffeine = 0.6
 	mode = Mode.DOODLE
 	score_coffee = 0
 	score_sugar = 0
