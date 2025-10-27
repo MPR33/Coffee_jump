@@ -146,9 +146,9 @@ func _on_quitbtn_pressed() -> void:
 
 func _on_startbtn_pressed():
 	anim.play("default")
-	var timer := get_tree().create_timer(4.0)
+	var timer := get_tree().create_timer(3.9)
 	await timer.timeout
 	GameManager.reset_game_state()
-	get_tree().change_scene_to_file("res://main.tscn")
+	transitioon.change_scene("res://main.tscn", Vector2(90,200))
 	GameManager.score_sugar = 0
 	GameManager.score_coffee = 0

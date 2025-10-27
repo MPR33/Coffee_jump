@@ -15,8 +15,8 @@ var CAFFEINE : float = 0.5
 
 # --- Caféine et paramètres généraux ---
 var caffeine: float = CAFFEINE
-@export var doodle_rate: float = -0.00        # vitesse de montée en Doodle
-@export var coffee_rate: float = +0.00       # vitesse de descente en Coffee
+@export var doodle_rate: float = 0        # vitesse de montée en Doodle
+@export var coffee_rate: float = 0       # vitesse de descente en Coffee
 @export var allow_coffee_to_doodle_anytime: bool = false
 
 # --- État du jeu ---
