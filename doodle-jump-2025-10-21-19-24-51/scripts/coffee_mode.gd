@@ -93,8 +93,8 @@ func _physics_process(delta: float) -> void:
 		return
 
 	# Suivi caméra
-	if player.position.y > camera.position.y:
-		camera.position.y = player.position.y
+	if player.position.y > camera.position.y - 100:
+		camera.position.y = player.position.y + 100
 		score_update()
 	elif player.position.y < camera.position.y - 130:
 		camera.position.y = player.position.y

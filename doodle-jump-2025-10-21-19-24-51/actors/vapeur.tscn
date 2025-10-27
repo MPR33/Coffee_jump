@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bewkgwjc47cu"]
+[gd_scene load_steps=11 format=3 uid="uid://yvfhu88sfcnm"]
 
 [ext_resource type="Script" uid="uid://2ryv3scedfog" path="res://scripts/vapeur.gd" id="1_a68pw"]
 [ext_resource type="Texture2D" uid="uid://fqx2c5be32lt" path="res://assets/actors/vapor_frame_1.png" id="2_wu7ib"]
@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dh4erbyjhvcoy" path="res://assets/actors/vapor_frame_6.png" id="7_tf17o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rsydx"]
-size = Vector2(25, 554)
+size = Vector2(25, 391)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ue6nj"]
 animations = [{
@@ -38,18 +38,18 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b64wy"]
-size = Vector2(21, 537)
+size = Vector2(25, 393)
 
 [node name="vapeur" type="StaticBody2D" groups=["enemies", "vapeur"]]
 script = ExtResource("1_a68pw")
 
 [node name="collision" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 319)
+position = Vector2(-0.5, 336.5)
 shape = SubResource("RectangleShape2D_rsydx")
 
 [node name="anim" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, 318.5)
-scale = Vector2(1, 4.5750003)
+position = Vector2(0, 336.00003)
+scale = Vector2(1, 3.3)
 sprite_frames = SubResource("SpriteFrames_ue6nj")
 animation = &"moving"
 frame_progress = 0.79749227
@@ -57,7 +57,7 @@ frame_progress = 0.79749227
 [node name="hitbox" type="Area2D" parent="."]
 
 [node name="collision" type="CollisionShape2D" parent="hitbox"]
-position = Vector2(3.5, 327.5)
+position = Vector2(-0.5, 336.5)
 shape = SubResource("RectangleShape2D_b64wy")
 debug_color = Color(0.8905542, 0.2697089, 0.47382057, 0.41960785)
 

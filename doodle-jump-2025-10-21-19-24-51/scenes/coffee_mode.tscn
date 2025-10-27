@@ -7,9 +7,9 @@
 [ext_resource type="Script" uid="uid://b8cpl8qctl00a" path="res://scripts/platform_coffee.gd" id="5_lqfok"]
 [ext_resource type="PackedScene" uid="uid://bnqbheiixm4sv" path="res://HUD/caffeine_hud.tscn" id="5_mc3dk"]
 [ext_resource type="FontFile" uid="uid://dvq2o6ni8eccq" path="res://fonts/Kenney Pixel.ttf" id="6_8pu30"]
-[ext_resource type="PackedScene" uid="uid://crd11i6mcyalc" path="res://scenes/rangée engrenages.tscn" id="7_scrcr"]
+[ext_resource type="PackedScene" path="res://scenes/rangée engrenages.tscn" id="7_scrcr"]
 [ext_resource type="PackedScene" uid="uid://dhegmosl7bs7t" path="res://platforms/ice.tscn" id="9_dbi4s"]
-[ext_resource type="PackedScene" uid="uid://bewkgwjc47cu" path="res://actors/vapeur.tscn" id="9_pnj8p"]
+[ext_resource type="PackedScene" uid="uid://yvfhu88sfcnm" path="res://actors/vapeur.tscn" id="9_pnj8p"]
 [ext_resource type="PackedScene" uid="uid://b0318vsw406h7" path="res://platforms/picots.tscn" id="10_pnj8p"]
 [ext_resource type="Texture2D" uid="uid://mxyiybnmwgco" path="res://assets/extras/Background coffee machine 6.png" id="10_scrcr"]
 
@@ -89,7 +89,7 @@ position = Vector2(-212, 250)
 position = Vector2(-197, 32)
 
 [node name="platform_cleaner_coffee" type="Area2D" parent="."]
-position = Vector2(90.00001, 119)
+position = Vector2(90.00001, -1.9999924)
 scale = Vector2(0.03, 0.03)
 collision_layer = 0
 collision_mask = 7
