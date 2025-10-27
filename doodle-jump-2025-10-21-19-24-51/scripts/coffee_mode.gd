@@ -68,10 +68,14 @@ func spawn() -> void:
 	var t1 := get_tree().create_timer(5 * (1 - d))
 	t1.timeout.connect(func():
 		var w := Warning.instantiate()
-		ui.add_child(w)
+		w.visible=false
 		w.set_anchors_preset(Control.PRESET_CENTER)
 		if w.has_method("setup"):
 			w.setup(x, 2)
+		ui.add_child(w)
+		await get_tree().create_timer(0.1).timeout
+		w.visible=true
+		
 
 	# Deuxième timer (vapeur)
 		var t := get_tree().create_timer(2)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bqogq6u70pfu2"]
 
-[ext_resource type="AudioStream" uid="uid://b48pm7h7yjdcf" path="res://assets/sounds/Steins;Gate Op - Hacking to The Gate (8-Bit).wav" id="1_g44g3"]
+[ext_resource type="AudioStream" uid="uid://djkmnx4sqe3ca" path="res://music/Inside the Grind.mp3" id="1_g44g3"]
 
 [node name="CoffeeMusic" type="AudioStreamPlayer2D"]
 stream = ExtResource("1_g44g3")

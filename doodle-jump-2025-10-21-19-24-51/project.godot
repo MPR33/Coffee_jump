@@ -33,6 +33,7 @@ platform=""
 player=""
 enemies=""
 vapeur=""
+ice=""
 
 [input]
 
