@@ -18,7 +18,7 @@ extends Node2D
 const VAPEUR_SCENE: PackedScene = preload("res://actors/vapeur.tscn")
 
 # Le score auquel on considère que la difficulté est à 100%
-const SCORE_AT_MAX_DIFFICULTY := 4000.0
+const SCORE_AT_MAX_DIFFICULTY := 10000.0
 
 # Intervalle de spawn borné par la difficulté (linéaire)
 const MIN_INTERVAL := 0.6
