@@ -26,7 +26,6 @@ const MAX_INTERVAL := 2.5
 
 var _rng := RandomNumberGenerator.new()
 var _spawn_timer: Timer
-
 @onready var Warning := preload("res://ui/warning_sign_ui.tscn")
 @onready var viewport_size := get_viewport().get_visible_rect().size
 
@@ -34,7 +33,7 @@ var last_platform_is_cloud := false
 
 func _ready() -> void:
 	randomize()
-	level_generator(100)
+	level_generator(30)
 	score_update()
 	_spawn_timer = Timer.new()
 	_spawn_timer.one_shot = true
@@ -58,36 +57,36 @@ func _get_difficulty() -> float:
 
 
 func _get_spawn_interval() -> float:
-	var d := _get_difficulty()
+	var d:=_get_difficulty()
 	# interpolation linéaire: quand d=0 => MAX_INTERVAL, quand d=1 => MIN_INTERVAL
 	return MAX_INTERVAL + (MIN_INTERVAL - MAX_INTERVAL) * d
 func spawn() -> void:
-	var d:=_get_difficulty()
+	var d := _get_difficulty()
 	var x := _rng.randf_range(20.0, 160.0)
-	var y := cafe2.position.y
-	print(str(y)+"voici")
-	var canvas_transform = get_viewport().get_canvas_transform()
-	var screen_top_left = -canvas_transform.origin
-	var yy=screen_top_left.y
-	print(str(yy)+'voila')
-	var w := Warning.instantiate()
-	ui.add_child(w)
-	w.set_anchors_preset(Control.PRESET_CENTER)
-	if w.has_method("setup"):
-		w.setup(x, 2) 
-	var t := get_tree().create_timer(2)
-	t.timeout.connect(func():
-		print("out")
-		var v := VAPEUR_SCENE.instantiate()
-		v.position = Vector2(x, y)
-		if v.has_method("apply_difficulty"):
-			v.apply_difficulty(d)
-		add_child(v)
+	var y := cafe2.position.y+200
+	# Premier timer (warning)
+	var t1 := get_tree().create_timer(5 * (1 - d))
+	t1.timeout.connect(func():
+		var w := Warning.instantiate()
+		ui.add_child(w)
+		w.set_anchors_preset(Control.PRESET_CENTER)
+		if w.has_method("setup"):
+			w.setup(x, 2)
 
-		# reprogrammer le prochain spawn selon la difficulté
-		var interval := _get_spawn_interval()
-		_spawn_timer.wait_time = interval+2
-		_spawn_timer.start())
+	# Deuxième timer (vapeur)
+		var t := get_tree().create_timer(2)
+		t.timeout.connect(func():
+			var v := VAPEUR_SCENE.instantiate()
+			v.position = Vector2(x, y)
+			if v.has_method("apply_difficulty"):
+				v.apply_difficulty(d)
+			add_child(v)
+
+			var interval := _get_spawn_interval()
+			_spawn_timer.wait_time = interval + 1
+			_spawn_timer.start()
+		))
+
 func _physics_process(delta: float) -> void:
 	if not GameManager.game_started:
 		return
@@ -111,28 +110,34 @@ func _physics_process(delta: float) -> void:
 # GÉNÉRATION DE PLATEFORMES
 # ---------------------------------------------------------------------
 func level_generator(amount: int) -> void:
+	var d:=_get_difficulty()
 	for i in range(amount):
 		var new_type: int = randi() % 3
 		var new_platform: Node2D
-
 		match new_type:
 			0:
 				platform_initial_position_y += randf_range(36, 54)
+				print(_get_difficulty())
 				new_platform = platform_scene[0].instantiate()
 				new_platform.position = Vector2(randf_range(15, 170), platform_initial_position_y)
 				platform_container.call_deferred("add_child", new_platform)
 
 			1:
 				platform_initial_position_y += randf_range(36, 54)
+				print(_get_difficulty())
 				new_platform = platform_scene[1].instantiate()
 				new_platform.position = Vector2(randf_range(20, 165), platform_initial_position_y)
 				platform_container.call_deferred("add_child", new_platform)
 
 			2:
 				if GameManager.score_coffee > 0:
-					print("oiii")
+					print(_get_difficulty())
+					var test:=randf_range(0,1)
 					platform_initial_position_y += randf_range(36, 54)
-					new_platform = platform_scene[2].instantiate()
+					if test<=d:
+						new_platform = platform_scene[2].instantiate()
+					else :
+						new_platform = platform_scene[0].instantiate()
 					new_platform.position = Vector2(randf_range(20, 165), platform_initial_position_y)
 					platform_container.call_deferred("add_child", new_platform)
 

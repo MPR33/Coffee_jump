@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://txha2oi4ffs0"]
 
-[ext_resource type="AudioStream" uid="uid://dayv48rhnhjl" path="res://assets/sounds/SPY x FAMILY OP - Mixed nuts (8-Bit remix).wav" id="1_kdotq"]
+[ext_resource type="AudioStream" uid="uid://c156ckf70k3i4" path="res://music/Sugar Escape.mp3" id="1_j6hy1"]
 
 [node name="MusicDoodle" type="AudioStreamPlayer2D"]
-stream = ExtResource("1_kdotq")
+stream = ExtResource("1_j6hy1")

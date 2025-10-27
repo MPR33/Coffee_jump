@@ -2,13 +2,13 @@ shader_type canvas_item;
 render_mode unshaded;
 
 uniform vec4  tint : source_color = vec4(1.0);
-uniform vec3  gloss_color = vec3(1.0, 1.0, 1.0); // teinte du highlight
-uniform float gloss_strength : hint_range(0.0, 5.0) = 0.8; // force du spéculaire
+uniform vec3  gloss_color = vec3(0.0, 0.0, 0.0); // teinte du highlight
+uniform float gloss_strength : hint_range(0.0, 5.0) = 0.5; // force du spéculaire
 uniform float spec_power     : hint_range(1.0, 128.0) = 32.0; // dureté
 
 // Bande lumineuse "sweep"
 uniform bool  use_sweep = true;
-uniform float sweep_angle_deg = 35.0;
+uniform float sweep_angle_deg = 0;
 uniform float sweep_width     : hint_range(0.02, 0.6) = 0.18;
 uniform float sweep_speed     : hint_range(-3.0, 3.0) = 0.25;
 uniform float sweep_strength  : hint_range(0.0, 3.0) = 1.3;
