@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://djkmnx4sqe3ca"
+path="res://.godot/imported/Inside the Grind.mp3-f0f431fb6f751a07982c47261bd989b5.mp3str"
+
+[deps]
+
+source_file="res://music/Inside the Grind.mp3"
+dest_files=["res://.godot/imported/Inside the Grind.mp3-f0f431fb6f751a07982c47261bd989b5.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c156ckf70k3i4"
+path="res://.godot/imported/Sugar Escape.mp3-70fe0ab593c7a81cdd17e47fd9865b14.mp3str"
+
+[deps]
+
+source_file="res://music/Sugar Escape.mp3"
+dest_files=["res://.godot/imported/Sugar Escape.mp3-70fe0ab593c7a81cdd17e47fd9865b14.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

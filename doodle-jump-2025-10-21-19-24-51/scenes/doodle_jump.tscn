@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dbrfr0h6vqo0g"]
+[gd_scene load_steps=14 format=3 uid="uid://dbrfr0h6vqo0g"]
 
 [ext_resource type="Script" uid="uid://ceptogppcdn68" path="res://scripts/game.gd" id="1_4fsdi"]
 [ext_resource type="PackedScene" uid="uid://mg0atayuqian" path="res://actors/player_blue.tscn" id="1_eowx7"]
@@ -8,26 +8,14 @@
 [ext_resource type="Script" uid="uid://bqfd6ncomoyrw" path="res://scripts/platform_cleaner.gd" id="7_gkglp"]
 [ext_resource type="Texture2D" uid="uid://b4ph5c5kwudpl" path="res://assets/extras/coffee_rectangle.png" id="8_j6j3j"]
 [ext_resource type="PackedScene" uid="uid://bnqbheiixm4sv" path="res://HUD/caffeine_hud.tscn" id="8_rea41"]
-[ext_resource type="Shader" uid="uid://c5qwfshq05v0i" path="res://scenes/glow.gdshader" id="10_1avu4"]
 [ext_resource type="Texture2D" uid="uid://d34tpf8k8ouj1" path="res://assets/extras/ChatGPT Image 22 oct. 2025, 12_50_11.png" id="10_rea41"]
 [ext_resource type="PackedScene" uid="uid://rml7e8sjjxs4" path="res://actors/enemy.tscn" id="11_1avu4"]
 
 [sub_resource type="Environment" id="Environment_1avu4"]
-glow_enabled = true
+background_mode = 2
 glow_bloom = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g5eel"]
-shader = ExtResource("10_1avu4")
-shader_parameter/tint = Color(1, 1, 1, 1)
-shader_parameter/gloss_color = Vector3(1, 1, 1)
-shader_parameter/gloss_strength = 0.0
-shader_parameter/spec_power = 1.0
-shader_parameter/use_sweep = true
-shader_parameter/sweep_angle_deg = 90.0
-shader_parameter/sweep_width = 0.60000002384186
-shader_parameter/sweep_speed = -0.4389998783525
-shader_parameter/sweep_strength = 0.162000007695
-shader_parameter/light_pos = Vector2(0.2, 0.8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4fsdi"]
 size = Vector2(180, 312)
@@ -97,7 +85,7 @@ texture = ExtResource("10_rea41")
 expand_mode = 1
 
 [node name="enemy" parent="." instance=ExtResource("11_1avu4")]
-position = Vector2(375, 39)
+position = Vector2(365, 94)
 
 [node name="platform_cleaner" type="Area2D" parent="."]
 position = Vector2(89, 192)

@@ -8,8 +8,8 @@ var velocity := Vector2.ZERO
 @onready var anim := $anim as AnimatedSprite2D
 
 # --- AJOUTS POUR DIFFICULTÉ ---
-@export var base_gravity := -20.0  # gravité "de base" (négative = vers le haut)
-@export var max_speed := -600.0    # vitesse verticale max (négative)
+@export var base_gravity := -200.0  # gravité "de base" (négative = vers le haut)
+@export var max_speed := -1000.0    # vitesse verticale max (négative)
 var difficulty_factor := 1.0
 
 func _ready():
@@ -23,7 +23,7 @@ func apply_difficulty(d: float) -> void:
 func movement(delta):
 	velocity.y += gravity * delta     # accélère verticalement (monte)
 	# bornes (pour éviter des vitesses folles si la gravité devient très grande)
-	velocity.y = max(velocity.y, max_speed * difficulty_factor)
+	velocity.y = min(velocity.y, max_speed * difficulty_factor)
 	position += velocity * delta      # applique le mouvement
 
 func _physics_process(delta: float) -> void:
