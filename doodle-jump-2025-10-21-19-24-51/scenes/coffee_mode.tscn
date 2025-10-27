@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://yvfhu88sfcnm" path="res://actors/vapeur.tscn" id="9_pnj8p"]
 [ext_resource type="PackedScene" uid="uid://b0318vsw406h7" path="res://platforms/picots.tscn" id="10_pnj8p"]
 [ext_resource type="Texture2D" uid="uid://mxyiybnmwgco" path="res://assets/extras/Background coffee machine 6.png" id="10_scrcr"]
-[ext_resource type="Texture2D" uid="uid://s1kkox6vrcl3" path="res://assets/tiles/engrenages_steampunk.png" id="13_pcege"]
+[ext_resource type="Texture2D" uid="uid://bhpcfiauh28lj" path="res://assets/tiles/ChatGPT Image 27 oct. 2025, 17_53_32.png" id="13_pcege"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cq4jp"]
 size = Vector2(5978.3345, 545.00024)
@@ -109,8 +109,8 @@ scale = Vector2(30, 30)
 
 [node name="Area2D" type="Sprite2D" parent="platform_cleaner_coffee"]
 texture_filter = 1
-position = Vector2(99.99805, 13166.667)
-scale = Vector2(33.703705, 25)
+position = Vector2(8.333542, 13033.334)
+scale = Vector2(5.843099, 6.315104)
 texture = ExtResource("13_pcege")
 
 [node name="platform_cleaner_coffee2" type="Area2D" parent="."]
@@ -126,13 +126,16 @@ scale = Vector2(0.99999976, 0.99999976)
 shape = SubResource("RectangleShape2D_cq4jp")
 
 [node name="Node2D" parent="platform_cleaner_coffee2" instance=ExtResource("7_scrcr")]
+visibility_layer = 2
 position = Vector2(-2766.666, -6766.668)
 scale = Vector2(30, 30)
 
 [node name="Area2D" type="Sprite2D" parent="platform_cleaner_coffee2"]
+show_behind_parent = true
+z_index = -1
 texture_filter = 1
-position = Vector2(33.33333, -24833.336)
-scale = Vector2(33.703705, 25)
+position = Vector2(75.00004, -24225)
+scale = Vector2(5.8430986, 6.3476563)
 texture = ExtResource("13_pcege")
 
 [node name="UI" type="CanvasLayer" parent="."]

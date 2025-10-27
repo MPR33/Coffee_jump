@@ -146,7 +146,7 @@ func _on_quitbtn_pressed() -> void:
 
 func _on_startbtn_pressed():
 	anim.play("default")
-	var timer := get_tree().create_timer(3.9)
+	var timer := get_tree().create_timer(3.5)
 	await timer.timeout
 	GameManager.reset_game_state()
 	transitioon.change_scene("res://main.tscn", Vector2(90,200))
