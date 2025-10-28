@@ -20,6 +20,8 @@ var caffeine: float = CAFFEINE
 @export var doodle_rate: float = 0        # vitesse de montée en Doodle
 @export var coffee_rate: float = 0       # vitesse de descente en Coffee
 @export var allow_coffee_to_doodle_anytime: bool = false
+var retry: bool = false
+var block_input : bool = false
 
 # --- État du jeu ---
 var game_started: bool = false
@@ -114,6 +116,8 @@ func _die(reason: String) -> void:
 
 func reset_game_state() -> void:
 	game_started = false
+	retry = false
+	block_input = false
 	caffeine = CAFFEINE
 	mode = Mode.DOODLE
 	score_coffee = 0

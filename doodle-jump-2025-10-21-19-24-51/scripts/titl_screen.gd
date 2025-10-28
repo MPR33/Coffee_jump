@@ -70,6 +70,8 @@ func _ready() -> void:
 
 	await get_tree().process_frame
 	last_trigger_t = Time.get_ticks_msec() / 1000.0
+	if GameManager.retry:
+		_on_startbtn_pressed()
 
 func _process(delta: float) -> void:
 	if analyzer_instance == null or title == null:
@@ -145,10 +147,14 @@ func _on_quitbtn_pressed() -> void:
 	get_tree().quit()
 
 func _on_startbtn_pressed():
+	if GameManager.block_input:
+		return
+	GameManager.block_input = true
 	anim.play("default")
-	var timer := get_tree().create_timer(3.5)
+	var timer := get_tree().create_timer(3.3)
 	await timer.timeout
 	GameManager.reset_game_state()
-	transitioon.change_scene("res://main.tscn", Vector2(90,200))
 	GameManager.score_sugar = 0
 	GameManager.score_coffee = 0
+	transitioon.change_scene("res://main.tscn", Vector2(90,200))
+	

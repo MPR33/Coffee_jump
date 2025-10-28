@@ -26,8 +26,16 @@ func gameover()-> void:
 func _process(delta: float) -> void:
 	pass
 
+func _input(event: InputEvent) -> void: # permet de lancer le jeu avec espace
+	if event.is_action_pressed("start_game") and not GameManager.game_started:
+		_on_retry_pressed()
 
 func _on_retry_pressed() -> void:
+	_stop_everything()
+	hide()
 	get_tree().paused=false
-	GameManager.reset_game_state()
-	get_tree().change_scene_to_file("res://main.tscn")
+	GameManager.retry = true
+	call_deferred("_go_title")
+	
+func _go_title() -> void:
+	get_tree().change_scene_to_file("res://scenes/titl_screen.tscn")
