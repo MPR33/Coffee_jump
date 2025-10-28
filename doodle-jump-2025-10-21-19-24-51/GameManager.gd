@@ -14,6 +14,7 @@ enum Mode { DOODLE, COFFEE }
 var mode: Mode = Mode.DOODLE
 var CAFFEINE : float = 0.5
 var raison: String
+var scoreId : String
 # --- Caféine et paramètres généraux ---
 var caffeine: float = CAFFEINE
 @export var doodle_rate: float = 0        # vitesse de montée en Doodle
@@ -27,6 +28,14 @@ var score_coffee: float = 0
 var score_sugar: float = 0.0
 
 func _ready() -> void:
+	
+	SilentWolf.configure({
+	"api_key": "a6FXfUCJ022svQdpFj7vTWrqpJV89Mo2Qcrw9Li4",
+	"game_id": "coffee_jump",
+	"log_level": 1
+  })
+
+	SilentWolf.configure_scores({"open_scene_on_close": "res://scenes/MainPage.tscn"})
 	set_process(true)
 	emit_signal("mode_changed", mode)
 	emit_signal("caffeine_changed", caffeine)
