@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://ddi45rxs26qi8"]
+
+[ext_resource type="Script" uid="uid://ywca8bh4coj5" path="res://scripts/game_over.gd" id="1_ccer4"]
+[ext_resource type="Texture2D" uid="uid://0d8ng0uyhqev" path="res://assets/extras/ChatGPT Image 28 oct. 2025, 08_24_35.png" id="1_y26ei"]
+[ext_resource type="FontFile" uid="uid://c4587vxue4ri3" path="res://fonts/Kenney Pixel Square.ttf" id="2_8u835"]
+[ext_resource type="Texture2D" uid="uid://nxski2ebfvxx" path="res://assets/extras/ChatGPT Image 28 oct. 2025, 08_32_53.png" id="3_8u835"]
+[ext_resource type="Script" uid="uid://7hhdtgj3ofg0" path="res://scripts/label.gd" id="3_ftari"]
+[ext_resource type="AudioStream" uid="uid://duiv54dwspswc" path="res://assets/sounds/Digital Typing Sound Effect.wav" id="4_28vn7"]
+[ext_resource type="AudioStream" uid="uid://bqba6anhof5ue" path="res://assets/sounds/533034__evretro__8-bit-game-over-soundtune.wav" id="7_k2vha"]
+
+[node name="GameOver" type="CanvasLayer"]
+process_mode = 2
+scale = Vector2(0.1, 0.1)
+transform = Transform2D(0.1, 0, 0, 0.1, 0, 0)
+script = ExtResource("1_ccer4")
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 1779.9999
+offset_bottom = 3209.9998
+
+[node name="Label" type="Label" parent="."]
+offset_top = 1679.9999
+offset_right = 1779.9999
+offset_bottom = 2349.9998
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_8u835")
+theme_override_font_sizes/font_size = 150
+horizontal_alignment = 1
+autowrap_mode = 3
+uppercase = true
+script = ExtResource("3_ftari")
+chars_per_second = 10.0
+sfx = ExtResource("4_28vn7")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+offset_right = 1779.9999
+offset_bottom = 2119.9998
+texture = ExtResource("1_y26ei")
+expand_mode = 1
+
+[node name="retry" type="TextureButton" parent="."]
+offset_left = 370.0
+offset_top = 1910.0
+offset_right = 1394.0
+offset_bottom = 3446.0
+texture_normal = ExtResource("3_8u835")
+stretch_mode = 4
+
+[node name="son" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_k2vha")
+
+[connection signal="pressed" from="retry" to="." method="_on_retry_pressed"]

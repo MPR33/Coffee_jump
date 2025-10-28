@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GameManager="*res://GameManager.gd"
 transitioon="*res://transition.tscn"
+GameOver="*res://game_over.tscn"
 
 [display]
 

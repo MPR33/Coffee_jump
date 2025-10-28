@@ -19,6 +19,7 @@ var last_coffee_pos: Vector2 = Vector2.ZERO
 var is_transitioning := false
 
 func _ready() -> void:
+	GameOver.hide()
 	doodle_node = doodle_packed.instantiate()
 	add_child(doodle_node)
 	# Musique DOODLE au tout début

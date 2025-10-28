@@ -4,6 +4,7 @@ signal caffeine_changed(value: float)        # 0.0 .. 1.0
 signal can_switch_changed(can_switch: bool)
 signal mode_changed(mode: int)               # 0 = DOODLE, 1 = COFFEE
 signal died(reason: String)
+signal reset_txt
 
 const DOODLE_SCENE := "res://scenes/doodle_jump.tscn"
 const COFFEE_SCENE := "res://scenes/coffee_mode.tscn"
@@ -12,7 +13,7 @@ const TITLE_SCENE :="res://scenes/titl_screen.tscn"
 enum Mode { DOODLE, COFFEE }
 var mode: Mode = Mode.DOODLE
 var CAFFEINE : float = 0.5
-
+var raison: String
 # --- Caféine et paramètres généraux ---
 var caffeine: float = CAFFEINE
 @export var doodle_rate: float = 0        # vitesse de montée en Doodle
@@ -91,14 +92,15 @@ func _die(reason: String) -> void:
 	var current_score: int = int(score_coffee - score_sugar)
 	if current_score > highscore:
 		highscore = current_score
-
-	print("☠️ Mort : %s" % reason)
+	raison=reason
+	print("☠️ Mort : %s" % raison)
 	print("Score : %d / Highscore : %d" % [current_score, highscore])
+	GameOver.gameover()
 
 	emit_signal("died", reason)
 
 	# Transition vers l’écran titre
-	get_tree().call_deferred("change_scene_to_file", TITLE_SCENE)
+	#get_tree().call_deferred("change_scene_to_file", TITLE_SCENE)
 	
 
 func reset_game_state() -> void:
@@ -107,6 +109,7 @@ func reset_game_state() -> void:
 	mode = Mode.DOODLE
 	score_coffee = 0
 	score_sugar = 0
+	emit_signal("reset_txt")
 	emit_signal("mode_changed", mode)
 	emit_signal("caffeine_changed", caffeine)
 	emit_signal("can_switch_changed", _compute_can_switch())
