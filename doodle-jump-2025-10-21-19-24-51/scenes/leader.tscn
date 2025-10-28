@@ -1,0 +1,93 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5l2gnvv1d0i6"]
+
+[ext_resource type="Texture2D" uid="uid://4l4ogig412hk" path="res://assets/extras/ChatGPT Image 28 oct. 2025, 16_29_13.png" id="1_4v8vt"]
+[ext_resource type="Script" uid="uid://b3umvh51a6w8x" path="res://scripts/leader.gd" id="1_808tp"]
+[ext_resource type="FontFile" uid="uid://c4587vxue4ri3" path="res://fonts/Kenney Pixel Square.ttf" id="2_808tp"]
+
+[node name="Panel" type="Panel"]
+offset_right = 180.0
+offset_bottom = 320.0
+script = ExtResource("1_808tp")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 37.0
+offset_right = 137.0
+offset_bottom = 44.0
+texture = ExtResource("1_4v8vt")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_top = 44.0
+offset_right = 180.0
+offset_bottom = 320.0
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_808tp")
+theme_override_font_sizes/font_size = 16
+text = "1er"
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_808tp")
+theme_override_font_sizes/font_size = 16
+text = "2eme"
+
+[node name="Label3" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_808tp")
+theme_override_font_sizes/font_size = 16
+text = "3eme"
+
+[node name="Label4" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_808tp")
+theme_override_font_sizes/font_size = 16
+text = "4eme"
+
+[node name="Label5" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_808tp")
+theme_override_font_sizes/font_size = 16
+text = "5eme"
+
+[node name="Label6" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_808tp")
+theme_override_font_sizes/font_size = 16
+text = "6eme"
+
+[node name="Label7" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_808tp")
+theme_override_font_sizes/font_size = 16
+text = "7eme"
+
+[node name="Label8" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_808tp")
+theme_override_font_sizes/font_size = 16
+text = "8eme"
+
+[node name="Label9" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_808tp")
+theme_override_font_sizes/font_size = 16
+text = "9eme"
+
+[node name="Label10" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_808tp")
+theme_override_font_sizes/font_size = 16
+text = "10eme"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_right = 37.0
+offset_bottom = 33.0
+theme_override_fonts/font = ExtResource("2_808tp")
+text = "X"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnhusrg2jsbq6"]
+
+[ext_resource type="Script" uid="uid://bara0c808r865" path="res://scripts/panel.gd" id="1_2t7te"]
+[ext_resource type="FontFile" uid="uid://c4587vxue4ri3" path="res://fonts/Kenney Pixel Square.ttf" id="1_3ilyb"]
+[ext_resource type="Script" uid="uid://moi2q6pioapl" path="res://scripts/line_edit.gd" id="3_oli24"]
+
+[node name="Panel" type="Panel"]
+offset_left = 28.0
+offset_top = 176.0
+offset_right = 161.0
+offset_bottom = 242.0
+script = ExtResource("1_2t7te")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 64.0
+offset_right = 107.0
+offset_bottom = 96.0
+theme_override_fonts/font = ExtResource("1_3ilyb")
+text = "Entrer"
+
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 0
+offset_right = 133.0
+offset_bottom = 64.0
+theme_override_fonts/font = ExtResource("1_3ilyb")
+theme_override_font_sizes/font_size = 11
+text = "Nom :"
+script = ExtResource("3_oli24")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

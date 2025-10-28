@@ -4,7 +4,7 @@ extends Control
 @onready var title: TextureRect =$"main/game-title"
 @onready var music: AudioStreamPlayer = AudioStreamPlayer.new()
 @onready var anim:= $anim as AnimatedSprite2D
-
+signal panel
 const TITLE_MUSIC: AudioStream = preload("res://assets/sounds/Hikari E [8 bit cover] - One Piece OP 3.wav")
 
 # -------- Réglages détection "sons aigus qui se détachent" ----------
@@ -147,14 +147,17 @@ func _on_quitbtn_pressed() -> void:
 	get_tree().quit()
 
 func _on_startbtn_pressed():
-	if GameManager.block_input:
-		return
-	GameManager.block_input = true
-	anim.play("default")
-	var timer := get_tree().create_timer(3.3)
-	await timer.timeout
-	GameManager.reset_game_state()
-	GameManager.score_sugar = 0
-	GameManager.score_coffee = 0
-	transitioon.change_scene("res://main.tscn", Vector2(90,200))
+	if GameManager.nomRempli:
+		if GameManager.block_input:
+			return
+		GameManager.block_input = true
+		anim.play("default")
+		var timer := get_tree().create_timer(3.3)
+		await timer.timeout
+		GameManager.reset_game_state()
+		GameManager.score_sugar = 0
+		GameManager.score_coffee = 0
+		transitioon.change_scene("res://main.tscn", Vector2(90,200))
+	else :
+		emit_signal("panel")
 	

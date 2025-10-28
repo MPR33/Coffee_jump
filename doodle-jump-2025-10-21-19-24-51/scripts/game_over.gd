@@ -1,5 +1,6 @@
 extends CanvasLayer
 @onready var son :=$MusicIntro
+@onready var leaderboard := $Panel2
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.hide()
@@ -9,6 +10,7 @@ func _ready():
 	$LabelMort.start_typing.connect($TypingSfx.play)
 	$LabelMort.stop_all.connect(_stop_everything)
 	#$TypingSfx.finished.connect(_on_typing_sfx_finished) # optionnel
+	#GameManager.over.connect(gameover)
 
 func on_intro_finished():
 	$LabelMort.start_typing_text()
@@ -39,3 +41,8 @@ func _on_retry_pressed() -> void:
 	
 func _go_title() -> void:
 	get_tree().change_scene_to_file("res://scenes/titl_screen.tscn")
+
+
+func _on_boutonleader_pressed() -> void:
+	leaderboard.visible=true
+	leaderboard._populate_leaderboard()

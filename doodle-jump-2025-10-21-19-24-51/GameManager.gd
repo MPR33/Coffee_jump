@@ -15,6 +15,9 @@ var mode: Mode = Mode.DOODLE
 var CAFFEINE : float = 0.5
 var raison: String
 var scoreId : String
+var nomRempli : bool = false
+var player_name : String
+var sw_result: Dictionary
 # --- Caféine et paramètres généraux ---
 var caffeine: float = CAFFEINE
 @export var doodle_rate: float = 0        # vitesse de montée en Doodle
@@ -103,11 +106,14 @@ func _die(reason: String) -> void:
 	var current_score: int = int(score_coffee - score_sugar)
 	if current_score > highscore:
 		highscore = current_score
+		SilentWolf.Scores.save_score(player_name, highscore)
+	sw_result= await SilentWolf.Scores.get_scores().sw_get_scores_complete
+	print("Scores: " + str(sw_result.scores))
 	raison=reason
 	print("☠️ Mort : %s" % raison)
 	print("Score : %d / Highscore : %d" % [current_score, highscore])
 	GameOver.gameover()
-
+	#emit_signal("over")
 	emit_signal("died", reason)
 
 	# Transition vers l’écran titre

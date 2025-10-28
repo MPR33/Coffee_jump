@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://xbny88htp7mc"]
+[gd_scene load_steps=46 format=3 uid="uid://xbny88htp7mc"]
 
 [ext_resource type="Script" uid="uid://dh2baj0n1x0ix" path="res://scripts/titl_screen.gd" id="1_suhcb"]
 [ext_resource type="Texture2D" uid="uid://dxvlmip8fic70" path="res://assets/extras/ChatGPT Image 22 oct. 2025, 09_14_22.png" id="2_wocmi"]
@@ -41,6 +41,7 @@
 [ext_resource type="Texture2D" uid="uid://q87bmmg24noq" path="res://assets/extras/frames/frame32.png" id="36_ntsh7"]
 [ext_resource type="Texture2D" uid="uid://c8erpwemtqi2q" path="res://assets/extras/frames/frame33.png" id="37_do2cg"]
 [ext_resource type="Texture2D" uid="uid://xs1h87ibm4m5" path="res://assets/extras/frames/frame15.png" id="38_7hkhc"]
+[ext_resource type="PackedScene" uid="uid://dnhusrg2jsbq6" path="res://panel.tscn" id="42_jobil"]
 
 [sub_resource type="Shader" id="Shader_lhcqg"]
 code = "shader_type canvas_item;
@@ -237,6 +238,13 @@ offset_bottom = 308.0
 scale = Vector2(0.5, 0.5)
 theme_override_fonts/font = ExtResource("7_ydcui")
 text = "Highscore :"
+
+[node name="Panel" parent="." instance=ExtResource("42_jobil")]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 147.0
+offset_right = 156.0
+offset_bottom = 213.0
 
 [connection signal="pressed" from="buttons/start-btn" to="." method="_on_startbtn_pressed"]
 [connection signal="pressed" from="buttons/quit-btn" to="." method="_on_quitbtn_pressed"]
