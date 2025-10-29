@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bnqbheiixm4sv"]
+[gd_scene load_steps=6 format=3 uid="uid://bnqbheiixm4sv"]
 
 [ext_resource type="Texture2D" uid="uid://bithlm7ae2jx0" path="res://assets/extras/coffee_gauge_full.png" id="1_cj132"]
 [ext_resource type="Script" uid="uid://mlpeg08nuspu" path="res://scripts/caffeine_hud.gd" id="1_f1d73"]
+[ext_resource type="Texture2D" uid="uid://bksqv15yia4j4" path="res://assets/extras/coffee_gauge_empty.png" id="2_0ofqp"]
+[ext_resource type="Script" uid="uid://dxdi5qhohn7ur" path="res://scripts/caffeine_bar.gd" id="4_7kafg"]
+[ext_resource type="Texture2D" uid="uid://cc501t7wjv4me" path="res://assets/extras/ChatGPT Image 29 oct. 2025, 08_58_28.png" id="4_243ai"]
 
 [node name="CaffeineHUD" type="CanvasLayer"]
 script = ExtResource("1_f1d73")
@@ -18,4 +21,33 @@ visibility_layer = 8
 layout_mode = 2
 size_flags_vertical = 0
 value = 76.0
+texture_under = ExtResource("2_0ofqp")
 texture_progress = ExtResource("1_cj132")
+script = ExtResource("4_7kafg")
+
+[node name="Warnings" type="HBoxContainer" parent="MarginContainer/CaffeineBar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 0.25
+offset_left = 276.66666
+offset_top = 10.000001
+offset_right = 2328.6667
+offset_bottom = 1056.6666
+scale = Vector2(0.05, 0.05)
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/CaffeineBar/Warnings"]
+layout_mode = 2
+texture = ExtResource("4_243ai")
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/CaffeineBar/Warnings"]
+layout_mode = 2
+texture = ExtResource("4_243ai")
+
+[node name="Halo" type="Panel" parent="MarginContainer/CaffeineBar"]
+modulate = Color(10.034221, 0.7660962, 0.56012714, 1)
+z_index = -1
+texture_filter = 1
+layout_mode = 0
+offset_left = 10.0
+offset_right = 393.3333
+offset_bottom = 80.0

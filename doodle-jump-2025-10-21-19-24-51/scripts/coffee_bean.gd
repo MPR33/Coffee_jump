@@ -9,7 +9,7 @@ extends CharacterBody2D
 
 # --- Accélérations / Décélérations (px/s²) ---
 # Sol (normal)
-@export var accel_ground: float = 1800.0
+@export var accel_ground: float = 1000.0
 @export var decel_ground: float = 2400.0
 # Glace (inertie la + forte => accélération plus faible, freinage très faible)
 @export var accel_ice: float = 600.0
@@ -83,10 +83,9 @@ func _physics_process(delta: float) -> void:
 	position.x = wrapf(position.x, 0.0, screen_size.x)
 
 func die():
-	velocity = Vector2.ZERO
 	# Appel différé pour éviter les suppressions / changements pendant la phase physique
 	call_deferred("_notify_death")
 
 func _notify_death():
 	# Laisse inchangé si ton GameManager s'attend à une string raison
-	GameManager._die("")
+	GameManager._die("Terrible")

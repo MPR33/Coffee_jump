@@ -1,5 +1,4 @@
 extends Panel
-
 # Mets ta liste ici si tu ne la prends pas d'ailleurs
 #var sw_result: Dictionary = await SilentWolf.Scores.get_scores().sw_get_scores_complete
 #var Scores=sw_result.scores

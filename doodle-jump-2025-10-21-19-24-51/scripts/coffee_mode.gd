@@ -75,6 +75,18 @@ func spawn() -> void:
 		ui.add_child(w)
 		await get_tree().create_timer(0.1).timeout
 		w.visible=true
+		# --- SON WARNING PENDANT 2s ---
+		var audio := AudioStreamPlayer.new()
+		audio.stream = preload("res://assets/sounds/missile_warning.wav")
+		ui.add_child(audio)
+		audio.play()
+
+		var stop_timer := get_tree().create_timer(1.0)
+		stop_timer.timeout.connect(func():
+			if audio:
+				audio.stop()
+				audio.queue_free()
+		)
 		
 
 	# Deuxième timer (vapeur)
@@ -129,7 +141,7 @@ func level_generator(amount: int) -> void:
 			1:
 				platform_initial_position_y += randf_range(36, 54)
 				print(_get_difficulty())
-				new_platform = platform_scene[1].instantiate()
+				new_platform = platform_scene[2].instantiate()
 				new_platform.position = Vector2(randf_range(20, 165), platform_initial_position_y)
 				platform_container.call_deferred("add_child", new_platform)
 

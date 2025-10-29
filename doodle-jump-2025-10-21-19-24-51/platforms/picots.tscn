@@ -31,7 +31,7 @@ size = Vector2(59, 20)
 [node name="picots" type="StaticBody2D" groups=["platform"]]
 script = ExtResource("1_cq0rx")
 
-[node name="anim" type="AnimatedSprite2D" parent="."]
+[node name="anim" type="AnimatedSprite2D" parent="." groups=["platform"]]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_cg2bu")
 frame_progress = 0.58260435
@@ -45,5 +45,6 @@ shape = SubResource("RectangleShape2D_kvopl")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_cq0rx")
+one_way_collision = true
 
 [connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
