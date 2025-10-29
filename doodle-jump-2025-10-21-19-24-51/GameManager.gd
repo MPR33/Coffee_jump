@@ -20,7 +20,7 @@ var player_name : String
 var sw_result: Dictionary
 # --- Caféine et paramètres généraux ---
 var caffeine: float = CAFFEINE
-@export var doodle_rate: float = 0.2        # vitesse de montée en Doodle
+@export var doodle_rate: float = 0.0        # vitesse de montée en Doodle
 @export var coffee_rate: float = -0.01       # vitesse de descente en Coffee
 @export var allow_coffee_to_doodle_anytime: bool = false
 var retry: bool = false
@@ -49,7 +49,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if not game_started:
 		return
-
+	
 	# Met à jour la caféine
 	if mode == Mode.DOODLE:
 		_add_caffeine(doodle_rate * delta)
