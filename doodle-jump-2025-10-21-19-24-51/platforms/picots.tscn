@@ -37,14 +37,14 @@ sprite_frames = SubResource("SpriteFrames_cg2bu")
 frame_progress = 0.58260435
 
 [node name="hitbox" type="Area2D" parent="."]
+modulate = Color(1, 0.24705882, 0.039215688, 1)
 
 [node name="collision" type="CollisionShape2D" parent="hitbox"]
-position = Vector2(-0.5, 0)
+position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_kvopl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 0)
+position = Vector2(0, 12)
 shape = SubResource("RectangleShape2D_cq0rx")
-one_way_collision = true
 
 [connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]

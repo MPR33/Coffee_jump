@@ -81,7 +81,7 @@ func spawn() -> void:
 		ui.add_child(audio)
 		audio.play()
 
-		var stop_timer := get_tree().create_timer(1.0)
+		var stop_timer := get_tree().create_timer(0.5)
 		stop_timer.timeout.connect(func():
 			if audio:
 				audio.stop()

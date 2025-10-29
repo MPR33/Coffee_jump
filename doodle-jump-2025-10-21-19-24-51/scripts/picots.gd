@@ -1,5 +1,6 @@
 extends "res://scripts/platform.gd"
 @onready var anim:=$anim
+
 func response():
 	emit_signal("delete_object",self)
 func _ready():
