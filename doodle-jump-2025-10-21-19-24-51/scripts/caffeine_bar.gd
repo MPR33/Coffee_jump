@@ -3,8 +3,8 @@ extends TextureProgressBar
 @onready var warnings := $Warnings
 @onready var halo := $Halo
 
-const LOW  := 20.0
-const HIGH := 80.0
+const LOW  := 10.0
+const HIGH := 90.0
 enum Mode { DOODLE, COFFEE }
 var _blink_tween: Tween
 

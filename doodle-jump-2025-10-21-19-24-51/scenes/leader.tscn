@@ -32,61 +32,61 @@ offset_bottom = 320.0
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_808tp")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 10
 text = "1er"
 
 [node name="Label2" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_808tp")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 10
 text = "2eme"
 
 [node name="Label3" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_808tp")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 10
 text = "3eme"
 
 [node name="Label4" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_808tp")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 10
 text = "4eme"
 
 [node name="Label5" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_808tp")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 10
 text = "5eme"
 
 [node name="Label6" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_808tp")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 10
 text = "6eme"
 
 [node name="Label7" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_808tp")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 10
 text = "7eme"
 
 [node name="Label8" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_808tp")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 10
 text = "8eme"
 
 [node name="Label9" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_808tp")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 10
 text = "9eme"
 
 [node name="Label10" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_808tp")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 10
 text = "10eme"
 
 [node name="Button" type="Button" parent="."]

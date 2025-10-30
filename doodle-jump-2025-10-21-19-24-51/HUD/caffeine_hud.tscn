@@ -26,6 +26,7 @@ texture_progress = ExtResource("1_cj132")
 script = ExtResource("4_7kafg")
 
 [node name="Warnings" type="HBoxContainer" parent="MarginContainer/CaffeineBar"]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_bottom = 0.25
