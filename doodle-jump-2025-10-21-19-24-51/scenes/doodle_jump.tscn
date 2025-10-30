@@ -79,7 +79,8 @@ layer = -1
 [node name="bg_texture" type="TextureRect" parent="BG"]
 texture_filter = 1
 material = SubResource("ShaderMaterial_g5eel")
-offset_right = 180.0
+offset_left = 1.0
+offset_right = 181.0
 offset_bottom = 319.0
 texture = ExtResource("10_rea41")
 expand_mode = 1
