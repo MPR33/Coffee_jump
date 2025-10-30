@@ -1,11 +1,11 @@
 [gd_scene load_steps=6 format=3 uid="uid://d1qpm3ys6gfcx"]
 
 [ext_resource type="Script" uid="uid://vnpf86sgij0r" path="res://scripts/coffee_bean.gd" id="1_fsxpr"]
-[ext_resource type="Texture2D" uid="uid://bd12t2fpx7s8g" path="res://assets/actors/pixellab-Change-the-character-s-dynamic-1761309667067.png" id="2_fsxpr"]
-[ext_resource type="Texture2D" uid="uid://d348tg2gn5ftu" path="res://assets/actors/pixellab-Create-pixel-art-sprites-of-a--1761309415344.png" id="3_yhk0c"]
+[ext_resource type="Texture2D" uid="uid://dqa0y7sajb7ti" path="res://assets/actors/Coffee fall.png" id="2_fsxpr"]
+[ext_resource type="Texture2D" uid="uid://swmdc3h3wv0v" path="res://assets/actors/Coffee posee.png" id="3_yhk0c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nl11q"]
-size = Vector2(28.000023, 26.500198)
+size = Vector2(28.000023, 25.250105)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yhk0c"]
 animations = [{
@@ -30,13 +30,13 @@ animations = [{
 script = ExtResource("1_fsxpr")
 
 [node name="collision_coffee" type="CollisionShape2D" parent="."]
-position = Vector2(2.0000029, -11.999999)
+position = Vector2(2.0000029, -12.625046)
 scale = Vector2(0.99999934, 0.99999934)
 shape = SubResource("RectangleShape2D_nl11q")
 
 [node name="anim_coffee" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(2, -12)
-scale = Vector2(0.5, 0.5)
+position = Vector2(1.999999, -11.5)
+scale = Vector2(0.02734375, 0.026367188)
 sprite_frames = SubResource("SpriteFrames_yhk0c")
 animation = &"idle"
