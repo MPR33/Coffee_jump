@@ -104,9 +104,13 @@ func _die(reason: String) -> void:
 
 	# Calcul du score final
 	var current_score: int = int(score_coffee - score_sugar)
+	print(current_score)
+	print(highscore)
+	print("voici")
 	if current_score > highscore:
 		highscore = current_score
 		SilentWolf.Scores.save_score(player_name, highscore)
+		print("fait")
 	raison=reason
 	print("☠️ Mort : %s" % raison)
 	print("Score : %d / Highscore : %d" % [current_score, highscore])
