@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://swmdc3h3wv0v" path="res://assets/actors/Coffee posee.png" id="3_yhk0c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nl11q"]
-size = Vector2(28.000023, 25.250105)
+size = Vector2(14.000009, 22.000013)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yhk0c"]
 animations = [{
@@ -30,7 +30,7 @@ animations = [{
 script = ExtResource("1_fsxpr")
 
 [node name="collision_coffee" type="CollisionShape2D" parent="."]
-position = Vector2(2.0000029, -12.625046)
+position = Vector2(1.9999998, -11)
 scale = Vector2(0.99999934, 0.99999934)
 shape = SubResource("RectangleShape2D_nl11q")
 
