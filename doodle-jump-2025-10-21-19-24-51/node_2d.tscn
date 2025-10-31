@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://f11ah5kvygi0"]
+[gd_scene load_steps=4 format=3 uid="uid://f11ah5kvygi0"]
 
 [ext_resource type="PackedScene" uid="uid://d1qpm3ys6gfcx" path="res://actors/coffee_bean.tscn" id="1_0e48y"]
+[ext_resource type="Script" uid="uid://dglhht5dxsyop" path="res://node_2d.gd" id="1_epypp"]
 [ext_resource type="PackedScene" uid="uid://b0318vsw406h7" path="res://platforms/picots.tscn" id="2_epypp"]
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_epypp")
 
 [node name="coffee_bean" parent="." instance=ExtResource("1_0e48y")]
 position = Vector2(88, 68)

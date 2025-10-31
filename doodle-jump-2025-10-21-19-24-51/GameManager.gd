@@ -111,14 +111,15 @@ func _die(reason: String) -> void:
 		highscore = current_score
 		SilentWolf.Scores.save_score(player_name, highscore)
 		print("fait")
+		#sw_result = await SilentWolf.Scores.save_score(player_name, highscore).sw_save_score_complete
 	raison=reason
 	print("☠️ Mort : %s" % raison)
-	print("Score : %d / Highscore : %d" % [current_score, highscore])
-	GameOver.gameover()
+	#print("Score : %d / Highscore : %d" % [current_score, highscore])
 	#emit_signal("over")
-	emit_signal("died", reason)
 	sw_result= await SilentWolf.Scores.get_scores().sw_get_scores_complete
 	print("Scores: " + str(sw_result.scores))
+	emit_signal("died", reason)
+	GameOver.gameover()
 	# Transition vers l’écran titre
 	#get_tree().call_deferred("change_scene_to_file", TITLE_SCENE)
 	

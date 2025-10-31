@@ -8,6 +8,7 @@ func _ready():
 
 func _populate_leaderboard():
 	var Scores = GameManager.sw_result
+	print(str(Scores)+"lemoment")
 	var tableau = Scores.get("scores", [])
 
 	# 1) Extraire deux listes propres
