@@ -4,11 +4,12 @@ extends Node
 @export var coffee_packed: PackedScene
 @export var doodle_music: PackedScene
 @export var coffee_music: PackedScene
-
+@export var GameOver: PackedScene
 signal transition_state_changed(is_transitioning: bool)
 
 var doodle_node: Node = null
 var coffee_node: Node = null
+var titl_node: Node=null
 var doodle_music_node: Node = null
 var coffee_music_node: Node = null
 
@@ -19,7 +20,7 @@ var last_coffee_pos: Vector2 = Vector2.ZERO
 var is_transitioning := false
 
 func _ready() -> void:
-	GameOver.hide()
+	#GameOver.visible=false
 	doodle_node = doodle_packed.instantiate()
 	add_child(doodle_node)
 	# Musique DOODLE au tout début

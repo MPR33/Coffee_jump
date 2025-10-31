@@ -32,6 +32,7 @@ var highscore: int = 0
 var score_coffee: float = 0
 var score_sugar: float = 0.0
 
+
 func _ready() -> void:
 	
 	SilentWolf.configure({
@@ -107,21 +108,31 @@ func _die(reason: String) -> void:
 	print(current_score)
 	print(highscore)
 	print("voici")
+
 	if current_score > highscore:
 		highscore = current_score
-		SilentWolf.Scores.save_score(player_name, highscore)
-		print("fait")
-		#sw_result = await SilentWolf.Scores.save_score(player_name, highscore).sw_save_score_complete
-	raison=reason
+		var save_req = SilentWolf.Scores.save_score(player_name, highscore)
+		var save_res = await save_req.sw_save_score_complete
+		print("✅ Nouveau highscore enregistré:", save_res)
+	else:
+		print("Aucun nouveau highscore.")
+
+	raison = reason
 	print("☠️ Mort : %s" % raison)
-	#print("Score : %d / Highscore : %d" % [current_score, highscore])
-	#emit_signal("over")
-	sw_result= await SilentWolf.Scores.get_scores().sw_get_scores_complete
-	print("Scores: " + str(sw_result.scores))
+
+	# Récupérer les scores à jour
+	var get_req = SilentWolf.Scores.get_scores()
+	var get_res = await get_req.sw_get_scores_complete
+	sw_result = get_res
+	print("📊 Scores:", str(sw_result.scores))
+
+	# Signaler la mort & afficher l'écran Game Over
 	emit_signal("died", reason)
 	GameOver.gameover()
+
 	# Transition vers l’écran titre
 	#get_tree().call_deferred("change_scene_to_file", TITLE_SCENE)
+
 	
 
 func reset_game_state() -> void:
