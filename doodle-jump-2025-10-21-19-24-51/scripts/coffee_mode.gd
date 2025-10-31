@@ -39,10 +39,8 @@ func _ready() -> void:
 	_spawn_timer.one_shot = true
 	add_child(_spawn_timer)
 	_spawn_timer.timeout.connect(spawn)
-
 	# premier spawn immédiat
 	spawn()
-	GameManager.died.connect(_on_died)
 
 	if not GameManager.game_started:
 		GameManager.start_game()
@@ -61,47 +59,69 @@ func _get_spawn_interval() -> float:
 	# interpolation linéaire: quand d=0 => MAX_INTERVAL, quand d=1 => MIN_INTERVAL
 	return MAX_INTERVAL + (MIN_INTERVAL - MAX_INTERVAL) * d
 func spawn() -> void:
+	var token := GameManager.spawn_token
+
 	var d := _get_difficulty()
 	var x := _rng.randf_range(20.0, 160.0)
-	var y := cafe2.position.y+200
-	# Premier timer (warning)
-	var t1 := get_tree().create_timer(5 * (1 - d))
-	t1.timeout.connect(func():
-		var w := Warning.instantiate()
-		w.visible=false
-		w.set_anchors_preset(Control.PRESET_CENTER)
-		if w.has_method("setup"):
-			w.setup(x, 2)
-		ui.add_child(w)
-		await get_tree().create_timer(0.1).timeout
-		w.visible=true
-		# --- SON WARNING PENDANT 2s ---
-		var audio := AudioStreamPlayer.new()
-		audio.stream = preload("res://assets/sounds/missile_warning.wav")
-		ui.add_child(audio)
-		audio.play()
+	var y := cafe2.position.y + 200.0
 
-		var stop_timer := get_tree().create_timer(0.5)
-		stop_timer.timeout.connect(func():
-			if audio:
-				audio.stop()
-				audio.queue_free()
-		)
-		
+	# --------- TIMER 1 : WARNING APRÈS DELAI ---------
+	var warn_delay := 5.0 * (1.0 - d)
+	var t1 := get_tree().create_timer(warn_delay)
+	await t1.timeout
+	if token != GameManager.spawn_token or not GameManager.game_started:
+		return
 
-	# Deuxième timer (vapeur)
-		var t := get_tree().create_timer(2)
-		t.timeout.connect(func():
-			var v := VAPEUR_SCENE.instantiate()
-			v.position = Vector2(x, y)
-			if v.has_method("apply_difficulty"):
-				v.apply_difficulty(d)
-			add_child(v)
+	# Crée le warning
+	var w := Warning.instantiate()
+	w.visible = false
+	w.set_anchors_preset(Control.PRESET_CENTER)
+	if w.has_method("setup"):
+		w.setup(x, 2)
+	ui.add_child(w)
 
-			var interval := _get_spawn_interval()
-			_spawn_timer.wait_time = interval + 1
-			_spawn_timer.start()
-		))
+	# Petit délai pour être sûr que le layout est en place
+	await get_tree().create_timer(0.1).timeout
+	if token != GameManager.spawn_token or not GameManager.game_started:
+		if is_instance_valid(w):
+			w.queue_free()
+		return
+	w.visible = true
+
+	# --------- SON WARNING COURT ---------
+	var audio := AudioStreamPlayer.new()
+	audio.stream = preload("res://assets/sounds/missile_warning.wav")
+	ui.add_child(audio)
+	audio.play()
+
+	var stop_timer := get_tree().create_timer(0.5)
+	await stop_timer.timeout
+	# si la partie est finie, on coupe proprement
+	if is_instance_valid(audio):
+		audio.stop()
+		audio.queue_free()
+
+	# --------- TIMER 2 : SPAWN VAPEUR ---------
+	var t2 := get_tree().create_timer(2.0)
+	await t2.timeout
+	if token != GameManager.spawn_token or not GameManager.game_started:
+		# Nettoyage du warning si on l'a encore
+		if is_instance_valid(w):
+			w.queue_free()
+		return
+
+	var v := VAPEUR_SCENE.instantiate()
+	v.position = Vector2(x, y)
+	if v.has_method("apply_difficulty"):
+		v.apply_difficulty(d)
+	add_child(v)
+
+	# Redémarrer le spawn timer uniquement si token toujours valide
+	if token == GameManager.spawn_token and GameManager.game_started:
+		var interval := _get_spawn_interval()
+		_spawn_timer.wait_time = interval + 1.0
+		_spawn_timer.start()
+
 
 func _physics_process(delta: float) -> void:
 	if not GameManager.game_started:
@@ -170,11 +190,11 @@ func delete_object(obstacle: Node) -> void:
 
 func _on_platform_cleaner_coffee_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		call_deferred("delete_object", body)
+		GameManager._die("Ecrasé")
 
 func _on_platform_cleaner_coffee_2_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player") and not body.is_in_group("vapeur"):
-		call_deferred("delete_object", body)
+		GameManager._die("Ecrasé")
 
 
 # ---------------------------------------------------------------------
@@ -183,10 +203,3 @@ func _on_platform_cleaner_coffee_2_body_entered(body: Node2D) -> void:
 func score_update() -> void:
 	GameManager.score_coffee = max(GameManager.score_coffee, player.position.y)
 	score_label.text = str(int(GameManager.score_coffee - GameManager.score_sugar))
-
-
-# ---------------------------------------------------------------------
-# MORT
-# ---------------------------------------------------------------------
-func _on_died(reason: String) -> void:
-	print("Mort détectée dans Coffee Mode : %s" % reason)

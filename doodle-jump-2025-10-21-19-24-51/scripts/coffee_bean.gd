@@ -84,10 +84,8 @@ func _physics_process(delta: float) -> void:
 
 func die():
 	# Appel différé pour éviter les suppressions / changements pendant la phase physique
-	velocity = Vector2.ZERO
 	call_deferred("_notify_death")
 
 func _notify_death():
 	# Laisse inchangé si ton GameManager s'attend à une string raison
-	velocity = Vector2.ZERO
 	GameManager._die("Terrible")

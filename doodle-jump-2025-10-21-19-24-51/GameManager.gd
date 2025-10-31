@@ -20,8 +20,8 @@ var player_name : String
 var sw_result: Dictionary
 # --- Caféine et paramètres généraux ---
 var caffeine: float = CAFFEINE
-@export var doodle_rate: float = 0.02        # vitesse de montée en Doodle
-@export var coffee_rate: float = -0.02       # vitesse de descente en Coffee
+@export var doodle_rate: float = -0.05        # vitesse de montée en Doodle
+@export var coffee_rate: float = 0.05       # vitesse de descente en Coffee
 @export var allow_coffee_to_doodle_anytime: bool = false
 var retry: bool = false
 var block_input : bool = false
@@ -97,6 +97,14 @@ func _add_caffeine(amount: float) -> void:
 	if caffeine != prev:
 		emit_signal("caffeine_changed", caffeine)
 
+# Dans ton spawner (ou GameManager si c'est lui qui gère)
+var spawn_token: int = 0
+
+func cancel_spawns_on_death() -> void:
+	# Appelle ça quand le joueur meurt
+	spawn_token += 1
+	# Optionnel : nettoyer les warnings/sons déjà à l'écran si tu les références
+
 func _die(reason: String) -> void:
 	if not game_started:
 		return
@@ -104,6 +112,8 @@ func _die(reason: String) -> void:
 	game_started = false
 
 	# Calcul du score final
+	await get_tree().create_timer(0.1).timeout
+	get_tree().paused = true
 	var current_score: int = int(score_coffee - score_sugar)
 	print(current_score)
 	print(highscore)
@@ -143,6 +153,7 @@ func reset_game_state() -> void:
 	mode = Mode.DOODLE
 	score_coffee = 0
 	score_sugar = 0
+	get_tree().paused = false
 	emit_signal("reset_txt")
 	emit_signal("mode_changed", mode)
 	emit_signal("caffeine_changed", caffeine)

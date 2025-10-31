@@ -1,22 +1,20 @@
 extends CanvasLayer
 
 const LOW_THRESH  := 0.15
-const HIGH_THRESH := 0.80 
+const HIGH_THRESH := 0.80
 
 @onready var bar: TextureProgressBar = $MarginContainer/CaffeineBar
 @onready var label: Label = get_node_or_null("MarginContainer/CaffeineBar/Label")
 
-var _blink_tween: Tween = null
-var _is_blinking: bool = false
+var _blink_tween: Tween
+var _is_blinking := false
 
 func _ready() -> void:
-	# Config de base
 	bar.min_value = 0
 	bar.max_value = 100
 	bar.value = GameManager.caffeine * 100.0
 	_reset_visuals()
 
-	# Connexions
 	GameManager.caffeine_changed.connect(_on_caffeine_changed)
 	GameManager.mode_changed.connect(_on_mode_changed)
 	GameManager.can_switch_changed.connect(_on_can_switch_changed)
@@ -24,7 +22,7 @@ func _ready() -> void:
 
 	_on_mode_changed(GameManager.mode)
 	_on_can_switch_changed(GameManager._compute_can_switch())
-	_update_blinking()  # état initial
+	_update_blinking()
 
 func _on_caffeine_changed(v: float) -> void:
 	bar.value = v * 100.0
@@ -33,24 +31,17 @@ func _on_caffeine_changed(v: float) -> void:
 	_update_blinking()
 
 func _on_mode_changed(mode: int) -> void:
-	# (optionnel) adapter la couleur selon le mode
-	# bar.tint_progress = (mode == GameManager.Mode.DOODLE) ? Color(0.8,0.9,1) : Color(1,0.9,0.6)
+	# On force un recalcul immédiat pour éviter un flash
 	_update_blinking()
 
 func _on_can_switch_changed(_can_switch: bool) -> void:
-	# rien à faire pour le clignotement ici
 	pass
 
 func _on_died(_reason: String) -> void:
 	_stop_blinking()
-	# (optionnel) flash rouge / feedback
-
-# ---------------------
-#      BLINK LOGIC
-# ---------------------
 
 func _should_blink() -> bool:
-	var v := GameManager.caffeine  # 0..1
+	var v := GameManager.caffeine # 0..1
 	var m := GameManager.mode
 	if m == GameManager.Mode.DOODLE:
 		return v < LOW_THRESH
@@ -67,19 +58,14 @@ func _update_blinking() -> void:
 
 func _start_blinking() -> void:
 	_is_blinking = true
-	# Nettoie un tween existant si besoin
 	if _blink_tween and _blink_tween.is_valid():
 		_blink_tween.kill()
 	_blink_tween = create_tween()
-	_blink_tween.set_loops()  # infini
+	_blink_tween.set_loops()
 	_blink_tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-
-	# On fait pulser l’alpha entre 1.0 et 0.35 en 0.45s (aller) puis retour 0.45s
-	# (un seul tween enchaîné ping-pong)
 	_blink_tween.tween_property(bar, "modulate:a", 0.35, 0.20)
 	if label:
 		_blink_tween.parallel().tween_property(label, "modulate:a", 0.35, 0.20)
-	# Retour à 1.0
 	_blink_tween.tween_property(bar, "modulate:a", 1.0, 0.20)
 	if label:
 		_blink_tween.parallel().tween_property(label, "modulate:a", 1.0, 0.20)

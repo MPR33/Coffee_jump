@@ -45,6 +45,7 @@ layout_mode = 2
 texture = ExtResource("4_243ai")
 
 [node name="Halo" type="Panel" parent="MarginContainer/CaffeineBar"]
+visible = false
 modulate = Color(10.034221, 0.7660962, 0.56012714, 1)
 z_index = -1
 texture_filter = 1
