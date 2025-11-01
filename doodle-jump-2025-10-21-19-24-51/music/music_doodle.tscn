@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://txha2oi4ffs0"]
 
-[ext_resource type="AudioStream" uid="uid://c156ckf70k3i4" path="res://music/Sugar Escape.mp3" id="1_j6hy1"]
+[ext_resource type="AudioStream" uid="uid://cffo40wkjdauf" path="res://music/Fantastic Dreamer [8 bit Cover] - Konosuba OP 1.wav" id="1_j6hy1"]
 
 [node name="MusicDoodle" type="AudioStreamPlayer2D"]
 stream = ExtResource("1_j6hy1")

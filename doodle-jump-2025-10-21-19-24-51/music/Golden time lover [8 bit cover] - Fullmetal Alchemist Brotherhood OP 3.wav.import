@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cbd07kthx3f7"
+path="res://.godot/imported/Golden time lover [8 bit cover] - Fullmetal Alchemist Brotherhood OP 3.wav-f2b0f717eb9bd330d1d46c14d8eccb50.sample"
+
+[deps]
+
+source_file="res://music/Golden time lover [8 bit cover] - Fullmetal Alchemist Brotherhood OP 3.wav"
+dest_files=["res://.godot/imported/Golden time lover [8 bit cover] - Fullmetal Alchemist Brotherhood OP 3.wav-f2b0f717eb9bd330d1d46c14d8eccb50.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

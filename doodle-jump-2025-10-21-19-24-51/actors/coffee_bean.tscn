@@ -76,7 +76,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_g4hre")
 }],
 "loop": true,
-"name": &"running",
+"name": &"run",
 "speed": 5.0
 }]
 
@@ -93,5 +93,4 @@ texture_filter = 1
 position = Vector2(3.9999998, -9)
 scale = Vector2(1.038, 1)
 sprite_frames = SubResource("SpriteFrames_yhk0c")
-animation = &"running"
-frame_progress = 0.84026563
+animation = &"run"

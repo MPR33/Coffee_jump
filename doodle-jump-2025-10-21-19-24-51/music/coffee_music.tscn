@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bqogq6u70pfu2"]
 
-[ext_resource type="AudioStream" uid="uid://djkmnx4sqe3ca" path="res://music/Inside the Grind.mp3" id="1_g44g3"]
+[ext_resource type="AudioStream" uid="uid://cbd07kthx3f7" path="res://music/Golden time lover [8 bit cover] - Fullmetal Alchemist Brotherhood OP 3.wav" id="1_g44g3"]
 
 [node name="CoffeeMusic" type="AudioStreamPlayer2D"]
 stream = ExtResource("1_g44g3")

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cffo40wkjdauf"
+path="res://.godot/imported/Fantastic Dreamer [8 bit Cover] - Konosuba OP 1.wav-a3e3744b3d35100c70c74bc6f5486038.sample"
+
+[deps]
+
+source_file="res://music/Fantastic Dreamer [8 bit Cover] - Konosuba OP 1.wav"
+dest_files=["res://.godot/imported/Fantastic Dreamer [8 bit Cover] - Konosuba OP 1.wav-a3e3744b3d35100c70c74bc6f5486038.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
