@@ -115,9 +115,6 @@ func _die(reason: String) -> void:
 	await get_tree().create_timer(0.1).timeout
 	get_tree().paused = true
 	var current_score: int = int(score_coffee - score_sugar)
-	print(current_score)
-	print(highscore)
-	print("voici")
 
 	if current_score > highscore:
 		highscore = current_score
@@ -131,7 +128,7 @@ func _die(reason: String) -> void:
 	print("☠️ Mort : %s" % raison)
 
 	# Récupérer les scores à jour
-	var get_req = SilentWolf.Scores.get_scores()
+	var get_req = SilentWolf.Scores.get_scores(0)
 	var get_res = await get_req.sw_get_scores_complete
 	sw_result = get_res
 	print("📊 Scores:", str(sw_result.scores))

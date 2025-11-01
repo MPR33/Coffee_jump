@@ -20,17 +20,21 @@ func _populate_leaderboard() -> void:
 
 	# Deduplicate + keep best score
 	var best_by_player := {}
+	var max:=0
 	for entry in tableau:
 		var p = entry["player_name"]
 		var s = int(entry["score"])
 		if not best_by_player.has(p) or s > best_by_player[p]:
 			best_by_player[p] = s
+			max+=1
+		if max==10:
+			break
 
 	# Build sorted unique list
 	var unique_sorted := []
 	for p in best_by_player.keys():
 		unique_sorted.append({"player_name": p, "score": best_by_player[p]})
-	unique_sorted.sort_custom(func(a, b): return a["score"] > b["score"])
+	#unique_sorted.sort_custom(func(a, b): return a["score"] > b["score"])
 
 	# Fill UI lists
 	for entry in unique_sorted:
