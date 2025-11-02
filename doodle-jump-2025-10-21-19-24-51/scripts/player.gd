@@ -69,6 +69,4 @@ func die(reason := ""):
 	# ⚠️ Ne pas mourir si la mort vient du café et qu’on est invulnérable
 	if invulnerable_to_cafe and reason.begins_with("goutte de café"):
 		return
-
-	velocity = Vector2.ZERO
 	GameManager._die(reason)

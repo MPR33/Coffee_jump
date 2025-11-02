@@ -128,8 +128,6 @@ func _die(reason: String) -> void:
 	var get_res = await get_req.sw_get_scores_complete
 	sw_result = get_res
 
-	# Signaler la mort & afficher l'écran Game Over
-	emit_signal("died", reason)
 	GameOver.gameover()
 
 	# Transition vers l’écran titre
