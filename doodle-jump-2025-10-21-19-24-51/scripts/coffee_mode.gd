@@ -187,24 +187,21 @@ func level_generator(amount: int) -> void:
 		match new_type:
 			0:
 				platform_initial_position_y += randf_range(36, 54)
-				print(_get_difficulty())
 				new_platform = platform_scene[0].instantiate()
 				new_platform.position = Vector2(randf_range(15, 170), platform_initial_position_y)
 				platform_container.call_deferred("add_child", new_platform)
 
 			1:
 				platform_initial_position_y += randf_range(36, 54)
-				print(_get_difficulty())
 				new_platform = platform_scene[1].instantiate()
 				new_platform.position = Vector2(randf_range(20, 165), platform_initial_position_y)
 				platform_container.call_deferred("add_child", new_platform)
 
 			2:
 				if GameManager.score_coffee > 0:
-					print(_get_difficulty())
 					var test:=randf_range(0,1)
 					platform_initial_position_y += randf_range(36, 54)
-					if test<=d:
+					if test<=min(5*d,0.5):
 						new_platform = platform_scene[2].instantiate()
 					else :
 						new_platform = platform_scene[0].instantiate()
@@ -217,7 +214,7 @@ func level_generator(amount: int) -> void:
 # ---------------------------------------------------------------------
 func delete_object(obstacle: Node) -> void:
 	if obstacle.is_in_group("player"):
-		GameManager._die("Vaporisé")
+		GameManager._die("Aie les picots !!!")
 	elif obstacle.is_in_group("platform") or obstacle.is_in_group("enemies"):
 		obstacle.call_deferred("queue_free")
 		level_generator(1)

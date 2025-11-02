@@ -8,7 +8,7 @@
 [sub_resource type="SpriteFrames" id="SpriteFrames_cg2bu"]
 animations = [{
 "frames": [{
-"duration": 1.0,
+"duration": 4.01,
 "texture": ExtResource("1_eam3r")
 }, {
 "duration": 1.0,
@@ -29,12 +29,15 @@ size = Vector2(59, 20)
 size = Vector2(59, 20)
 
 [node name="picots" type="StaticBody2D" groups=["platform"]]
+collision_layer = 2
+collision_mask = 6
+collision_priority = 5.0
 script = ExtResource("1_cq0rx")
 
 [node name="anim" type="AnimatedSprite2D" parent="." groups=["platform"]]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_cg2bu")
-frame_progress = 0.58260435
+frame_progress = 0.9365567
 
 [node name="hitbox" type="Area2D" parent="."]
 modulate = Color(1, 0.24705882, 0.039215688, 1)
@@ -44,7 +47,7 @@ position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_kvopl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 12)
+position = Vector2(0, 13)
 shape = SubResource("RectangleShape2D_cq0rx")
 
 [connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]

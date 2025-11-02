@@ -59,9 +59,9 @@ func _process(delta: float) -> void:
 
 	# Mort naturelle par jauge
 	if caffeine <= 0.0:
-		_die("épuisé de caféine (Doodle)")
+		_die("épuisé de caféine")
 	elif caffeine >= 1.0:
-		_die("overdose de caféine (Coffee)")
+		_die("overdose de caféine")
 
 	emit_signal("can_switch_changed", _compute_can_switch())
 
@@ -120,18 +120,13 @@ func _die(reason: String) -> void:
 		highscore = current_score
 		var save_req = SilentWolf.Scores.save_score(player_name, highscore)
 		var save_res = await save_req.sw_save_score_complete
-		print("✅ Nouveau highscore enregistré:", save_res)
-	else:
-		print("Aucun nouveau highscore.")
 
 	raison = reason
-	print("☠️ Mort : %s" % raison)
 
 	# Récupérer les scores à jour
 	var get_req = SilentWolf.Scores.get_scores(0)
 	var get_res = await get_req.sw_get_scores_complete
 	sw_result = get_res
-	print("📊 Scores:", str(sw_result.scores))
 
 	# Signaler la mort & afficher l'écran Game Over
 	emit_signal("died", reason)

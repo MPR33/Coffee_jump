@@ -29,7 +29,7 @@ func _process(delta):
 		_index += 1
 
 func start_typing_text():
-	full_text = "☠️ Mort : %s" % GameManager.raison
+	full_text = " Mort : %s" % GameManager.raison
 	_typing_active = true
 	_index = 0
 	_timer = 0.0

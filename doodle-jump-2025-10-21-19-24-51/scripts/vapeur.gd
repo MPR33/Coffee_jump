@@ -64,4 +64,4 @@ func response():
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		GameManager._die("")
+		GameManager._die("Vaporisé")

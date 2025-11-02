@@ -88,7 +88,8 @@ scale = Vector2(1.2, 1)
 position = Vector2(-212, 250)
 
 [node name="picots" parent="platform_container_coffee" instance=ExtResource("10_pnj8p")]
-position = Vector2(-197, 32)
+position = Vector2(-116, 62)
+disable_mode = 2
 
 [node name="platform_cleaner_coffee" type="Area2D" parent="."]
 position = Vector2(90.00001, 59.999996)

@@ -32,8 +32,6 @@ func _ready() -> void:
 	level_generator(10)
 	score_update()
 
-	GameManager.died.connect(_on_died)
-
 	if not GameManager.game_started:
 		GameManager.start_game()
 
@@ -163,10 +161,3 @@ func _on_platform_cleaner_body_entered(body: Node2D) -> void:
 func score_update() -> void:
 	GameManager.score_sugar = min(GameManager.score_sugar, player.position.y)
 	score_label.text = str(int(-GameManager.score_sugar + GameManager.score_coffee))
-
-
-# ---------------------------------------------------------------------
-# ÉVÉNEMENTS
-# ---------------------------------------------------------------------
-func _on_died(reason: String) -> void:
-	print("Mort détectée dans Doodle Mode : %s" % reason)
