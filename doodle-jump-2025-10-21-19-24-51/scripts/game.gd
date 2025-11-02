@@ -144,7 +144,7 @@ func spawn_enemy() -> void:
 # ---------------------------------------------------------------------
 func delete_object(obstacle: Node) -> void:
 	if obstacle.is_in_group("player"):
-		GameManager._die("tombé dans le café (Doodle)")
+		GameManager._die("tombé dans le café ")
 	elif obstacle.is_in_group("platform"):
 		obstacle.call_deferred("queue_free")
 		level_generator(1)

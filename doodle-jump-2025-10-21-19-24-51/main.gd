@@ -9,7 +9,7 @@ signal transition_state_changed(is_transitioning: bool)
 
 var doodle_node: Node = null
 var coffee_node: Node = null
-var titl_node: Node=null
+var titl_node: Node = null
 var doodle_music_node: Node = null
 var coffee_music_node: Node = null
 
@@ -19,10 +19,17 @@ var last_doodle_pos: Vector2 = Vector2.ZERO
 var last_coffee_pos: Vector2 = Vector2.ZERO
 var is_transitioning := false
 
+# --- Positions mémorisées des musiques (pour reprendre au bon endroit)
+var _music_pos := {
+	GameManager.Mode.DOODLE: 0.0,
+	GameManager.Mode.COFFEE: 0.0
+}
+
 func _ready() -> void:
-	#GameOver.visible=false
+	# Instancie le mode doodle au départ
 	doodle_node = doodle_packed.instantiate()
 	add_child(doodle_node)
+
 	# Musique DOODLE au tout début
 	_ensure_music_for(GameManager.Mode.DOODLE)
 	_start_music_for(GameManager.Mode.DOODLE)
@@ -68,7 +75,7 @@ func transition_to(next_mode: String) -> void:
 	emit_signal("transition_state_changed", true)
 	var current_node := doodle_node if current_mode == GameManager.Mode.DOODLE else coffee_node
 
-	# 1) geler + mémoriser position
+	# 1) geler + mémoriser position joueur
 	if current_node:
 		current_node.process_mode = Node.PROCESS_MODE_DISABLED
 		var player := _get_player(current_node, current_mode)
@@ -78,7 +85,7 @@ func transition_to(next_mode: String) -> void:
 			else:
 				last_coffee_pos = player.global_position
 
-	# Met en PAUSE la musique du mode courant avant de basculer
+	# Met en PAUSE la musique du mode courant avant de basculer (en mémorisant la position)
 	_pause_music_for(current_mode)
 
 	await get_tree().create_timer(0.3).timeout
@@ -133,7 +140,7 @@ func transition_to(next_mode: String) -> void:
 	is_transitioning = false
 	emit_signal("transition_state_changed", false)
 
-# ------------------ MUSIQUE (helpers très simples) ------------------
+# ------------------ MUSIQUE (helpers) ------------------
 
 func _ensure_music_for(mode: int) -> void:
 	if mode == GameManager.Mode.DOODLE:
@@ -158,33 +165,41 @@ func _fix_2d_music(n: Node) -> void:
 		if cam:
 			p.global_position = cam.global_position
 
-
 func _resume_music_for(mode: int) -> void:
 	var p := _music_player(mode)
 	if p == null:
 		return
-	# Si jamais elle n’a pas encore joué, play(); sinon dé-pauser
+	var pos := float(_music_pos.get(mode, 0.0))
+	# Si déjà créé mais pas playing, on relance au temps mémorisé
 	if not p.playing:
-		p.play()
-	else:
+		p.play(pos)
 		p.stream_paused = false
+	else:
+		# Déjà playing mais potentiellement en pause → dé-pauser
+		p.stream_paused = false
+		# Et si on veut forcer le seek (au cas où) :
+		# p.seek(pos)
 
 func _pause_music_for(mode: int) -> void:
 	var p := _music_player(mode)
 	if p:
+		# Mémorise la position actuelle si playing
+		if p.playing:
+			_music_pos[mode] = p.get_playback_position()
 		p.stream_paused = true
 
 func _start_music_for(mode: int) -> void:
 	var p := _music_player(mode)
 	if p and not p.playing:
-		p.play()
+		var pos := float(_music_pos.get(mode, 0.0))
+		p.play(pos)
 
 func _music_player(mode: int) -> Node:
 	var n := doodle_music_node if mode == GameManager.Mode.DOODLE else coffee_music_node
 	if n == null:
 		return null
-	# Le root de ta PackedScene peut être AudioStreamPlayer **ou** AudioStreamPlayer2D.
-	# On le retourne tel quel : les deux ont .play(), .playing, .stream_paused.
+	# Le root de la PackedScene peut être AudioStreamPlayer OU AudioStreamPlayer2D.
+	# Les deux exposent play(from_position), playing, stream_paused, get_playback_position.
 	return n
 
 # ------------------ (le reste inchangé) ------------------

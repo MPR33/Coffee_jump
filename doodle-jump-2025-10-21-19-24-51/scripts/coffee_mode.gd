@@ -58,6 +58,17 @@ func _get_spawn_interval() -> float:
 	var d:=_get_difficulty()
 	# interpolation linéaire: quand d=0 => MAX_INTERVAL, quand d=1 => MIN_INTERVAL
 	return MAX_INTERVAL + (MIN_INTERVAL - MAX_INTERVAL) * d
+
+func _is_control_on_screen(c: Control) -> bool:
+	if not is_instance_valid(c):
+		return false
+	if not c.visible or not c.is_visible_in_tree():
+		return false
+	# Intersections géométriques avec la zone visible du viewport
+	var r := c.get_global_rect()
+	var vp := get_viewport().get_visible_rect()  # Rect2 avec position et size
+	return r.intersects(vp)
+
 func spawn() -> void:
 	var token := GameManager.spawn_token
 
@@ -88,18 +99,41 @@ func spawn() -> void:
 		return
 	w.visible = true
 
-	# --------- SON WARNING COURT ---------
+# --------- SON WARNING CONDITIONNEL ---------
+# Le son ne joue QUE si le warning est réellement visible à l'écran.
+# Et on arrête dès qu'il ne l'est plus. Durée max de lecture : 0.5s.
 	var audio := AudioStreamPlayer.new()
 	audio.stream = preload("res://assets/sounds/missile_warning.wav")
-	ui.add_child(audio)
-	audio.play()
+	# On attache le son AU WARNING : s'il disparaît, le son suit
+	w.add_child(audio)
 
-	var stop_timer := get_tree().create_timer(0.5)
-	await stop_timer.timeout
-	# si la partie est finie, on coupe proprement
+	var max_dur := 0.5
+	var elapsed := 0.0
+
+	# Lecture “guardée” frame par frame
+	while elapsed < max_dur:
+		# Abandon si token invalide ou partie arrêtée
+		if token != GameManager.spawn_token or not GameManager.game_started:
+			break
+
+		# Si le warning n'est plus visible à l'écran → stop immédiat
+		if not _is_control_on_screen(w):
+			if is_instance_valid(audio) and audio.playing:
+				audio.stop()
+			break
+
+		# Si visible et le son n'a pas encore démarré → play()
+		if is_instance_valid(audio) and not audio.playing:
+			audio.play()
+
+		await get_tree().process_frame
+		elapsed += get_process_delta_time()
+
+	# Nettoyage sécurisé
 	if is_instance_valid(audio):
 		audio.stop()
 		audio.queue_free()
+
 
 	# --------- TIMER 2 : SPAWN VAPEUR ---------
 	var t2 := get_tree().create_timer(2.0)
@@ -183,7 +217,7 @@ func level_generator(amount: int) -> void:
 # ---------------------------------------------------------------------
 func delete_object(obstacle: Node) -> void:
 	if obstacle.is_in_group("player"):
-		GameManager._die("tombé dans le café (Coffee)")
+		GameManager._die("Vaporisé")
 	elif obstacle.is_in_group("platform") or obstacle.is_in_group("enemies"):
 		obstacle.call_deferred("queue_free")
 		level_generator(1)

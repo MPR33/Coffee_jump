@@ -30,7 +30,7 @@ environment = SubResource("Environment_1avu4")
 
 [node name="player" parent="platform_container" instance=ExtResource("1_eowx7")]
 texture_filter = 1
-position = Vector2(88, 210)
+position = Vector2(91, 210)
 script = ExtResource("2_qq6sq")
 
 [node name="platform" parent="platform_container" instance=ExtResource("2_pi054")]
