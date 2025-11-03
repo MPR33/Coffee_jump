@@ -106,6 +106,13 @@ func _on_SaveScore_request_completed(result, response_code, headers, body) -> vo
 	
 	if status_check:
 		var json_body = JSON.parse_string(body.get_string_from_utf8())
+		if json_body == null:
+	# Fallback pour éviter le crash
+			json_body = {
+				"success": false,
+				"data": {},
+				"error": "Empty or invalid server response"
+			}
 		var sw_result: Dictionary = SilentWolf.build_result(json_body)
 		if json_body.success:
 			SWLogger.info("SilentWolf save score success.")

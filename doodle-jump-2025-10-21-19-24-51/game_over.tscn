@@ -68,5 +68,8 @@ scale = Vector2(0.5, 0.4)
 texture_normal = ExtResource("9_woa3c")
 stretch_mode = 0
 
+[node name="GameOverhttp" type="HTTPRequest" parent="."]
+
 [connection signal="pressed" from="retry" to="." method="_on_retry_pressed"]
 [connection signal="pressed" from="boutonleader" to="." method="_on_boutonleader_pressed"]
+[connection signal="request_completed" from="GameOverhttp" to="." method="_on_game_overhttp_request_completed"]

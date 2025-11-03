@@ -25,6 +25,7 @@ GameManager="*res://GameManager.gd"
 transitioon="*res://transition.tscn"
 GameOver="*res://game_over.tscn"
 SilentWolf="*res://addons/silent_wolf/SilentWolf.gd"
+LootLocker="*res://scripts/lootlocker.gd"
 
 [display]
 

@@ -2,6 +2,8 @@ extends CanvasLayer
 @onready var son :=$MusicIntro
 @onready var leaderboard := $Panel2
 @onready var gameoverscreen:=$Panel
+@onready var add_score_http: HTTPRequest = $GameOverhttp
+@onready var get_score_http: HTTPRequest = $Panel2/leaderboardhttp
 
 var can_retry : bool = false
 # Called when the node enters the scene tree for the first time.
@@ -12,6 +14,8 @@ func _ready():
 	$MusicIntro.finished.connect(on_intro_finished)
 	$LabelMort.start_typing.connect($TypingSfx.play)
 	$LabelMort.stop_all.connect(_stop_everything)
+	assert(add_score_http, "Chemin vers GameOver/GameOverhttp invalide")
+	assert(get_score_http, "Chemin vers GameOver/Panel2/leaderboardhttp invalide")
 	
 	#$TypingSfx.finished.connect(_on_typing_sfx_finished) # optionnel
 	#GameManager.over.connect(gameover)
@@ -24,6 +28,19 @@ func _stop_everything():
 	$MusicIntro.stop()
 	$TypingSfx.stop()
 
+
+func upload_score(player_name: String, score: int) -> void:
+	var headers = ["Content-Type: application/json"]
+	var body = {"player": player_name, "score": score}
+	add_score_http.request(
+		"https://coffee.maoune.fr/score/add/",
+		headers,
+		HTTPClient.METHOD_POST,
+		JSON.stringify(body)
+	)
+
+func get_scores() -> void:
+	get_score_http.request("https://coffee.maoune.fr/score/list")
 
 func gameover()-> void:
 	self.show()
@@ -50,6 +67,10 @@ func _go_title() -> void:
 
 
 func _on_boutonleader_pressed() -> void:
+	get_scores()
 	leaderboard.visible=true
 	gameoverscreen.visible=false
-	leaderboard._populate_leaderboard()
+
+
+func _on_game_overhttp_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
+	print("Réponse serveur add score:", response_code, body.get_string_from_utf8())

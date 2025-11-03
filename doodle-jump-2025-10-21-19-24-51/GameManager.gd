@@ -35,13 +35,13 @@ var score_sugar: float = 0.0
 
 func _ready() -> void:
 	
-	SilentWolf.configure({
-	"api_key": "a6FXfUCJ022svQdpFj7vTWrqpJV89Mo2Qcrw9Li4",
-	"game_id": "coffee_jump",
-	"log_level": 1
-  })
-
-	SilentWolf.configure_scores({"open_scene_on_close": "res://scenes/MainPage.tscn"})
+	#SilentWolf.configure({
+	#"api_key": "a6FXfUCJ022svQdpFj7vTWrqpJV89Mo2Qcrw9Li4",
+	#"game_id": "coffee_jump",
+	#"log_level": 1
+  #})
+#
+	#SilentWolf.configure_scores({"open_scene_on_close": "res://scenes/MainPage.tscn"})
 	set_process(true)
 	emit_signal("mode_changed", mode)
 	emit_signal("caffeine_changed", caffeine)
@@ -118,15 +118,22 @@ func _die(reason: String) -> void:
 
 	if current_score > highscore:
 		highscore = current_score
-		var save_req = SilentWolf.Scores.save_score(player_name, highscore)
-		var save_res = await save_req.sw_save_score_complete
+		GameOver.upload_score(player_name, highscore)
+		#var res = await LootLocker.push_score(player_name, highscore)
+		#if not res.ok:
+			#push_error("Push score a échoué: %s" % res.error)
+		#else:
+			#print("success")
+		#var save_req = SilentWolf.Scores.save_score(player_name, highscore)
+		#var save_res = await save_req.sw_save_score_complete
 
 	raison = reason
 
 	# Récupérer les scores à jour
-	var get_req = SilentWolf.Scores.get_scores(0)
-	var get_res = await get_req.sw_get_scores_complete
-	sw_result = get_res
+	#var get_req = SilentWolf.Scores.get_scores(0)
+	#var get_res = await get_req.sw_get_scores_complete
+	#sw_result = get_res
+	#print("Scores: " + str(sw_result))
 
 	GameOver.gameover()
 
