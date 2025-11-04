@@ -208,7 +208,7 @@ texture_filter = 1
 position = Vector2(90.00001, 160)
 scale = Vector2(2.857143, 3.3333333)
 sprite_frames = SubResource("SpriteFrames_80m6b")
-frame = 1
+frame_progress = 0.08979863
 speed_scale = 1.8
 
 [node name="buttons" type="HBoxContainer" parent="."]
@@ -240,6 +240,7 @@ theme_override_fonts/font = ExtResource("7_ydcui")
 text = "Highscore :"
 
 [node name="Panel" parent="." instance=ExtResource("42_jobil")]
+visible = false
 layout_mode = 0
 offset_left = 23.0
 offset_top = 147.0
