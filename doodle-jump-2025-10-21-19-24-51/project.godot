@@ -13,7 +13,10 @@ config_version=5
 config/name="Coffee jump"
 run/main_scene="uid://xbny88htp7mc"
 config/features=PackedStringArray("4.5", "Forward Plus")
+boot_splash/bg_color=Color(0.972549, 0.72156864, 0.23921569, 1)
+boot_splash/image="uid://c57qv1da4xk73"
 config/icon="uid://858o6axq0nky"
+boot_splash/minimum_display_time=1000
 
 [audio]
 
