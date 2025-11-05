@@ -84,7 +84,6 @@ func _on_leaderboardhttp_request_completed(result: int, response_code: int, head
 
 	# ✅ On stocke le JSON comme Variant puis on cast plus tard
 	var parsed: Variant = JSON.parse_string(txt)
-
 	# ✅ safety: on vérifie qu'on a bien un tableau
 	if typeof(parsed) != TYPE_ARRAY:
 		print("Erreur: données invalides ->", parsed)
@@ -94,7 +93,6 @@ func _on_leaderboardhttp_request_completed(result: int, response_code: int, head
 
 	# Déduplication : garder le meilleur score par joueur
 	var best := {} # Dictionary player -> score
-
 	for e in arr:
 		if typeof(e) == TYPE_DICTIONARY and e.has("player") and e.has("score"):
 			var player := str(e["player"]).strip_edges()
@@ -111,7 +109,6 @@ func _on_leaderboardhttp_request_completed(result: int, response_code: int, head
 
 	# Tri décroissant
 	scoreboard.sort_custom(func(a, b): return float(a["score"]) > float(b["score"]))
-
 	# Remplissage des labels 1–10
 	for i in range(10):
 		var path := "VBoxContainer/Label" + ("" if i == 0 else str(i + 1))

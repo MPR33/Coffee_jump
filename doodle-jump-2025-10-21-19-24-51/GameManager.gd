@@ -115,10 +115,9 @@ func _die(reason: String) -> void:
 	await get_tree().create_timer(0.1).timeout
 	get_tree().paused = true
 	var current_score: int = int(score_coffee - score_sugar)
-
 	if current_score > highscore:
 		highscore = current_score
-		GameOver.upload_score(player_name, highscore)
+		GameOver.upload_score(player_name, current_score)
 		#var res = await LootLocker.push_score(player_name, highscore)
 		#if not res.ok:
 			#push_error("Push score a échoué: %s" % res.error)
